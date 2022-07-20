@@ -3,7 +3,7 @@ package controlador;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Salve fml, tmj.");
+		System.out.println("Salve Salve fml");
 
 	}
 
