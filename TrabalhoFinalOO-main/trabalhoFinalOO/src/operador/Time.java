@@ -131,7 +131,6 @@ public class Time {
 	}
 
 	private void setNumJogos(int numJogos) {
-		this.setNumJogos(this.getNumJogos() + vitorias);
 		this.numJogos = numJogos;
 	}
 
@@ -140,7 +139,6 @@ public class Time {
 	}
 
 	public void setVitorias(int vitorias) {
-		this.setNumJogos(this.getNumJogos() + derrotas);
 		this.vitorias = vitorias;
 	}
 
@@ -149,7 +147,6 @@ public class Time {
 	}
 
 	public void setEmpates(int empates) {
-		this.setNumJogos(this.getNumJogos() + empates);
 		this.empates = empates;
 	}
 

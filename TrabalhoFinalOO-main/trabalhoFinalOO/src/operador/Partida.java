@@ -6,14 +6,8 @@ public class Partida {
 	private Estadios estadio;
 	private int rodada;
 	
-	//Precisamos saber de quem é o gol
-	private int golsCasa; 
-	private int golsFora;
-	private boolean emAndamento;
-	
 	//Partida Precisa ter um resultado
 	private boolean finalizado;
-	private Time ganhador;
 	
 	//Constructor
 	public Partida(Time timeCasa, Time timeFora, Estadios estadio, int rodada) {
@@ -22,72 +16,33 @@ public class Partida {
 		this.timeFora = timeFora;
 		this.estadio = estadio;
 		this.rodada = rodada;
-		this.golsCasa = 0;
-		this.golsFora = 0;
-		this.setFinalizado(false);
-	}
-
-	//Boolean para retornar falso caso não adcione o gol
-	public boolean addGol(Time marcador){
-		if(!this.isFinalizado()) {
-			if(this.getTimeCasa() == marcador) {
-				this.setGolsCasa(this.getGolsCasa()+1);
-				this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols()+1);
-				return true;
-			}else if(this.getTimeFora() == marcador) {
-				this.setGolsFora(this.getGolsFora()+1);
-				this.timeFora.setSaldoGols(this.timeFora.getSaldoGols()+1);
-				return true;
-			}else
-				return false;
-		}else {
-			return false;
-		}
-	}
-	
-	public void imprimePartida() {
-		
 	}
 	
 	//Analiza se tudo está correto para finalizar a partida
-	public boolean finalizarPartida(Time ganhador) {
-		if(!this.isFinalizado()) {
-			if(this.getTimeCasa() == ganhador) {
-				this.setEmAndamento(false);
-				this.setGanhador(ganhador);
+	public boolean finalizarPartida(int golsCasa, int golsFora) {
+			if(golsCasa > golsFora) {
 				this.getTimeCasa().addVitoria();
 				this.getTimeFora().addDerrota();
+				this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() + (golsCasa - golsFora));
+				this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() + (golsFora - golsCasa));
 				this.setFinalizado(true);
 				return true;
-			}else if(this.getTimeFora() == ganhador) {
-				this.setEmAndamento(false);
-				this.setGanhador(this.getTimeFora());
+			}else if(golsCasa < golsFora) {
 				this.getTimeFora().addVitoria();
 				this.getTimeCasa().addDerrota();
+				this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() + (golsCasa - golsFora));
+				this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() + (golsFora - golsCasa));
+				this.setFinalizado(true);
+				return true;
+			}else if(golsCasa == golsFora){
+				this.getTimeCasa().addEmpate();
+				this.getTimeFora().addEmpate();
 				this.setFinalizado(true);
 				return true;
 			}else {
 				return false;
 			}	
-		}else {
-			return false;
-		}
 	}
-	
-	//Finalizar partida como empate
-	public boolean finalizarPartida(boolean empate) {
-		if(!this.isFinalizado() && empate) {
-			
-			this.getTimeCasa().addEmpate();
-			this.getTimeFora().addEmpate();
-			this.setFinalizado(true);
-			
-			return empate;
-		}
-		return false;
-	}
-		
-	
 
 	public Time getTimeCasa() {
 		return timeCasa;
@@ -119,38 +74,6 @@ public class Partida {
 
 	public void setRodada(int rodada) {
 		this.rodada = rodada;
-	}
-
-	public boolean isEmAndamento() {
-		return emAndamento;
-	}
-
-	public void setEmAndamento(boolean emAndamento) {
-		this.emAndamento = emAndamento;
-	}
-
-	public Time getGanhador() {
-		return ganhador;
-	}
-
-	public void setGanhador(Time ganhador) {
-		this.ganhador = ganhador;
-	}
-
-	public int getGolsCasa() {
-		return golsCasa;
-	}
-
-	public void setGolsCasa(int golsCasa) {
-		this.golsCasa = golsCasa;
-	}
-
-	public int getGolsFora() {
-		return golsFora;
-	}
-
-	public void setGolsFora(int golsFora) {
-		this.golsFora = golsFora;
 	}
 
 	public boolean isFinalizado() {
