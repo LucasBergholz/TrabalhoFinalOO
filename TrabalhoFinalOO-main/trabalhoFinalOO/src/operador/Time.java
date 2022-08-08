@@ -31,6 +31,23 @@ public class Time {
 		this.pontosTotais = 0;
 	}
 	
+	public Time(String nome, String cor1, String cor2, Estadios estadio, Jogador jogador, Jogador jogador2, Jogador jogador3) {
+		
+		this.nome = nome;
+		this.cor1 = cor1;
+		this.cor2 = cor2;
+		this.estadio = estadio;
+		this.numJogos = 0;
+		this.vitorias = 0;
+		this.empates = 0;
+		this.derrotas = 0;
+		this.saldoGols = 0;
+		this.pontosTotais = 0;
+		this.jogadores[0] = jogador;
+		this.jogadores[1] = jogador2;
+		this.jogadores[2] = jogador3;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -40,7 +57,7 @@ public class Time {
 	}
 
 	//Metodos Concretos 
-	public void addJogador(String nome, String posicao) {
+	public void addJogador(String nome, Posicao posicao) {
 		int  j;
 		
 		for(j = 0; j< 11; j++) {
@@ -51,7 +68,7 @@ public class Time {
 		}	
 	}
 	
-	public void addJogador() {
+	/*public void addJogador() {
 		int j;
 		Scanner in = new Scanner(System.in);
 		for(j = 0; j< 11; j++) {
@@ -67,7 +84,7 @@ public class Time {
 			}	
 		}
 		System.out.println("Escreva o nome do jogador: ");
-	}
+	}*/
 	
 	private void addJogo() {
 		this.setNumJogos(this.getNumJogos() + 1);

@@ -2,7 +2,7 @@ package operador;
 
 public class Jogador extends Pessoa {
 	private int totalGols;
-	private String posicao;
+	private Posicao posicao;
 	
 	//Metodos concretos
 	public void fazerGol() {
@@ -11,7 +11,15 @@ public class Jogador extends Pessoa {
 	
 
 	//Construtores
-	public Jogador(String nome, String posicao) {
+	public Jogador(Time time, String nome, Posicao posicao) {
+		super();
+		setTime(time);
+		this.setTotalGols(0);
+		this.posicao = posicao;
+		setNome(nome);
+	}
+	
+	public Jogador(String nome, Posicao posicao) {
 		super();
 		this.setTotalGols(0);
 		this.posicao = posicao;
@@ -24,11 +32,11 @@ public class Jogador extends Pessoa {
 	
 	
 	//Getters & Setters
-	public String getPosicao() {
+	public Posicao getPosicao() {
 		return posicao;
 	}
 
-	public void setPosicao(String posicao) {
+	public void setPosicao(Posicao posicao) {
 		this.posicao = posicao;
 	}
 
