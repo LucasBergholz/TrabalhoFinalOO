@@ -11,27 +11,15 @@ public class Jogador extends Pessoa {
 	
 
 	//Construtores
-	//Recebendo todos os parametros
-	
-	
-	public Jogador(int totalGols, String posicao, int numeroPartidas) {
-		super();
-		this.totalGols = totalGols;
-		this.posicao = posicao;
-		
-	}
-	
-	public Jogador() {
-		super();
-	}
-
-
-	//Recebendo apenas a posição
 	public Jogador(String nome, String posicao) {
 		super();
 		this.setTotalGols(0);
 		this.posicao = posicao;
 		setNome(nome);
+	}
+	
+	public Jogador() {
+		super();
 	}
 	
 	
