@@ -7,6 +7,7 @@ public class Time {
 	private String nome;
 	private Tecnico tecnico;
 	private Jogador[] jogadores = new Jogador[11];
+	private Partida[] partidas = new Partida[18];
 	private Estadios estadio;
 	private String cor1;
 	private String cor2;
@@ -16,6 +17,8 @@ public class Time {
 	private int derrotas;
 	private int saldoGols;
 	private int pontosTotais;
+	
+	//Construtores
 	
 	public Time(String nome, String cor1, String cor2, Estadios estadio) {
 		
@@ -47,19 +50,13 @@ public class Time {
 		this.jogadores[1] = jogador2;
 		this.jogadores[2] = jogador3;
 	}
+
+	//Metodos Concretos
 	
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	//Metodos Concretos 
+	//Criar jogador para o time
 	public void addJogador(String nome, Posicao posicao) {
 		int  j;
-		
+		//Checar se o time ja possui 11 jogadores
 		for(j = 0; j< 11; j++) {
 			if(this.jogadores[j] == null) {
 				this.jogadores[j] = new Jogador(nome, posicao);
@@ -68,6 +65,7 @@ public class Time {
 		}	
 	}
 	
+	//Permitindo um usuario criar o jogador
 	/*public void addJogador() {
 		int j;
 		Scanner in = new Scanner(System.in);
@@ -86,6 +84,7 @@ public class Time {
 		System.out.println("Escreva o nome do jogador: ");
 	}*/
 	
+	//Metodos usados na criacao de uma partida
 	private void addJogo() {
 		this.setNumJogos(this.getNumJogos() + 1);
 	}
@@ -112,6 +111,14 @@ public class Time {
 	}
 	
 	//Getters & Setters
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 	public Tecnico getTecnico() {
 		return tecnico;
 	}
@@ -137,6 +144,18 @@ public class Time {
 	public void setJogadores(Jogador[] time) {
 		if (time.length == 11)
 			this.jogadores = time;
+	}
+
+	public Partida[] getPartidas() {
+		return partidas;
+	}
+	
+	public Partida getPartidas(int i) {
+		return partidas[i];
+	}
+
+	public void setPartidas(Partida[] partidas) {
+		this.partidas = partidas;
 	}
 
 	public Estadios getEstadio() {

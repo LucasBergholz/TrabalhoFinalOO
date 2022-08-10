@@ -6,44 +6,48 @@ public class Partida {
 	private Estadios estadio;
 	private int rodada;
 	
-	//Partida Precisa ter um resultado
-	private boolean finalizado;
-	
 	//Constructor
-	public Partida(Time timeCasa, Time timeFora, Estadios estadio, int rodada) {
+	public Partida(Time timeCasa, Time timeFora, Estadios estadio) {
 		super();
 		this.timeCasa = timeCasa;
 		this.timeFora = timeFora;
 		this.estadio = estadio;
-		this.rodada = rodada;
 	}
 	
 	//Analiza se tudo está correto para finalizar a partida
-	public boolean finalizarPartida(int golsCasa, int golsFora) {
+	public boolean finalizarPartida(int golsCasa, int golsFora, int rodada) {
+		//Checando se os times ja jogaram na rodada escolhida
+		if((this.getTimeCasa().getPartidas((rodada-1)) == null) && (this.getTimeFora().getPartidas((rodada-1)) == null)) {
 			if(golsCasa > golsFora) {
+				//Vitoria do time mandante
 				this.getTimeCasa().addVitoria();
 				this.getTimeFora().addDerrota();
 				this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() + (golsCasa - golsFora));
 				this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() + (golsFora - golsCasa));
-				this.setFinalizado(true);
 				return true;
 			}else if(golsCasa < golsFora) {
+				//Vitoria do time visitante
 				this.getTimeFora().addVitoria();
 				this.getTimeCasa().addDerrota();
 				this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() + (golsCasa - golsFora));
 				this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() + (golsFora - golsCasa));
-				this.setFinalizado(true);
 				return true;
 			}else if(golsCasa == golsFora){
+				//Empate entre as equipes
 				this.getTimeCasa().addEmpate();
 				this.getTimeFora().addEmpate();
-				this.setFinalizado(true);
 				return true;
 			}else {
 				return false;
-			}	
+			}
+			
+		}else {
+			return false;
+		}
 	}
 
+	//Getters e Setters
+	
 	public Time getTimeCasa() {
 		return timeCasa;
 	}
@@ -75,16 +79,6 @@ public class Partida {
 	public void setRodada(int rodada) {
 		this.rodada = rodada;
 	}
-
-	public boolean isFinalizado() {
-		return finalizado;
-	}
-
-	public void setFinalizado(boolean finalizado) {
-		this.finalizado = finalizado;
-	}
-
-	
 	
 	
 }
