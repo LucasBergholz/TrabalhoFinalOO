@@ -1,7 +1,8 @@
 package controlador;
 
-import operador.*;
 import bancoDeDados.*;
+import modelo.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;

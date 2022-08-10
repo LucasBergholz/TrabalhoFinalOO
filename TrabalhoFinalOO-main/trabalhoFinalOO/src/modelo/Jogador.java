@@ -1,4 +1,4 @@
-package operador;
+package modelo;
 
 public class Jogador extends Pessoa {
 	private int totalGols;

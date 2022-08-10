@@ -1,4 +1,4 @@
-package operador;
+package modelo;
 
 import java.util.Scanner;
 

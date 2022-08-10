@@ -1,7 +1,8 @@
 package bancoDeDados;
 
-import operador.*;
 import java.util.ArrayList;
+
+import modelo.*;
 
 public class Listas {
 	//Criando ArrayList dos times;
@@ -84,7 +85,7 @@ public class Listas {
 			times.get(16).addJogador("GUSTAVO SCARPA", Posicao.MEIA);
 			times.get(17).addJogador("ARTUR VICTOR", Posicao.PONTA);
 			times.get(17).addJogador("LEO ORTIZ", Posicao.ZAGUEIRO);
-			times.get(17).addJogador("HELINHO NUNES", Posicao.PONTA);
+			times.get(17).addJogador("HELINHO MEGAMENTE", Posicao.PONTA);
 			times.get(18).addJogador("MARCOS LEONARDO", Posicao.ATACANTE);
 			times.get(18).addJogador("ANGELO GABRIEL", Posicao.PONTA);
 			times.get(18).addJogador("LEO BAPTISTAO", Posicao.ATACANTE);
