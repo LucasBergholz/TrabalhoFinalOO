@@ -1,8 +1,8 @@
-package operador;
+package modelo;
 
 public class Jogador extends Pessoa {
 	private int totalGols;
-	private String posicao;
+	private Posicao posicao;
 	
 	//Metodos concretos
 	public void fazerGol() {
@@ -11,36 +11,32 @@ public class Jogador extends Pessoa {
 	
 
 	//Construtores
-	//Recebendo todos os parametros
-	
-	
-	public Jogador(int totalGols, String posicao, int numeroPartidas) {
+	public Jogador(Time time, String nome, Posicao posicao) {
 		super();
-		this.totalGols = totalGols;
+		setTime(time);
+		this.setTotalGols(0);
 		this.posicao = posicao;
-		
+		setNome(nome);
 	}
 	
-	public Jogador() {
-		super();
-	}
-
-
-	//Recebendo apenas a posição
-	public Jogador(String nome, String posicao) {
+	public Jogador(String nome, Posicao posicao) {
 		super();
 		this.setTotalGols(0);
 		this.posicao = posicao;
 		setNome(nome);
 	}
 	
+	public Jogador() {
+		super();
+	}
+	
 	
 	//Getters & Setters
-	public String getPosicao() {
+	public Posicao getPosicao() {
 		return posicao;
 	}
 
-	public void setPosicao(String posicao) {
+	public void setPosicao(Posicao posicao) {
 		this.posicao = posicao;
 	}
 

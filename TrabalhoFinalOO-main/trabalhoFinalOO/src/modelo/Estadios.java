@@ -1,4 +1,4 @@
-package operador;
+package modelo;
 
 public enum Estadios {
 	ALFREDO_JACONI,
