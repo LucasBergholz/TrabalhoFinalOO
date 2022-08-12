@@ -22,9 +22,7 @@ import javax.swing.ButtonGroup;
 import java.awt.Rectangle;
 import javax.swing.JTable;
 
-public class Menu extends JFrame {
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-	
+public class Menu extends JFrame {	
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 750, 600));
@@ -42,27 +40,27 @@ public class Menu extends JFrame {
 		titulo.setFont(new Font("Arial", Font.BOLD, 50));
 		
 		JToggleButton botaoClassificacao = new JToggleButton("Classificacao");
-		botaoClassificacao.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				Classificacao.main(null);
-			}
+		//Mudar a pagina para a de classificacao
+		botaoClassificacao.addActionListener((event) -> {
+			this.dispose();
+			Classificacao.main(null);
 		});
-		buttonGroup.add(botaoClassificacao);
+		
 		getContentPane().add(botaoClassificacao);
 		botaoClassificacao.setBounds(286, 145, 175, 33);
 		botaoClassificacao.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoClassificacao.addActionListener(null);
 		
 		JToggleButton botaoPartidas = new JToggleButton("Partidas");
-		buttonGroup.add(botaoPartidas);
 		getContentPane().add(botaoPartidas);
 		botaoPartidas.setBounds(286, 245, 175, 33);
 		botaoPartidas.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoPartidas.addActionListener((event) -> {
+			this.dispose();
+			MenuPartidas.main(null);
+		});
 		
 		JToggleButton botaoArtilharia = new JToggleButton("Artilharia");
-		buttonGroup.add(botaoArtilharia);
 		getContentPane().add(botaoArtilharia);
 		botaoArtilharia.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoArtilharia.setBounds(286, 345, 175, 33);

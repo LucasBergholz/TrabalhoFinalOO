@@ -47,11 +47,11 @@ public class Classificacao extends JFrame {
 	 */
 	public Classificacao() {
 		//Criando titulo do frame e definindo caracteristicas do painel de conteudo
+		painelConteudo = new JPanel();
 		setTitle("Brasileirao 2022");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
-		painelConteudo = new JPanel();
 		painelConteudo.setBackground(new Color(0, 0, 128));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
@@ -98,7 +98,7 @@ public class Classificacao extends JFrame {
 		botaoVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				dispose();
 				Menu.main(null);
 			}
 		});
