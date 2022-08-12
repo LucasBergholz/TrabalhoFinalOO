@@ -18,6 +18,8 @@ import javax.swing.JScrollBar;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
 
 public class Classificacao extends JFrame {
 
@@ -79,13 +81,6 @@ public class Classificacao extends JFrame {
 		
 		//Titulo para a pagina
 		JLabel titulo = new JLabel("CLASSIFICAÇÃO");
-		titulo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-				Menu.main(null);
-			}
-		});
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.setForeground(Color.WHITE);
 		titulo.setFont(new Font("Arial", Font.BOLD, 50));
@@ -97,16 +92,24 @@ public class Classificacao extends JFrame {
 		painelConteudo.add(scrollBar);
 		scrollBar.setBounds(719, 0, 17, 575);
 		
-		JButton btnMenu = new JButton("Voltar");
-		btnMenu.setBounds(10, 35, 85, 21);
-		painelConteudo.add(btnMenu);
+		JButton botaoVoltar = new JButton("Voltar");
+		botaoVoltar.setBounds(10, 35, 85, 21);
+		painelConteudo.add(botaoVoltar);
+		botaoVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				Menu.main(null);
+			}
+		});
 		
 		//Funcao que muda a posicao vertical dos elementos durante o scroll
 		scrollBar.addAdjustmentListener(new AdjustmentListener() {  
 		    public void adjustmentValueChanged(AdjustmentEvent e) {  
 		    	tabelaClassificacao.setBounds(40, 100-scrollBar.getValue(), 650, 525);
 		    	titulo.setBounds(0, 0-scrollBar.getValue(), 751, 100);
-		    }  
+		    	botaoVoltar.setBounds(10, 35-scrollBar.getValue(), 85, 21);
+		    }
 		 });  
 	}
 }
