@@ -1,10 +1,13 @@
-package operador;
+package modelo;
+
+import java.util.Scanner;
 
 public class Time {
 	//Atributos
 	private String nome;
 	private Tecnico tecnico;
 	private Jogador[] jogadores = new Jogador[11];
+	private Partida[] partidas = new Partida[18];
 	private Estadios estadio;
 	private String cor1;
 	private String cor2;
@@ -14,6 +17,8 @@ public class Time {
 	private int derrotas;
 	private int saldoGols;
 	private int pontosTotais;
+	
+	//Construtores
 	
 	public Time(String nome, String cor1, String cor2, Estadios estadio) {
 		
@@ -29,18 +34,29 @@ public class Time {
 		this.pontosTotais = 0;
 	}
 	
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	//Metodos Concretos 
-	public void addJogador(String nome, String posicao) {
-		int  j;
+	public Time(String nome, String cor1, String cor2, Estadios estadio, Jogador jogador, Jogador jogador2, Jogador jogador3) {
 		
+		this.nome = nome;
+		this.cor1 = cor1;
+		this.cor2 = cor2;
+		this.estadio = estadio;
+		this.numJogos = 0;
+		this.vitorias = 0;
+		this.empates = 0;
+		this.derrotas = 0;
+		this.saldoGols = 0;
+		this.pontosTotais = 0;
+		this.jogadores[0] = jogador;
+		this.jogadores[1] = jogador2;
+		this.jogadores[2] = jogador3;
+	}
+
+	//Metodos Concretos
+	
+	//Criar jogador para o time
+	public void addJogador(String nome, Posicao posicao) {
+		int  j;
+		//Checar se o time ja possui 11 jogadores
 		for(j = 0; j< 11; j++) {
 			if(this.jogadores[j] == null) {
 				this.jogadores[j] = new Jogador(nome, posicao);
@@ -49,6 +65,26 @@ public class Time {
 		}	
 	}
 	
+	//Permitindo um usuario criar o jogador
+	/*public void addJogador() {
+		int j;
+		Scanner in = new Scanner(System.in);
+		for(j = 0; j< 11; j++) {
+			if(this.jogadores[j] == null) {
+				this.jogadores[j] = new Jogador();
+				System.out.println("Escreva o nome do jogador: ");
+				String name = in.nextLine();
+				this.jogadores[j].setNome(name);
+				System.out.println("Escreva a posicao do jogador: ");
+				String posicao = in.nextLine();
+				this.jogadores[j].setPosicao(posicao);
+				break;
+			}	
+		}
+		System.out.println("Escreva o nome do jogador: ");
+	}*/
+	
+	//Metodos usados na criacao de uma partida
 	private void addJogo() {
 		this.setNumJogos(this.getNumJogos() + 1);
 	}
@@ -75,6 +111,14 @@ public class Time {
 	}
 	
 	//Getters & Setters
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 	public Tecnico getTecnico() {
 		return tecnico;
 	}
@@ -100,6 +144,18 @@ public class Time {
 	public void setJogadores(Jogador[] time) {
 		if (time.length == 11)
 			this.jogadores = time;
+	}
+
+	public Partida[] getPartidas() {
+		return partidas;
+	}
+	
+	public Partida getPartidas(int i) {
+		return partidas[i];
+	}
+
+	public void setPartidas(Partida[] partidas) {
+		this.partidas = partidas;
 	}
 
 	public Estadios getEstadio() {
@@ -131,7 +187,6 @@ public class Time {
 	}
 
 	private void setNumJogos(int numJogos) {
-		this.setNumJogos(this.getNumJogos() + vitorias);
 		this.numJogos = numJogos;
 	}
 
@@ -140,7 +195,6 @@ public class Time {
 	}
 
 	public void setVitorias(int vitorias) {
-		this.setNumJogos(this.getNumJogos() + derrotas);
 		this.vitorias = vitorias;
 	}
 
@@ -149,7 +203,6 @@ public class Time {
 	}
 
 	public void setEmpates(int empates) {
-		this.setNumJogos(this.getNumJogos() + empates);
 		this.empates = empates;
 	}
 

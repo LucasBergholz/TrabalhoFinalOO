@@ -1,4 +1,4 @@
-package operador;
+package modelo;
 
 public class Tecnico extends Pessoa {
 	private int vitorias;
