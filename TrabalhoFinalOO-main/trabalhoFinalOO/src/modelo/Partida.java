@@ -16,6 +16,18 @@ public class Partida {
 	
 	//Analiza se tudo está correto para finalizar a partida
 	public boolean finalizarPartida(int golsCasa, int golsFora, int rodada) {
+		
+		this.rodada = rodada;
+		for(int i = 0; i < golsCasa; i++) {
+			int j = 0;
+			this.getTimeCasa().getJogadores(j).fazerGol();
+			if(j == 3) {
+				j = 0;
+			} else {
+				j++;
+			}
+		}
+		
 		//Checando se os times ja jogaram na rodada escolhida
 		if((this.getTimeCasa().getPartidas((rodada-1)) == null) && (this.getTimeFora().getPartidas((rodada-1)) == null)) {
 			if(golsCasa > golsFora) {
@@ -79,6 +91,13 @@ public class Partida {
 	public void setRodada(int rodada) {
 		this.rodada = rodada;
 	}
+
+	@Override
+	public String toString() {
+		return "Partida [timeCasa=" + timeCasa.getNome() + ", timeFora=" + timeFora.getNome() + ", estadio=" + estadio + ", rodada="
+				+ rodada + "]";
+	}
+	
 	
 	
 }

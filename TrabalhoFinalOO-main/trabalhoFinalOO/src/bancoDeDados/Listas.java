@@ -96,14 +96,53 @@ public class Listas {
 		}
 		
 		public void inicializarPartidas() {
-			//Flu VS Santos
-			partidas.add(new Partida(times.get(11), times.get(19), Estadios.MARACANA));
-			partidas.get(0).finalizarPartida(0, 0, 01);
+			//Flu x Santos
+			partidas.add(new Partida(times.get(11), times.get(18), Estadios.MARACANA));
+			partidas.get(0).finalizarPartida(0, 0, 1);
 			
-			//Atletico VS 
+			//AtleticoGO x Flamengo
+			partidas.add(new Partida(times.get(2), times.get(10), times.get(2).getEstadio()));
+			partidas.get(1).finalizarPartida(1, 1, 1);
+			
+			//Palmeiras x Ceara
+			partidas.add(new Partida(times.get(16), times.get(6), times.get(16).getEstadio()));
+			partidas.get(2).finalizarPartida(2, 3, 1);
+			
+			//Coritiba x Goias
+			partidas.add(new Partida(times.get(8), times.get(13), times.get(8).getEstadio()));
+			partidas.get(3).finalizarPartida(3, 0, 1);
+			
+			//Galo x Inter
+			partidas.add(new Partida(times.get(3), times.get(14), times.get(3).getEstadio()));
+			partidas.get(4).finalizarPartida(2, 0, 1);
+			
+			//Botafogo x Corinthians
+			partidas.add(new Partida(times.get(5), times.get(7), times.get(5).getEstadio()));
+			partidas.get(5).finalizarPartida(1, 3, 1);
+			
+			//Fortaleza x CUiaba
+			partidas.add(new Partida(times.get(12), times.get(9), times.get(12).getEstadio()));
+			partidas.get(6).finalizarPartida(0, 1, 1);
+			
+			//SPFC x CAP
+			partidas.add(new Partida(times.get(19), times.get(1), times.get(19).getEstadio()));
+			partidas.get(7).finalizarPartida(4, 0, 1);
+			
+			//Avai x AmericaMG
+			partidas.add(new Partida(times.get(4), times.get(0), times.get(4).getEstadio()));
+			partidas.get(8).finalizarPartida(1, 0, 1);
+			
+			//Juventude x Bragantino
+			partidas.add(new Partida(times.get(15), times.get(17), times.get(15).getEstadio()));
+			partidas.get(9).finalizarPartida(2, 2, 1);
 		}
+		
 		public ArrayList<Time> getTimes() {
 			return times;
+		}
+		
+		public ArrayList<Partida> getPartidas(){
+			return partidas;
 		}
 
 
