@@ -15,6 +15,9 @@ import java.awt.event.AdjustmentListener;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollBar;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Classificacao extends JFrame {
 
@@ -76,6 +79,13 @@ public class Classificacao extends JFrame {
 		
 		//Titulo para a pagina
 		JLabel titulo = new JLabel("CLASSIFICAÇÃO");
+		titulo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				Menu.main(null);
+			}
+		});
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.setForeground(Color.WHITE);
 		titulo.setFont(new Font("Arial", Font.BOLD, 50));
@@ -86,6 +96,10 @@ public class Classificacao extends JFrame {
 		JScrollBar scrollBar = new JScrollBar();
 		painelConteudo.add(scrollBar);
 		scrollBar.setBounds(719, 0, 17, 575);
+		
+		JButton btnMenu = new JButton("Voltar");
+		btnMenu.setBounds(10, 35, 85, 21);
+		painelConteudo.add(btnMenu);
 		
 		//Funcao que muda a posicao vertical dos elementos durante o scroll
 		scrollBar.addAdjustmentListener(new AdjustmentListener() {  

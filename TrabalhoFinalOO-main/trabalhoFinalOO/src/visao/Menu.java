@@ -42,6 +42,13 @@ public class Menu extends JFrame {
 		titulo.setFont(new Font("Arial", Font.BOLD, 50));
 		
 		JToggleButton botaoClassificacao = new JToggleButton("Classificacao");
+		botaoClassificacao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				Classificacao.main(null);
+			}
+		});
 		buttonGroup.add(botaoClassificacao);
 		getContentPane().add(botaoClassificacao);
 		botaoClassificacao.setBounds(286, 145, 175, 33);
