@@ -14,7 +14,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import java.awt.SystemColor;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.awt.Dimension;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -55,6 +57,8 @@ public class TabelaRodadas extends JFrame {
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
+		//Criando os blocos das partidas
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0x274360));
 		panel.setBounds(0, 78, 736, 64);
@@ -86,25 +90,34 @@ public class TabelaRodadas extends JFrame {
 		int numPartidas = menu.getBrasileirao().getPartidas().size();
 		int rod =(int) Math.round((double) spnRodada.getValue());
 		
-		//Criando os blocos das partidas
+		List<JPanel> painelPartidas = new ArrayList<>();
+		List<JSeparator> separadores = new ArrayList<>();
+		List<JLabel> labels = new ArrayList<>();
 		Box caixaVertical = Box.createVerticalBox();
+		caixaVertical.setSize(700, 154*11);
+		painelConteudo.add(caixaVertical);
+		caixaVertical.setLocation(10, 175);
 		
-		//for (int i = 0; i < numPartidas; i++) {
+		for (int i = 0; i < numPartidas-1; i++) {
+			
+			Box caixaHorizontal = Box.createHorizontalBox();
 			
 			JPanel panel_1 = new JPanel();
-			panel_1.setBounds(63, 177, 622, 154);
-			painelConteudo.add(panel_1);
+			panel_1.setSize(622, 154);
 			panel_1.setLayout(null);
 			
-			JLabel lblTimeCasa = new JLabel(menu.getBrasileirao().getPartidas().get(0).getTimeCasa().getNome());
+			if(i ==1) {
+				panel_1.setBackground(Color.cyan);
+			}
+			JLabel lblTimeCasa = new JLabel(menu.getBrasileirao().getPartidas().get(i).getTimeCasa().getNome());
 			lblTimeCasa.setBounds(95, 69, 103, 13);
 			panel_1.add(lblTimeCasa);
 			
-			JLabel lblTimeFora = new JLabel(menu.getBrasileirao().getPartidas().get(0).getTimeFora().getNome());
+			JLabel lblTimeFora = new JLabel(menu.getBrasileirao().getPartidas().get(i).getTimeFora().getNome());
 			lblTimeFora.setBounds(505, 69, 65, 13);
 			panel_1.add(lblTimeFora);
 			
-			JLabel lblEstadio = new JLabel(menu.getBrasileirao().getPartidas().get(0).getEstadio().toString());
+			JLabel lblEstadio = new JLabel(menu.getBrasileirao().getPartidas().get(i).getEstadio().toString());
 			lblEstadio.setBounds(275, 131, 95, 13);
 			panel_1.add(lblEstadio);
 			
@@ -114,14 +127,34 @@ public class TabelaRodadas extends JFrame {
 			lblX.setBounds(302, 69, 45, 13);
 			panel_1.add(lblX);
 			
-			JLabel lblGolsCasa = new JLabel(Integer.toString(menu.getBrasileirao().getPartidas().get(0).getGolsCasa()));
+			JLabel lblGolsCasa = new JLabel(Integer.toString(menu.getBrasileirao().getPartidas().get(i).getGolsCasa()));
 			lblGolsCasa.setBounds(204, 69, 45, 13);
 			panel_1.add(lblGolsCasa);
 			
-			JLabel lblGolsFora = new JLabel(Integer.toString(menu.getBrasileirao().getPartidas().get(0).getGolsFora()));
+			JLabel lblGolsFora = new JLabel(Integer.toString(menu.getBrasileirao().getPartidas().get(i).getGolsFora()));
 			lblGolsFora.setBounds(388, 69, 45, 13);
 			panel_1.add(lblGolsFora);
-		//}
+			
+			JSeparator separator = new JSeparator();
+			separator.setBounds(0, 130, 736, 12);
+			
+			
+			//Adcionando as Listas
+			labels.add(lblTimeCasa);
+			labels.add(lblTimeFora);
+			labels.add(lblEstadio);
+			labels.add(lblEstadio);
+			labels.add(lblGolsCasa);
+			labels.add(lblGolsFora);
+			labels.add(lblX);
+			painelPartidas.add(panel_1);
+			caixaHorizontal.add(panel_1);
+			caixaVertical.add(caixaHorizontal);
+			separadores.add(separator);
+			caixaHorizontal.add(separator);
+			caixaVertical.add(separator);
+			
+		}
 		
 		
 		
