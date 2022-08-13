@@ -19,9 +19,6 @@ public class MenuPartidas extends JFrame {
 
 	private JPanel painelConteudo;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -35,9 +32,7 @@ public class MenuPartidas extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public MenuPartidas() {
 		//Painel e titulo instanciados
 		setTitle("Brasileirao 2022");

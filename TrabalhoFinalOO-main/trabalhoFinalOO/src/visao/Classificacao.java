@@ -26,9 +26,6 @@ public class Classificacao extends JFrame {
 	private JPanel painelConteudo;
 	private JTable tabelaClassificacao;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,9 +39,6 @@ public class Classificacao extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Classificacao() {
 		//Criando titulo do frame e definindo caracteristicas do painel de conteudo
 		painelConteudo = new JPanel();

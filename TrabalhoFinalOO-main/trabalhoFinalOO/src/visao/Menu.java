@@ -6,6 +6,9 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import bancoDeDados.Listas;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
@@ -21,9 +24,23 @@ import javax.swing.JMenu;
 import javax.swing.ButtonGroup;
 import java.awt.Rectangle;
 import javax.swing.JTable;
+import javax.swing.JMenuBar;
+import javax.swing.JRadioButtonMenuItem;
+import java.awt.SystemColor;
 
 public class Menu extends JFrame {	
+	private Listas brasileirao = new Listas();
+	
+	public Listas getBrasileirao() {
+		return brasileirao;
+	}
+	
 	public Menu() {
+		
+		brasileirao.inicializarTimes();
+		brasileirao.inicializarJogadores();
+		brasileirao.inicializarPartidas();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 750, 600));
 		getContentPane().setBackground(new Color(0, 0, 128));
@@ -71,11 +88,13 @@ public class Menu extends JFrame {
 		botaoSair.setBounds(286, 445, 175, 33);
 		botaoSair.addActionListener((event) -> System.exit(0));
 		
-		
 	}
 	
 	public static void main(String[] args) {
 		Menu menu = new Menu();
 		menu.setVisible(true);
 	}
+
+	
+	
 }
