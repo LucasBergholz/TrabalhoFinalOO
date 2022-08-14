@@ -57,10 +57,24 @@ public class TabelaRodadas extends JFrame {
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
 		painelConteudo = new JPanel();
+		painelConteudo.setBounds(0, 0, 750, 1200);
 		painelConteudo.setBackground(new Color(0, 0, 128));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
+		
+		//Criando ScrollBar para ver o restante da tabela
+		JScrollBar scrollBar = new JScrollBar();
+		painelConteudo.add(scrollBar);
+		scrollBar.setMaximum(1340);
+		scrollBar.setBounds(719, 0, 17, 1900);
+		
+		//Funcao que muda a posicao vertical dos elementos durante o scroll
+		scrollBar.addAdjustmentListener(new AdjustmentListener() {  
+		    public void adjustmentValueChanged(AdjustmentEvent e) {  
+		    	painelConteudo.setBounds(0, 0-scrollBar.getValue(), 750, 1900);
+		    }
+		 });  
 		
 		//Criando os blocos das partidas
 		
