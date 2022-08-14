@@ -15,7 +15,7 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class MenuPartidas extends JFrame {
+public class PartidasMenu extends JFrame {
 
 	private JPanel painelConteudo;
 
@@ -23,7 +23,7 @@ public class MenuPartidas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuPartidas frame = new MenuPartidas();
+					PartidasMenu frame = new PartidasMenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class MenuPartidas extends JFrame {
 	}
 
 	
-	public MenuPartidas() {
+	public PartidasMenu() {
 		//Painel e titulo instanciados
 		setTitle("Brasileirao 2022");
 		painelConteudo = new JPanel();

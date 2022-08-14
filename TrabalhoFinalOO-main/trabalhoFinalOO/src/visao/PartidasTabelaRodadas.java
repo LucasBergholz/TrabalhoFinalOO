@@ -34,7 +34,7 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Cursor;
 import java.awt.Dimension;
 
-public class TabelaRodadas extends JFrame {
+public class PartidasTabelaRodadas extends JFrame {
 
 	private JPanel painelConteudo;
 
@@ -43,7 +43,7 @@ public class TabelaRodadas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TabelaRodadas frame = new TabelaRodadas();
+					PartidasTabelaRodadas frame = new PartidasTabelaRodadas();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class TabelaRodadas extends JFrame {
 		});
 	}
 
-	public TabelaRodadas() {
+	public PartidasTabelaRodadas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
