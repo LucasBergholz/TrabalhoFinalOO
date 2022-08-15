@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
@@ -69,13 +71,6 @@ public class PartidasTabelaRodadas extends JFrame {
 		scrollBar.setMaximum(1340);
 		scrollBar.setBounds(719, 0, 17, 1900);
 		
-		//Funcao que muda a posicao vertical dos elementos durante o scroll
-		scrollBar.addAdjustmentListener(new AdjustmentListener() {  
-		    public void adjustmentValueChanged(AdjustmentEvent e) {  
-		    	painelConteudo.setBounds(0, 0-scrollBar.getValue(), 750, 1900);
-		    }
-		 });  
-		
 		//Criando os blocos das partidas
 		
 		JPanel panel = new JPanel();
@@ -101,61 +96,62 @@ public class PartidasTabelaRodadas extends JFrame {
 		titulo.setFont(new Font("Arial", Font.BOLD, 50));
 		titulo.setBounds(0, 0, 736, 83);
 		painelConteudo.add(titulo);
-		
-		
-		
 		Menu menu = new Menu();
 		//Recebendo o dados necessarios para instanciar os componentes
 		int numPartidas = menu.getBrasileirao().getPartidas().size();
 		int rod =(int) Math.round((double) spnRodada.getValue());
+		int partRod = 1;
 		
-		List<JPanel> painelPartidas = new ArrayList<>();
+		for (int i = 0; i < numPartidas-1; i++) {
+			if(menu.getBrasileirao().getPartidas().get(i).getRodada() == rod) {
+				partRod++;
+			}	
+		}
+		
+		
+		
+		List<JPanel> listaPainelPartidas = new ArrayList<>();
 		List<JSeparator> separadores = new ArrayList<>();
 		List<JLabel> labels = new ArrayList<>();
 		Box caixaVertical = Box.createVerticalBox();
-		caixaVertical.setSize(736, 1690);
+		caixaVertical.setSize(736, 150*partRod);
 		painelConteudo.add(caixaVertical);
 		caixaVertical.setLocation(0, 179);
-		
-		/*JLabel lblNewLabel = new JLabel(Integer.toString(rod));
-		lblNewLabel.setBounds(85, 24, 45, 13);
-		lblNewLabel.setForeground(Color.WHITE);
-		painelConteudo.add(lblNewLabel);*/
 		
 		for (int i = 0; i < numPartidas-1; i++) {
 			if(menu.getBrasileirao().getPartidas().get(i).getRodada() == rod) {
 				Box caixaHorizontal = Box.createHorizontalBox();
 				
-				JPanel panel_1 = new JPanel();
-				panel_1.setSize(622, 154);
-				panel_1.setBackground(new Color(0x483D8B));
-				panel_1.setLayout(null);
+				JPanel painelPartidas = new JPanel();
+				painelPartidas.setMaximumSize(new Dimension(3000, 7000));
+				painelPartidas.setBackground(new Color(0x483D8B));
+				painelPartidas.setLayout(null);
 				
 				JLabel lblTimeCasa = new JLabel(menu.getBrasileirao().getPartidas().get(i).getTimeCasa().getNome());
 				lblTimeCasa.setBounds(95, 69, 103, 13);
-				panel_1.add(lblTimeCasa);
+				painelPartidas.add(lblTimeCasa);
 				
 				JLabel lblTimeFora = new JLabel(menu.getBrasileirao().getPartidas().get(i).getTimeFora().getNome());
 				lblTimeFora.setBounds(505, 69, 103, 13);
-				panel_1.add(lblTimeFora);
+				painelPartidas.add(lblTimeFora);
 				
 				JLabel lblEstadio = new JLabel(menu.getBrasileirao().getPartidas().get(i).getEstadio().toString());
-				lblEstadio.setBounds(275, 131, 95, 13);
-				panel_1.add(lblEstadio);
+				lblEstadio.setBounds(275, 131, 150, 13);
+				painelPartidas.add(lblEstadio);
 				
 				JLabel lblX = new JLabel("X");
 				lblX.setFont(new Font("Tahoma", Font.PLAIN, 31));
 				lblX.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 				lblX.setBounds(302, 69, 45, 13);
-				panel_1.add(lblX);
+				painelPartidas.add(lblX);
 				
 				JLabel lblGolsCasa = new JLabel(Integer.toString(menu.getBrasileirao().getPartidas().get(i).getGolsCasa()));
 				lblGolsCasa.setBounds(204, 69, 45, 13);
-				panel_1.add(lblGolsCasa);
+				painelPartidas.add(lblGolsCasa);
 				
 				JLabel lblGolsFora = new JLabel(Integer.toString(menu.getBrasileirao().getPartidas().get(i).getGolsFora()));
 				lblGolsFora.setBounds(388, 69, 45, 13);
-				panel_1.add(lblGolsFora);
+				painelPartidas.add(lblGolsFora);
 				
 				JSeparator separator = new JSeparator();
 				separator.setMaximumSize(new Dimension(3000, 800));
@@ -170,8 +166,8 @@ public class PartidasTabelaRodadas extends JFrame {
 				labels.add(lblGolsCasa);
 				labels.add(lblGolsFora);
 				labels.add(lblX);
-				painelPartidas.add(panel_1);
-				caixaHorizontal.add(panel_1);
+				listaPainelPartidas.add(painelPartidas);
+				caixaHorizontal.add(painelPartidas);
 				caixaVertical.add(caixaHorizontal);
 				separadores.add(separator);
 				caixaHorizontal.add(separator);
@@ -179,16 +175,87 @@ public class PartidasTabelaRodadas extends JFrame {
 			}	
 		}
 		
-		/*JScrollBar scrollBar = new JScrollBar();
-		painelConteudo.add(scrollBar);
-		scrollBar.setBounds(719, 0, 17, 575);
+		//Metodos
+		//Funcao que muda a posicao vertical dos elementos durante o scroll
 		scrollBar.addAdjustmentListener(new AdjustmentListener() {  
-		    public void adjustmentValueChanged(AdjustmentEvent e) {  
-		    	titulo.setBounds(0, 0-scrollBar.getValue(), 751, 100);
-		    	caixaVertical.setBounds(40, 100-scrollBar.getValue(), 650, 525);
-		    	panel.setBounds(10, 35-scrollBar.getValue(), 85, 21);
-		    }
-		 });*/
+			public void adjustmentValueChanged(AdjustmentEvent e) {  
+				painelConteudo.setBounds(0, 0-scrollBar.getValue(), 750, 1900);
+			}
+		}); 
+		spnRodada.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int partRod =1;
+				int rodada =(int) Math.round((double) spnRodada.getValue());
+				caixaVertical.removeAll();
+				for (int i = 0; i < numPartidas-1; i++) {
+					if(menu.getBrasileirao().getPartidas().get(i).getRodada() == rodada) {
+						partRod++;
+					}	
+				}
+				caixaVertical.setSize(736, 150*partRod);
+				 for (int i = 0; i < numPartidas-1; i++) {
+						if(menu.getBrasileirao().getPartidas().get(i).getRodada() == rodada) {
+							Box caixaHorizontal = Box.createHorizontalBox();
+							
+							JPanel painelPartidas = new JPanel();
+							painelPartidas.setMaximumSize(new Dimension(3000, 8000));
+							painelPartidas.setMinimumSize(new Dimension(3000, 4000));
+							painelPartidas.setBackground(new Color(0x483D8B));
+							painelPartidas.setLayout(null);
+							
+							JLabel lblTimeCasa = new JLabel(menu.getBrasileirao().getPartidas().get(i).getTimeCasa().getNome());
+							lblTimeCasa.setBounds(95, 69, 103, 13);
+							painelPartidas.add(lblTimeCasa);
+							
+							JLabel lblTimeFora = new JLabel(menu.getBrasileirao().getPartidas().get(i).getTimeFora().getNome());
+							lblTimeFora.setBounds(505, 69, 103, 13);
+							painelPartidas.add(lblTimeFora);
+							
+							JLabel lblEstadio = new JLabel(menu.getBrasileirao().getPartidas().get(i).getEstadio().toString());
+							lblEstadio.setBounds(275, 131, 150, 13);
+							painelPartidas.add(lblEstadio);
+							
+							JLabel lblX = new JLabel("X");
+							lblX.setFont(new Font("Tahoma", Font.PLAIN, 31));
+							lblX.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+							lblX.setBounds(302, 69, 45, 13);
+							painelPartidas.add(lblX);
+							
+							JLabel lblGolsCasa = new JLabel(Integer.toString(menu.getBrasileirao().getPartidas().get(i).getGolsCasa()));
+							lblGolsCasa.setBounds(204, 69, 45, 13);
+							painelPartidas.add(lblGolsCasa);
+							
+							JLabel lblGolsFora = new JLabel(Integer.toString(menu.getBrasileirao().getPartidas().get(i).getGolsFora()));
+							lblGolsFora.setBounds(388, 69, 45, 13);
+							painelPartidas.add(lblGolsFora);
+							
+							JSeparator separator = new JSeparator();
+							separator.setMaximumSize(new Dimension(3000, 800));
+							separator.setBackground(new Color(0x483D8B));
+							separator.setBounds(0, 130, 736, 12);
+							
+							//Adcionando as Listas
+							labels.add(lblTimeCasa);
+							labels.add(lblTimeFora);
+							labels.add(lblEstadio);
+							labels.add(lblEstadio);
+							labels.add(lblGolsCasa);
+							labels.add(lblGolsFora);
+							labels.add(lblX);
+							listaPainelPartidas.add(painelPartidas);
+							caixaHorizontal.add(painelPartidas);
+							caixaVertical.add(caixaHorizontal);
+							separadores.add(separator);
+							caixaHorizontal.add(separator);
+							caixaVertical.add(separator);
+						}	
+					}
+				 	caixaVertical.setVisible(false);
+				 	caixaVertical.setVisible(true);
+			}
+		});
 		
 		
 	}

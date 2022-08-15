@@ -72,6 +72,10 @@ public class PartidasMenu extends JFrame {
 		getContentPane().add(botaoVer);
 		botaoVer.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoVer.setBounds(286, 345, 175, 33);
+		botaoVer.addActionListener((event) -> {
+			this.dispose();
+			PartidasTabelaRodadas.main(null);
+		});
 		
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
