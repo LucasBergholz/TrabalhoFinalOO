@@ -1,34 +1,35 @@
 package visao;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import bancoDeDados.*;
+import modelo.*;
 
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JTable;
 import java.awt.Font;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.event.MouseWheelEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.awt.Dimension;
 
 public class Classificacao extends JFrame {
 
 	private JPanel painelConteudo;
 	private JTable tabelaClassificacao;
+	private Listas brasileirao = new Listas();
+	ArrayList<Time> times = new ArrayList<Time>();
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,9 +43,7 @@ public class Classificacao extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public Classificacao() {
 		//Criando titulo do frame e definindo caracteristicas do painel de conteudo
 		painelConteudo = new JPanel();
@@ -57,18 +56,29 @@ public class Classificacao extends JFrame {
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
-		//Criando a tabela
-		tabelaClassificacao = new JTable(21,7) {
-	         public boolean editCellAt(int row, int column, java.util.EventObject e) {
-	             return false;
-	          }
-	       };
+		//Criando a tabela dentro de um painel com scroll
+		JScrollPane painelScroll = new JScrollPane();
+		painelScroll.setEnabled(false);
+		painelScroll.setFocusable(false);
+		painelScroll.setBackground(new Color(0, 0, 128));
+		painelScroll.setLocation(0, 122);
+		painelScroll.setSize(new Dimension(736, 441));
+		
+		//Estetica da tabela
+		tabelaClassificacao = new JTable(21,7);
+		tabelaClassificacao.setTableHeader(null);
+		tabelaClassificacao.setEnabled(false);
+		tabelaClassificacao.setGridColor(new Color(0, 0, 0));
+		tabelaClassificacao.setBackground(new Color(255, 255, 255));
+		tabelaClassificacao.setForeground(new Color(0, 0, 0));
 		tabelaClassificacao.setAutoCreateColumnsFromModel(false);
 		tabelaClassificacao.setRowHeight(25);
-		painelConteudo.add(tabelaClassificacao);
+		tabelaClassificacao.getColumnModel().getColumn(0).setPreferredWidth(200);
 		tabelaClassificacao.setFont(new Font("Arial", Font.PLAIN, 20));
 		tabelaClassificacao.setBounds(40, 100, 650, 525);
 		tabelaClassificacao.setRowSelectionAllowed(false);
+		painelScroll.setViewportView(tabelaClassificacao);
+		painelConteudo.add(painelScroll);
 		
 		//Adicionando legenda a tabela
 		tabelaClassificacao.setValueAt("Times",0,0);
@@ -79,6 +89,9 @@ public class Classificacao extends JFrame {
 		tabelaClassificacao.setValueAt("Derrotas",0,5);
 		tabelaClassificacao.setValueAt("SG",0,6);
 		
+		//Inicializando a tabela
+		inicializarTabela();
+		
 		//Titulo para a pagina
 		JLabel titulo = new JLabel("CLASSIFICAÇÃO");
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -87,11 +100,6 @@ public class Classificacao extends JFrame {
 		titulo.setBounds(0, 0, 751, 100);
 		painelConteudo.add(titulo);
 		
-		//Criando ScrollBar para ver o restante da tabela
-		JScrollBar scrollBar = new JScrollBar();
-		painelConteudo.add(scrollBar);
-		scrollBar.setBounds(719, 0, 17, 575);
-		
 		JButton botaoVoltar = new JButton("Voltar");
 		botaoVoltar.setBounds(10, 35, 85, 21);
 		painelConteudo.add(botaoVoltar);
@@ -99,17 +107,53 @@ public class Classificacao extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
+				times.clear();
 				Menu.main(null);
 			}
 		});
-		
-		//Funcao que muda a posicao vertical dos elementos durante o scroll
-		scrollBar.addAdjustmentListener(new AdjustmentListener() {  
-		    public void adjustmentValueChanged(AdjustmentEvent e) {  
-		    	tabelaClassificacao.setBounds(40, 100-scrollBar.getValue(), 650, 525);
-		    	titulo.setBounds(0, 0-scrollBar.getValue(), 751, 100);
-		    	botaoVoltar.setBounds(10, 35-scrollBar.getValue(), 85, 21);
-		    }
-		 });  
 	}
+		
+		public void inicializarTabela() {
+			times.clear();
+			//Adicionando os dados a tabela
+			
+			//Tirando os dados do banco de dados
+			for(int i = 0; i < 20; i++) {
+				times.add(brasileirao.getTimes().get(i));		
+			}
+			
+			//Fazendo bubble sort para elencar eles por numero de pontos e posteriormente por saldo de gol
+			for(int i = 0; i < 20; i++) {
+				ArrayList<Time> auxiliar = new ArrayList<Time>();
+				auxiliar.clear();
+				int auxCounter = 0;
+				for(int j = 0; j < 19; j++) {
+					if(times.get(j).getPontosTotais() < times.get(j+1).getPontosTotais()) {
+						auxiliar.add(times.get(j));
+						times.set(j, times.get(j+1));
+						times.set(j+1, auxiliar.get(auxCounter));
+						auxCounter++;
+					} else if((times.get(j).getPontosTotais() == times.get(j+1).getPontosTotais()) &&
+							  (times.get(j).getSaldoGols() < times.get(j+1).getSaldoGols())) {
+						auxiliar.add(times.get(j));
+						times.set(j, times.get(j+1));
+						times.set(j+1, auxiliar.get(auxCounter));
+						auxCounter++;
+					}
+					
+				}
+			}
+			
+			//Passando os valores para a tabela
+			for(int i = 1; i < 21; i++) {
+				tabelaClassificacao.setValueAt(i + " - " + times.get(i-1).getNome(),i,0);
+				tabelaClassificacao.setValueAt(times.get(i-1).getNumJogos(),i,1);
+				tabelaClassificacao.setValueAt(times.get(i-1).getPontosTotais(),i,2);
+				tabelaClassificacao.setValueAt(times.get(i-1).getVitorias(),i,3);
+				tabelaClassificacao.setValueAt(times.get(i-1).getEmpates(),i,4);
+				tabelaClassificacao.setValueAt(times.get(i-1).getDerrotas(),i,5);
+				tabelaClassificacao.setValueAt(times.get(i-1).getSaldoGols(),i,6);
+			}
+		 }
+
 }

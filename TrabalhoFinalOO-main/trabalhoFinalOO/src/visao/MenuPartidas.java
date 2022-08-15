@@ -15,6 +15,9 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import bancoDeDados.Listas;
+import modelo.Partida;
+
 public class MenuPartidas extends JFrame {
 
 	private JPanel painelConteudo;
@@ -63,7 +66,10 @@ public class MenuPartidas extends JFrame {
 		getContentPane().add(botaoCriar);
 		botaoCriar.setBounds(286, 145, 175, 33);
 		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
-		botaoCriar.addActionListener(null);
+		botaoCriar.addActionListener((event) -> {
+			this.dispose();
+			Menu.main(null);
+		});
 		
 		JToggleButton botaoEditar = new JToggleButton("Editar Partida");
 		getContentPane().add(botaoEditar);
