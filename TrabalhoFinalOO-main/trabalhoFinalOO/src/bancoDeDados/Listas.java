@@ -6,8 +6,8 @@ import modelo.*;
 
 public class Listas {
 	//Criando ArrayList dos times;
-		private static final ArrayList<Time> times = new ArrayList<>();
-		private static final ArrayList<Partida> partidas = new ArrayList<>();
+		public static final ArrayList<Time> times = new ArrayList<>();
+		public static final ArrayList<Partida> partidas = new ArrayList<>();
 		
 		public void inicializarTimes() {
 			times.add(new Time("AMERICA-MG", "#00FF00", "#FFFFFF", Estadios.INDEPENDENCIA)); //0
