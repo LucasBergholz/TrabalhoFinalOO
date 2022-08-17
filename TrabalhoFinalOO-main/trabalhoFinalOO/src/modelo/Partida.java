@@ -7,6 +7,7 @@ public class Partida {
 	private Time timeFora;
 	private Estadios estadio;
 	private int rodada;
+	private int golsCasa, golsFora;
 	
 	//Constructor
 	public Partida(Time timeCasa, Time timeFora, Estadios estadio) {
@@ -14,10 +15,16 @@ public class Partida {
 		this.timeCasa = timeCasa;
 		this.timeFora = timeFora;
 		this.estadio = estadio;
+		this.setGolsCasa(0);
+		this.setGolsFora(0);
 	}
 	
 	//Analiza se tudo está correto para finalizar a partida
 	public boolean finalizarPartida(int golsCasa, int golsFora, int rodada) {
+		
+		this.rodada = rodada;
+		this.golsCasa = golsCasa;
+		this.golsFora = golsFora;
 		
 		Random gerador = new Random();
 		this.rodada = rodada;
@@ -93,6 +100,22 @@ public class Partida {
 
 	public void setRodada(int rodada) {
 		this.rodada = rodada;
+	}
+
+	public int getGolsCasa() {
+		return golsCasa;
+	}
+
+	public void setGolsCasa(int golsCasa) {
+		this.golsCasa = golsCasa;
+	}
+
+	public int getGolsFora() {
+		return golsFora;
+	}
+
+	public void setGolsFora(int golsFora) {
+		this.golsFora = golsFora;
 	}
 
 	@Override

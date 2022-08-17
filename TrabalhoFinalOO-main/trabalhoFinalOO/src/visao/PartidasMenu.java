@@ -15,21 +15,15 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import bancoDeDados.Listas;
-import modelo.Partida;
-
-public class MenuPartidas extends JFrame {
+public class PartidasMenu extends JFrame {
 
 	private JPanel painelConteudo;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuPartidas frame = new MenuPartidas();
+					PartidasMenu frame = new PartidasMenu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,10 +32,8 @@ public class MenuPartidas extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public MenuPartidas() {
+	
+	public PartidasMenu() {
 		//Painel e titulo instanciados
 		setTitle("Brasileirao 2022");
 		painelConteudo = new JPanel();
@@ -68,7 +60,7 @@ public class MenuPartidas extends JFrame {
 		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoCriar.addActionListener((event) -> {
 			this.dispose();
-			Menu.main(null);
+			PartidasCriar.main(null);
 		});
 		
 		JToggleButton botaoEditar = new JToggleButton("Editar Partida");
@@ -80,6 +72,10 @@ public class MenuPartidas extends JFrame {
 		getContentPane().add(botaoVer);
 		botaoVer.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoVer.setBounds(286, 345, 175, 33);
+		botaoVer.addActionListener((event) -> {
+			this.dispose();
+			PartidasTabelaRodadas.main(null);
+		});
 		
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);

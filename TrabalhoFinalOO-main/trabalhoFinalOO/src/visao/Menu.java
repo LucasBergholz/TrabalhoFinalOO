@@ -69,7 +69,7 @@ public class Menu extends JFrame {
 		botaoPartidas.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoPartidas.addActionListener((event) -> {
 			this.dispose();
-			MenuPartidas.main(null);
+			PartidasMenu.main(null);
 		});
 		
 		JToggleButton botaoArtilharia = new JToggleButton("Artilharia");
