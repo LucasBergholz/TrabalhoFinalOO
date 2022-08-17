@@ -27,7 +27,7 @@ public class Listas {
 			times.add(new Time("INTERNACIONAL", "#FF0000", "#FFFFFF", Estadios.BEIRA_RIO));//14
 			times.add(new Time("JUVENTUDE", "#008000", "#FFFFFF", Estadios.ALFREDO_JACONI));//15
 			times.add(new Time("PALMEIRAS", "#008000", "#FFFFFF", Estadios.ALLIANZ_PARQUE));//16
-			times.add(new Time("RED BULL BRAGANTINO", "#FFFFFF", "#FF0000", Estadios.NABI_ABI_CHEDID));//17
+			times.add(new Time("RB BRAGANTINO", "#FFFFFF", "#FF0000", Estadios.NABI_ABI_CHEDID));//17
 			times.add(new Time("SANTOS", "#0000000", "#FFFFFF", Estadios.VILA_BELMIRO));//18
 			times.add(new Time("SAO PAULO", "#FF0000", "#FFFFFF", Estadios.MORUMBI));//19
 		}
@@ -85,7 +85,7 @@ public class Listas {
 			times.get(16).addJogador("RAPHAEL VEIGA", Posicao.MEIA);
 			times.get(16).addJogador("GUSTAVO SCARPA", Posicao.MEIA);
 			times.get(17).addJogador("ALFREDINHO DELAS", Posicao.PONTA);
-			times.get(17).addJogador("LEO ORTIZ", Posicao.ZAGUEIRO);
+			times.get(17).addJogador("DALTRO O ROMANTICO", Posicao.ZAGUEIRO);
 			times.get(17).addJogador("HELINHO MEGAMENTE", Posicao.PONTA);
 			times.get(18).addJogador("MARCOS LEONARDO", Posicao.ATACANTE);
 			times.get(18).addJogador("ANGELO GABRIEL", Posicao.PONTA);
@@ -122,7 +122,7 @@ public class Listas {
 			
 			//Fortaleza x CUiaba
 			partidas.add(new Partida(times.get(12), times.get(9), times.get(12).getEstadio()));
-			partidas.get(6).finalizarPartida(2, 1, 1);
+			partidas.get(6).finalizarPartida(0, 1, 1);
 			
 			//SPFC x CAP
 			partidas.add(new Partida(times.get(19), times.get(1), times.get(19).getEstadio()));
