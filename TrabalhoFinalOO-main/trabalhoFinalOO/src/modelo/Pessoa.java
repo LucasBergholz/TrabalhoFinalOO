@@ -3,7 +3,7 @@ package modelo;
 public abstract class Pessoa {
 	
 	private String nome;
-	private Time time;
+	private String time;
 	private int idade;
 	private int numeroPartidas;
 	
@@ -26,11 +26,11 @@ public abstract class Pessoa {
 		this.nome = nome;
 	}
 
-	public Time getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 

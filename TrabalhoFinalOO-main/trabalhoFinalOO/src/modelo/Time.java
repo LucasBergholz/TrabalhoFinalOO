@@ -60,6 +60,7 @@ public class Time {
 		for(j = 0; j< 11; j++) {
 			if(this.jogadores[j] == null) {
 				this.jogadores[j] = new Jogador(nome, posicao);
+				this.jogadores[j].setTime(this.getNome());
 				break;
 			}	
 		}	

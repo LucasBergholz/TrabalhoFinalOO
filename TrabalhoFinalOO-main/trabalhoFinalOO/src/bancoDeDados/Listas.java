@@ -56,11 +56,11 @@ public class Listas {
 			times.get(6).addJogador("GUIZAO COSTA", Posicao.ZAGUEIRO);
 			times.get(7).addJogador("CASSIO RAMOS", Posicao.GOLEIRO);
 			times.get(7).addJogador("ROGER GUEDES", Posicao.ATACANTE);
-			times.get(7).addJogador("WILLIAN BORGES", Posicao.PONTA);
+			times.get(7).addJogador("LUCAS GOBBI", Posicao.PONTA);
 			times.get(8).addJogador("IGOR PAIXAO", Posicao.PONTA);
 			times.get(8).addJogador("LEO GAMALHO", Posicao.ATACANTE);
 			times.get(8).addJogador("ALEF MANGA", Posicao.PONTA);
-			times.get(9).addJogador("RODRIGUINHO COSTA", Posicao.MEIA);
+			times.get(9).addJogador("RODRIGUINHO REIDRIGUINHO", Posicao.MEIA);
 			times.get(9).addJogador("ANDRE BALADA", Posicao.ATACANTE);
 			times.get(9).addJogador("DEYVERSON BRUM", Posicao.ATACANTE);
 			times.get(10).addJogador("GIORGIAN DE ARRASCAETA", Posicao.MEIA);
@@ -70,7 +70,7 @@ public class Listas {
 			times.get(11).addJogador("GERMAN CANO", Posicao.ATACANTE);
 			times.get(11).addJogador("JHON ARIAS", Posicao.PONTA);
 			times.get(12).addJogador("MARCELO BENEVENUTO", Posicao.ZAGUEIRO);
-			times.get(12).addJogador("LUCAS CRISPIM", Posicao.MEIA);
+			times.get(12).addJogador("MURILO BALA", Posicao.MEIA);
 			times.get(12).addJogador("LUCAS LIMA", Posicao.MEIA);
 			times.get(13).addJogador("PEDRO RAUL", Posicao.ATACANTE);
 			times.get(13).addJogador("APODI ALVES", Posicao.LATERAL);
@@ -84,7 +84,7 @@ public class Listas {
 			times.get(16).addJogador("RONY RUSTICO", Posicao.ATACANTE);
 			times.get(16).addJogador("RAPHAEL VEIGA", Posicao.MEIA);
 			times.get(16).addJogador("GUSTAVO SCARPA", Posicao.MEIA);
-			times.get(17).addJogador("ARTUR VICTOR", Posicao.PONTA);
+			times.get(17).addJogador("ALFREDINHO DELAS", Posicao.PONTA);
 			times.get(17).addJogador("LEO ORTIZ", Posicao.ZAGUEIRO);
 			times.get(17).addJogador("HELINHO MEGAMENTE", Posicao.PONTA);
 			times.get(18).addJogador("MARCOS LEONARDO", Posicao.ATACANTE);
@@ -122,7 +122,7 @@ public class Listas {
 			
 			//Fortaleza x CUiaba
 			partidas.add(new Partida(times.get(12), times.get(9), times.get(12).getEstadio()));
-			partidas.get(6).finalizarPartida(0, 1, 1);
+			partidas.get(6).finalizarPartida(2, 1, 1);
 			
 			//SPFC x CAP
 			partidas.add(new Partida(times.get(19), times.get(1), times.get(19).getEstadio()));
