@@ -69,10 +69,10 @@ public class PartidasTabelaRodadas extends JFrame {
 		painelConteudo.setLayout(null);
 		
 		//Criando ScrollBar para ver o restante da tabela
-		/*JScrollBar scrollBar = new JScrollBar();
+		JScrollBar scrollBar = new JScrollBar();
 		painelConteudo.add(scrollBar);
 		scrollBar.setMaximum(1340);
-		scrollBar.setBounds(719, 0, 17, 1900);*/
+		scrollBar.setBounds(719, 0, 17, 1900);
 		
 		//Criando os blocos das partidas
 		
@@ -116,17 +116,18 @@ public class PartidasTabelaRodadas extends JFrame {
 		List<JSeparator> separadores = new ArrayList<>();
 		List<JLabel> labels = new ArrayList<>();
 		Box caixaVertical = Box.createVerticalBox();
-		caixaVertical.setSize(700, 150*partRod);
+		caixaVertical.setSize(2000, 150*partRod);
 		painelConteudo.add(caixaVertical);
 		caixaVertical.setLocation(20, 179);
 		
 		for (int i = 0; i < numPartidas-1; i++) {
 			if(menu.getBrasileirao().getPartidas().get(i).getRodada() == rod) {
 				Box caixaHorizontal = Box.createHorizontalBox();
+				caixaHorizontal.setMaximumSize(new Dimension(2000, 3000));
 				Border blackline = BorderFactory.createLineBorder(Color.black, 3, true);
 				
 				JPanel painelPartidas = new JPanel();
-				painelPartidas.setMaximumSize(new Dimension(3000, 7000));
+				painelPartidas.setMaximumSize(new Dimension(2000, 2000));
 				painelPartidas.setBackground(new Color(255,255,255));
 				painelPartidas.setBorder(blackline);
 				painelPartidas.setLayout(null);
@@ -145,7 +146,6 @@ public class PartidasTabelaRodadas extends JFrame {
 				
 				JLabel lblX = new JLabel("X");
 				lblX.setFont(new Font("Tahoma", Font.PLAIN, 31));
-				lblX.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 				lblX.setBounds(342, 69, 45, 13);
 				painelPartidas.add(lblX);
 				
@@ -158,7 +158,7 @@ public class PartidasTabelaRodadas extends JFrame {
 				painelPartidas.add(lblGolsFora);
 				
 				JSeparator separator = new JSeparator();
-				separator.setMaximumSize(new Dimension(3000, 800));
+				separator.setMaximumSize(new Dimension(3000, 200));
 				separator.setBackground(new Color(0x483D8B));
 				separator.setBounds(0, 130, 736, 12);
 				
@@ -181,11 +181,11 @@ public class PartidasTabelaRodadas extends JFrame {
 		
 		//Metodos
 		//Funcao que muda a posicao vertical dos elementos durante o scroll
-		/*scrollBar.addAdjustmentListener(new AdjustmentListener() {  
+		scrollBar.addAdjustmentListener(new AdjustmentListener() {  
 			public void adjustmentValueChanged(AdjustmentEvent e) {  
 				painelConteudo.setBounds(0, 0-scrollBar.getValue(), 750, 1900);
 			}
-		}); */
+		}); 
 		spnRodada.addChangeListener(new ChangeListener() {
 			
 			@Override
@@ -202,10 +202,11 @@ public class PartidasTabelaRodadas extends JFrame {
 				 for (int i = 0; i < numPartidas-1; i++) {
 						if(menu.getBrasileirao().getPartidas().get(i).getRodada() == rodada) {
 							Box caixaHorizontal = Box.createHorizontalBox();
+							caixaHorizontal.setMaximumSize(new Dimension(2000, 3000));
 							Border blackline = BorderFactory.createLineBorder(Color.black, 3, true);
 							
 							JPanel painelPartidas = new JPanel();
-							painelPartidas.setMaximumSize(new Dimension(3000, 7000));
+							painelPartidas.setMaximumSize(new Dimension(2000, 800));
 							painelPartidas.setBackground(new Color(255,255,255));
 							painelPartidas.setBorder(blackline);
 							painelPartidas.setLayout(null);
@@ -219,12 +220,11 @@ public class PartidasTabelaRodadas extends JFrame {
 							painelPartidas.add(lblTimeFora);
 							
 							JLabel lblEstadio = new JLabel(menu.getBrasileirao().getPartidas().get(i).getEstadio().toString());
-							lblEstadio.setBounds(320, 131, 150, 13);
+							lblEstadio.setBounds(305, 121, 150, 13);
 							painelPartidas.add(lblEstadio);
 							
 							JLabel lblX = new JLabel("X");
 							lblX.setFont(new Font("Tahoma", Font.PLAIN, 31));
-							lblX.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 							lblX.setBounds(342, 69, 45, 13);
 							painelPartidas.add(lblX);
 							
@@ -237,7 +237,7 @@ public class PartidasTabelaRodadas extends JFrame {
 							painelPartidas.add(lblGolsFora);
 							
 							JSeparator separator = new JSeparator();
-							separator.setMaximumSize(new Dimension(3000, 800));
+							separator.setMaximumSize(new Dimension(3000, 200));
 							separator.setBackground(new Color(0x483D8B));
 							separator.setBounds(0, 130, 736, 12);
 							
@@ -255,6 +255,8 @@ public class PartidasTabelaRodadas extends JFrame {
 							separadores.add(separator);
 							caixaHorizontal.add(separator);
 							caixaVertical.add(separator);
+						
+
 						}	
 					}
 				 	caixaVertical.setVisible(false);

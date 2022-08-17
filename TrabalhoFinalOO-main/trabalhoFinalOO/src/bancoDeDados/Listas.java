@@ -98,11 +98,11 @@ public class Listas {
 		public void inicializarPartidas() {
 			//Flu x Santos
 			partidas.add(new Partida(times.get(11), times.get(18), Estadios.MARACANA));
-			partidas.get(0).finalizarPartida(0, 0, 1);
+			partidas.get(0).finalizarPartida(0, 0, 2);
 			
 			//AtleticoGO x Flamengo
 			partidas.add(new Partida(times.get(2), times.get(10), times.get(2).getEstadio()));
-			partidas.get(1).finalizarPartida(1, 1, 1);
+			partidas.get(1).finalizarPartida(1, 1, 2);
 			
 			//Palmeiras x Ceara
 			partidas.add(new Partida(times.get(16), times.get(6), times.get(16).getEstadio()));
