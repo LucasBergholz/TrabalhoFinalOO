@@ -13,7 +13,7 @@ public class Jogador extends Pessoa {
 	//Construtores
 	public Jogador(Time time, String nome, Posicao posicao) {
 		super();
-		setTime(time);
+		setTime(time.getNome());
 		this.setTotalGols(0);
 		this.posicao = posicao;
 		setNome(nome);

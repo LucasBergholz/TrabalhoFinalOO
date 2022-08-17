@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Random;
+
 public class Partida {
 	private Time timeCasa;
 	private Time timeFora;
@@ -17,15 +19,16 @@ public class Partida {
 	//Analiza se tudo está correto para finalizar a partida
 	public boolean finalizarPartida(int golsCasa, int golsFora, int rodada) {
 		
+		Random gerador = new Random();
 		this.rodada = rodada;
 		for(int i = 0; i < golsCasa; i++) {
-			int j = 0;
+			int j = gerador.nextInt(3);
 			this.getTimeCasa().getJogadores(j).fazerGol();
-			if(j == 3) {
-				j = 0;
-			} else {
-				j++;
-			}
+		}
+		
+		for(int i = 0; i < golsFora; i++) {
+			int j = gerador.nextInt(3);
+			this.getTimeFora().getJogadores(j).fazerGol();
 		}
 		
 		//Checando se os times ja jogaram na rodada escolhida

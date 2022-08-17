@@ -76,6 +76,10 @@ public class Menu extends JFrame {
 		getContentPane().add(botaoArtilharia);
 		botaoArtilharia.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoArtilharia.setBounds(286, 345, 175, 33);
+		botaoArtilharia.addActionListener((event) -> {
+			this.dispose();
+			Artilharia.main(null);
+		});
 		
 		JButton botaoSair = new JButton("Sair");
 		getContentPane().add(botaoSair);
