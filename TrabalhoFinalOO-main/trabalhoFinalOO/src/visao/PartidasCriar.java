@@ -115,7 +115,7 @@ public class PartidasCriar extends JFrame {
 			DefaultListModel listaJogadores1 = new DefaultListModel();
 			DefaultListModel listaJogadores2 = new DefaultListModel();
 			
-			for(int i = 0; i < 19; i++) {
+			for(int i = 0; i < 20; i++) {
 				listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
 				
 			}
@@ -129,7 +129,7 @@ public class PartidasCriar extends JFrame {
 			timeCasa.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent evt) {
 					listaTimes2.clear();
-					for(int j = 0; j < 19; j++) {
+					for(int j = 0; j < 20; j++) {
 						if(timeCasa.getSelectedValue() != brasileirao.getTimes().get(j).getNome()) {
 							listaTimes2.addElement(brasileirao.getTimes().get(j).getNome());
 						}
@@ -206,13 +206,13 @@ public class PartidasCriar extends JFrame {
 			painelScrollGoleadores.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 			painelScrollGoleadores.setVisible(false);
 			painelScrollGoleadores.setLocation(51, 180);
-			painelScrollGoleadores.setSize(200, 50);
+			painelScrollGoleadores.setSize(200, 550);
 			
-			
+			//Lista de jogadores que fizerem gol
 			JList<String> jogadoresGols = new JList<String>(listaJogadores1);
 			jogadoresGols.setBounds(new Rectangle(0, 0, 200, 50));
 			jogadoresGols.setFont(new Font("Arial Black", Font.PLAIN, 11));
-			painelScrollGoleadores.setViewportView(jogadoresGols);
+			painelScrollGoleadores.add(jogadoresGols);
 			painelConteudo.add(painelScrollGoleadores);
 			
 			JTextPane textoGoleadoresCasa = new JTextPane();
@@ -228,21 +228,31 @@ public class PartidasCriar extends JFrame {
 			
 			//Botao para mudar a tela do placar para a tela dos goleadores da partida
 			botaoProximo.addActionListener((event) -> {
-				listaTimesScroll1.setVisible(false);
-				listaTimesScroll2.setVisible(false);
-				textoTimeCasa.setVisible(false);
-				golsCasa.setVisible(false);
-				textoTimeFora.setVisible(false);
-				golsFora.setVisible(false);
-				textoX.setVisible(false);
-				textoRodada.setVisible(false);
-				spinnerRodada.setVisible(false);
-				listaEstadios.setVisible(false);
-				botaoProximo.setVisible(false);
-				this.jogadoresParaGols(timeCasa, listaJogadores1);
-				painelScrollGoleadores.setVisible(true);
-				textoGoleadoresCasa.setVisible(true);
+				if((timeCasa.isSelectionEmpty() == false) && (timeFora.isSelectionEmpty() == false) && (estadios.isSelectionEmpty() == false)) {
+					listaTimesScroll1.setVisible(false);
+					listaTimesScroll2.setVisible(false);
+					textoTimeCasa.setVisible(false);
+					golsCasa.setVisible(false);
+					textoTimeFora.setVisible(false);
+					golsFora.setVisible(false);
+					textoX.setVisible(false);
+					textoRodada.setVisible(false);
+					spinnerRodada.setVisible(false);
+					listaEstadios.setVisible(false);
+					botaoProximo.setVisible(false);
+					this.jogadoresParaGols(timeCasa, listaJogadores1);
+					for(int i = 0; i < getGolsCasa(); i++) {
+						JList<String> jogadoresGolszin = new JList<String>(listaJogadores1);
+						jogadoresGolszin.setBounds(new Rectangle(0, 0, 200, 50));
+						jogadoresGolszin.setFont(new Font("Arial Black", Font.PLAIN, 11));
+						painelScrollGoleadores.add(jogadoresGolszin);
+					}
+					painelScrollGoleadores.setVisible(true);
+					textoGoleadoresCasa.setVisible(true);	
+				}
 			});
+				
+			
 			
 		}
 	
