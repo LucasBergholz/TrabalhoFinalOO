@@ -27,6 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
+import java.awt.Rectangle;
 
 public class PartidasCriar extends JFrame {
 
@@ -198,13 +199,31 @@ public class PartidasCriar extends JFrame {
 			spinnerRodada.setBounds(149, 345, 46, 33);
 			painelConteudo.add(spinnerRodada);
 			
+			//Criando painel secundario para os goleadores
+			
 			painelScrollGoleadores = new JScrollPane();
 			painelScrollGoleadores.setBackground(Color.WHITE);
 			painelScrollGoleadores.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 			painelScrollGoleadores.setVisible(false);
-			painelScrollGoleadores.setLocation(116, 130);
-			painelScrollGoleadores.setSize(500, 500);
+			painelScrollGoleadores.setLocation(51, 180);
+			painelScrollGoleadores.setSize(200, 50);
+			
+			
+			JList<String> jogadoresGols = new JList<String>(listaJogadores1);
+			jogadoresGols.setBounds(new Rectangle(0, 0, 200, 50));
+			jogadoresGols.setFont(new Font("Arial Black", Font.PLAIN, 11));
+			painelScrollGoleadores.setViewportView(jogadoresGols);
 			painelConteudo.add(painelScrollGoleadores);
+			
+			JTextPane textoGoleadoresCasa = new JTextPane();
+			textoGoleadoresCasa.setText("Escolha os goleadores do jogo:");
+			textoGoleadoresCasa.setForeground(Color.WHITE);
+			textoGoleadoresCasa.setFont(new Font("Arial", Font.PLAIN, 25));
+			textoGoleadoresCasa.setEditable(false);
+			textoGoleadoresCasa.setVisible(false);
+			textoGoleadoresCasa.setBackground(new Color(0, 0, 128));
+			textoGoleadoresCasa.setBounds(185, 111, 366, 35);
+			painelConteudo.add(textoGoleadoresCasa);
 			
 			
 			//Botao para mudar a tela do placar para a tela dos goleadores da partida
@@ -220,20 +239,27 @@ public class PartidasCriar extends JFrame {
 				spinnerRodada.setVisible(false);
 				listaEstadios.setVisible(false);
 				botaoProximo.setVisible(false);
+				this.jogadoresParaGols(timeCasa, listaJogadores1);
 				painelScrollGoleadores.setVisible(true);
+				textoGoleadoresCasa.setVisible(true);
 			});
 			
 		}
 	
-	/*public void jogadoresParaGols(JList listaTime1, JList listaTime2) {
-		String timeCasa = listaTime1.getSelectedValue().toString();
+	 public void jogadoresParaGols(JList listaTime, DefaultListModel listaJogadores) {
+		String timeCasa = listaTime.getSelectedValue().toString();
 		
-		for(int i = 0; i < 11; i++) {
-			if() {
-				
+		for(int i = 0; i < 20; i++) {
+			if(brasileirao.getTimes().get(i).getNome() == timeCasa) {
+				for(int j = 0; j < 11; j++) {
+					if(brasileirao.getTimes().get(i).getJogadores(j) != null) {
+						listaJogadores.addElement(brasileirao.getTimes().get(i).getJogadores(j).getNome());
+					}
+				}
 			}
 		}
-	}*/
+	 }
+	
 
 	public int getGolsCasa() {
 		return golsCasa;
@@ -250,7 +276,4 @@ public class PartidasCriar extends JFrame {
 	public void setGolsFora(int golsFora) {
 		this.golsFora = golsFora;
 	}
-
-	
-
 }
