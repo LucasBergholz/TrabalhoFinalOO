@@ -1,11 +1,14 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Partida {
 	private Time timeCasa;
 	private Time timeFora;
 	private Estadios estadio;
+	private ArrayList<Jogador> jogadorCasa = new ArrayList<Jogador>();
+	private ArrayList<Jogador> jogadorFora = new ArrayList<Jogador>();
 	private int rodada;
 	private int golsCasa, golsFora;
 	
@@ -68,6 +71,16 @@ public class Partida {
 		}
 	}
 
+	
+	//Adicionar quem fez o gol de cada time
+	public void addGolCasa(Jogador jogador) {
+		jogadorCasa.add(jogador);
+	}
+	
+	public void addGolFora(Jogador jogador) {
+		jogadorFora.add(jogador);
+	}
+	
 	//Getters e Setters
 	
 	public Time getTimeCasa() {

@@ -25,12 +25,15 @@ import javax.swing.JButton;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
 
 public class PartidasCriar extends JFrame {
 
 	private JPanel painelConteudo;
+	private JScrollPane painelScrollGoleadores;
 	private Listas brasileirao = new Listas();
+	private int golsCasa, golsFora;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,6 +59,15 @@ public class PartidasCriar extends JFrame {
 			painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(painelConteudo);
 			painelConteudo.setLayout(null);
+			
+			JButton botaoVoltar = new JButton("Voltar");
+			getContentPane().add(botaoVoltar);
+			botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
+			botaoVoltar.setBounds(34, 35, 101, 33);
+			botaoVoltar.addActionListener((event) -> {
+				this.dispose();
+				PartidasMenu.main(null);
+			});
 			
 			//Titulo para a pagina
 			JLabel titulo = new JLabel("CRIAR PARTIDA");
@@ -99,10 +111,14 @@ public class PartidasCriar extends JFrame {
 			brasileirao.inicializarTimes();
 			DefaultListModel listaTimes = new DefaultListModel();
 			DefaultListModel listaTimes2 = new DefaultListModel();
+			DefaultListModel listaJogadores1 = new DefaultListModel();
+			DefaultListModel listaJogadores2 = new DefaultListModel();
+			
 			for(int i = 0; i < 19; i++) {
 				listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
 				
 			}
+			
 			JList timeCasa = new JList(listaTimes);
 			timeCasa.setFont(new Font("Arial Black", Font.PLAIN, 11));
 			timeCasa.setBounds(52, 183, 197, 45);
@@ -140,15 +156,17 @@ public class PartidasCriar extends JFrame {
 			JSpinner golsCasa = new JSpinner();
 			golsCasa.setBounds(248, 183, 47, 45);
 			painelConteudo.add(golsCasa);
+			this.setGolsCasa((Integer) golsCasa.getValue());
 			
 			JSpinner golsFora = new JSpinner();
 			golsFora.setBounds(445, 183, 47, 45);
 			painelConteudo.add(golsFora);
+			this.setGolsFora((Integer) golsFora.getValue());
 			
-			JButton botaoEnviar = new JButton("Proximo");
-			painelConteudo.add(botaoEnviar);
-			botaoEnviar.setBounds(512, 492, 175, 33);
-			botaoEnviar.setFont(new Font("Arial", Font.PLAIN, 20));
+			JButton botaoProximo = new JButton("Proximo");
+			painelConteudo.add(botaoProximo);
+			botaoProximo.setBounds(512, 492, 175, 33);
+			botaoProximo.setFont(new Font("Arial", Font.PLAIN, 20));
 			
 			//Adicionando itens para a escolha do estadio
 			DefaultListModel demoList = new DefaultListModel();
@@ -156,15 +174,6 @@ public class PartidasCriar extends JFrame {
 				demoList.addElement(Estadios.values()[i]);
 				
 			}
-			
-			JButton botaoVoltar = new JButton("Voltar");
-			getContentPane().add(botaoVoltar);
-			botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
-			botaoVoltar.setBounds(52, 492, 175, 33);
-			botaoVoltar.addActionListener((event) -> {
-				this.dispose();
-				PartidasMenu.main(null);
-			});
 			
 			JList estadios = new JList(demoList);
 			estadios.setFont(new Font("Arial Black", Font.PLAIN, 11));
@@ -176,18 +185,72 @@ public class PartidasCriar extends JFrame {
 			listaEstadios.setSize(195, 152);
 			painelConteudo.add(listaEstadios);
 			
-			JTextPane txtpnRodada = new JTextPane();
-			txtpnRodada.setFont(new Font("Arial", Font.PLAIN, 25));
-			txtpnRodada.setForeground(new Color(255, 255, 255));
-			txtpnRodada.setText("Rodada");
-			txtpnRodada.setBackground(new Color(0, 0, 128));
-			txtpnRodada.setBounds(56, 345, 95, 35);
-			painelConteudo.add(txtpnRodada);
+			JTextPane textoRodada = new JTextPane();
+			textoRodada.setFont(new Font("Arial", Font.PLAIN, 25));
+			textoRodada.setForeground(new Color(255, 255, 255));
+			textoRodada.setText("Rodada");
+			textoRodada.setBackground(new Color(0, 0, 128));
+			textoRodada.setBounds(56, 345, 95, 35);
+			painelConteudo.add(textoRodada);
 			
 			SpinnerNumberModel modelo = new SpinnerNumberModel(1, 1, 38.0, 1.0);
-			JSpinner spinner = new JSpinner(modelo);
-			spinner.setBounds(149, 345, 46, 33);
-			painelConteudo.add(spinner);
+			JSpinner spinnerRodada = new JSpinner(modelo);
+			spinnerRodada.setBounds(149, 345, 46, 33);
+			painelConteudo.add(spinnerRodada);
+			
+			painelScrollGoleadores = new JScrollPane();
+			painelScrollGoleadores.setBackground(Color.WHITE);
+			painelScrollGoleadores.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			painelScrollGoleadores.setVisible(false);
+			painelScrollGoleadores.setLocation(116, 130);
+			painelScrollGoleadores.setSize(500, 500);
+			painelConteudo.add(painelScrollGoleadores);
+			
+			
+			//Botao para mudar a tela do placar para a tela dos goleadores da partida
+			botaoProximo.addActionListener((event) -> {
+				listaTimesScroll1.setVisible(false);
+				listaTimesScroll2.setVisible(false);
+				textoTimeCasa.setVisible(false);
+				golsCasa.setVisible(false);
+				textoTimeFora.setVisible(false);
+				golsFora.setVisible(false);
+				textoX.setVisible(false);
+				textoRodada.setVisible(false);
+				spinnerRodada.setVisible(false);
+				listaEstadios.setVisible(false);
+				botaoProximo.setVisible(false);
+				painelScrollGoleadores.setVisible(true);
+			});
 			
 		}
+	
+	/*public void jogadoresParaGols(JList listaTime1, JList listaTime2) {
+		String timeCasa = listaTime1.getSelectedValue().toString();
+		
+		for(int i = 0; i < 11; i++) {
+			if() {
+				
+			}
+		}
+	}*/
+
+	public int getGolsCasa() {
+		return golsCasa;
 	}
+
+	public void setGolsCasa(int golsCasa) {
+		this.golsCasa = golsCasa;
+	}
+
+	public int getGolsFora() {
+		return golsFora;
+	}
+
+	public void setGolsFora(int golsFora) {
+		this.golsFora = golsFora;
+	}
+
+	
+
+}
