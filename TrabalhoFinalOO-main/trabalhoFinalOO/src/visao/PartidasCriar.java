@@ -203,21 +203,20 @@ public class PartidasCriar extends JFrame {
 			
 			//Painel com o conteudo dos goleadores
 			painelGoleadores = new JPanel();
-			painelGoleadores.setBackground(Color.WHITE);
+			painelGoleadores.setBackground(new Color(0, 0, 128));
 			painelGoleadores.setLocation(0, 0);
-			painelGoleadores.setSize(200, 500);
+			painelGoleadores.setSize(600, 500);
 			painelGoleadores.setVisible(true);
 			
 			//Painel com scroll que contera o painel dos goleadores
 			painelScrollGoleadores = new JScrollPane();
-			painelScrollGoleadores.setBackground(Color.WHITE);
+			painelScrollGoleadores.setBackground(new Color(0, 0, 128));
 			painelScrollGoleadores.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 			painelScrollGoleadores.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			painelScrollGoleadores.setVisible(false);
-			painelScrollGoleadores.add(painelGoleadores);
 			painelScrollGoleadores.setViewportView(painelGoleadores);
-			painelScrollGoleadores.setLocation(51, 180);
-			painelScrollGoleadores.setSize(200, 300);
+			painelScrollGoleadores.setLocation(60, 180);
+			painelScrollGoleadores.setSize(600, 300);
 			painelConteudo.add(painelScrollGoleadores);
 			painelGoleadores.setLayout(null);
 			
@@ -231,8 +230,13 @@ public class PartidasCriar extends JFrame {
 			textoGoleadoresCasa.setBounds(185, 111, 366, 35);
 			painelConteudo.add(textoGoleadoresCasa);
 			
+			//Lista de JList dos goleadores
+			ArrayList<JList> listaDeListas1 = new ArrayList<JList>();
+			ArrayList<JList> listaDeListas2 = new ArrayList<JList>();
 			
-			ArrayList<JList> listaDeListas = new ArrayList<JList>();
+			//Lista de JScrollPane, onde cada JScrollPane terá um JList
+			ArrayList<JScrollPane> listaDePaineis1 = new ArrayList<JScrollPane>();
+			ArrayList<JScrollPane> listaDePaineis2 = new ArrayList<JScrollPane>();
 			
 			//Botao para mudar a tela do placar para a tela dos goleadores da partida
 			botaoProximo.addActionListener((event) -> {
@@ -251,11 +255,27 @@ public class PartidasCriar extends JFrame {
 					listaEstadios.setVisible(false);
 					botaoProximo.setVisible(false);
 					this.jogadoresParaGols(timeCasa, listaJogadores1);
+					
+					//De acordo com o valor que o usuario escolheu para os gols, printar na tela "n" JLists com os jogadores do time
 					for(int i = 0; i < getGolsCasa(); i++) {
-						listaDeListas.add(i, new JList<String>(listaJogadores1));
-						listaDeListas.get(i).setBounds(new Rectangle(0, (i*60), 200, 60));
-						listaDeListas.get(i).setFont(new Font("Arial Black", Font.PLAIN, 11));
-						painelGoleadores.add(listaDeListas.get(i));
+						listaDeListas1.add(i, new JList<String>(listaJogadores1));
+						listaDeListas1.get(i).setBounds(new Rectangle(0, (i*60), 200, 60));
+						listaDeListas1.get(i).setFont(new Font("Arial Black", Font.PLAIN, 11));
+						listaDePaineis1.add(i, new JScrollPane());
+						listaDePaineis1.get(i).setBounds(new Rectangle(0, (i*70), 180, 60));
+						listaDePaineis1.get(i).setViewportView(listaDeListas1.get(i));
+						painelGoleadores.add(listaDePaineis1.get(i));
+					}
+					
+					this.jogadoresParaGols(timeFora, listaJogadores2);
+					for(int i = 0; i < getGolsFora(); i++) {
+						listaDeListas2.add(i, new JList<String>(listaJogadores2));
+						listaDeListas2.get(i).setBounds(new Rectangle(0, (i*60), 200, 60));
+						listaDeListas2.get(i).setFont(new Font("Arial Black", Font.PLAIN, 11));
+						listaDePaineis2.add(i, new JScrollPane());
+						listaDePaineis2.get(i).setBounds(new Rectangle(410, (i*70), 180, 60));
+						listaDePaineis2.get(i).setViewportView(listaDeListas2.get(i));
+						painelGoleadores.add(listaDePaineis2.get(i));
 					}
 					painelScrollGoleadores.setVisible(true);
 					textoGoleadoresCasa.setVisible(true);	
