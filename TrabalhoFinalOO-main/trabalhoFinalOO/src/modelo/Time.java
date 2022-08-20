@@ -20,7 +20,7 @@ public class Time {
 	
 	//Construtores
 	
-	public Time(String nome, String cor1, String cor2, Estadios estadio) {
+	public Time(String nome, String cor1, String cor2,String nomeTecnico ,Estadios estadio) {
 		
 		this.nome = nome;
 		this.cor1 = cor1;
@@ -32,9 +32,22 @@ public class Time {
 		this.derrotas = 0;
 		this.saldoGols = 0;
 		this.pontosTotais = 0;
+		this.setTecnico(new Tecnico(nome, this.getNome()));
 	}
-	
-	public Time(String nome, String cor1, String cor2, Estadios estadio, Jogador jogador, Jogador jogador2, Jogador jogador3) {
+	public Time(String nome, String cor1, String cor2, Estadios estadio) {
+			
+			this.nome = nome;
+			this.cor1 = cor1;
+			this.cor2 = cor2;
+			this.estadio = estadio;
+			this.numJogos = 0;
+			this.vitorias = 0;
+			this.empates = 0;
+			this.derrotas = 0;
+			this.saldoGols = 0;
+			this.pontosTotais = 0;
+	}
+	public Time(String nome, String cor1, String cor2, Estadios estadio, Jogador jogador, Jogador jogador2, Jogador jogador3, String nomeTecnico) {
 		
 		this.nome = nome;
 		this.cor1 = cor1;
@@ -49,6 +62,7 @@ public class Time {
 		this.jogadores[0] = jogador;
 		this.jogadores[1] = jogador2;
 		this.jogadores[2] = jogador3;
+		this.setTecnico(new Tecnico(nome, this.getNome()));
 	}
 
 	//Metodos Concretos
