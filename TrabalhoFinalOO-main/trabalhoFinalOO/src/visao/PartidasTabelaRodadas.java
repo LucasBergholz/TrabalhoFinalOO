@@ -143,7 +143,7 @@ public class PartidasTabelaRodadas extends JFrame {
 		for (int i = 0; i < numPartidas-1; i++) {
 			if(menu.getBrasileirao().getPartidas().get(i).getRodada() == rod) {
 				Box caixaHorizontal = Box.createHorizontalBox();
-				caixaHorizontal.setMaximumSize(new Dimension(2000, 3000));
+				caixaHorizontal.setMaximumSize(new Dimension(1355, 3000));
 				Border blackline = BorderFactory.createLineBorder(Color.black, 3, true);
 				
 				JPanel painelPartidas = new JPanel();
@@ -178,8 +178,8 @@ public class PartidasTabelaRodadas extends JFrame {
 				painelPartidas.add(lblGolsFora);
 				
 				JSeparator separator = new JSeparator();
-				separator.setMaximumSize(new Dimension(3000, 200));
-				separator.setBackground(new Color(0x483D8B));
+				separator.setMaximumSize(new Dimension(1350, 200));
+				separator.setBackground(new Color(0, 0, 128));
 				separator.setBounds(0, 130, 736, 12);
 				
 				//Adcionando as Listas
@@ -222,7 +222,7 @@ public class PartidasTabelaRodadas extends JFrame {
 				 for (int i = 0; i < numPartidas-1; i++) {
 						if(brasileirao.getPartidas().get(i).getRodada() == rodada) {
 							Box caixaHorizontal = Box.createHorizontalBox();
-							caixaHorizontal.setMaximumSize(new Dimension(2000, 3000));
+							caixaHorizontal.setMaximumSize(new Dimension(1355, 3000));
 							Border blackline = BorderFactory.createLineBorder(Color.black, 3, true);
 							
 							JPanel painelPartidas = new JPanel();
@@ -257,8 +257,8 @@ public class PartidasTabelaRodadas extends JFrame {
 							painelPartidas.add(lblGolsFora);
 							
 							JSeparator separator = new JSeparator();
-							separator.setMaximumSize(new Dimension(3000, 200));
-							separator.setBackground(new Color(0x483D8B));
+							separator.setMaximumSize(new Dimension(1355, 200));
+							separator.setBackground(new Color(0, 0, 128));
 							separator.setBounds(0, 130, 736, 12);
 							
 							//Adcionando as Listas
