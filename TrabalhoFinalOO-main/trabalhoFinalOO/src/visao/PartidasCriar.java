@@ -40,7 +40,7 @@ public class PartidasCriar extends JFrame {
 	private Listas brasileirao = new Listas();
 	private int golsCasa, golsFora;
 	private Time timeCasa, timeFora;
-	private Estadios estadin;
+	private Estadios estadio;
 	private int golasd, index;
 
 	public static void main(String[] args) {
@@ -161,11 +161,13 @@ public class PartidasCriar extends JFrame {
 			listaTimesScroll2.setSize(197, 45);
 			listaTimesScroll2.setLocation(490, 183);
 			
-			JSpinner golsCasa = new JSpinner();
+			SpinnerNumberModel modeloGolsCasa = new SpinnerNumberModel(0, 0, 100, 1);
+			JSpinner golsCasa = new JSpinner(modeloGolsCasa);
 			golsCasa.setBounds(248, 183, 47, 45);
 			painelConteudo.add(golsCasa);
 			
-			JSpinner golsFora = new JSpinner();
+			SpinnerNumberModel modeloGolsFora = new SpinnerNumberModel(0, 0, 100, 1);
+			JSpinner golsFora = new JSpinner(modeloGolsFora);
 			golsFora.setBounds(445, 183, 47, 45);
 			painelConteudo.add(golsFora);
 			
@@ -297,15 +299,15 @@ public class PartidasCriar extends JFrame {
 					botaoCriar.setVisible(true);
 					painelScrollGoleadores.setVisible(true);
 					textoGoleadoresCasa.setVisible(true);	
-					String fulanin, ciclanin;
-					estadin = estadios.getSelectedValue();
+					String timeCasaString, timeForaString;
+					estadio = estadios.getSelectedValue();
 					golasd = (int) Math.round((double) spinnerRodada.getValue());
-					fulanin = (String) timeCasa.getSelectedValue();
-					ciclanin = (String) timeFora.getSelectedValue();
+					timeCasaString = (String) timeCasa.getSelectedValue();
+					timeForaString = (String) timeFora.getSelectedValue();
 					for(int j = 0; j < 20; j++) {
-						if(fulanin == brasileirao.getTimes().get(j).getNome()) {
+						if(timeCasaString == brasileirao.getTimes().get(j).getNome()) {
 							setTimeCasa(brasileirao.getTimes().get(j));
-						} else if(ciclanin == brasileirao.getTimes().get(j).getNome()) {
+						} else if(timeForaString == brasileirao.getTimes().get(j).getNome()) {
 							setTimeFora(brasileirao.getTimes().get(j));
 						}
 					}
@@ -318,9 +320,20 @@ public class PartidasCriar extends JFrame {
 			botaoCriar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					Listas.partidas.add(new Partida(getTimeCasa(), getTimeFora(), estadin));
+					Listas.partidas.add(new Partida(getTimeCasa(), getTimeFora(), estadio));
 					index = Listas.partidas.size()-1;
-					Listas.partidas.get(index).finalizarPartida(getGolsCasa(), getGolsFora(), golasd);
+					for(int i = 0; i < getGolsCasa(); i ++) {
+						for(int j = 0; j < 11; j++) {
+							if(getTimeCasa().getJogadores(j) != null && listaDeListas1.get(i).getSelectedValue() == getTimeCasa().getJogadores(j).getNome()) {
+								for(int k = 0; k < 20; k++) {
+									if(Listas.times.get(k) == getTimeCasa()) {
+										Listas.times.get(k).getJogadores(j).fazerGol();			
+									}
+								}
+							}
+						}		
+					}
+					Listas.partidas.get(index).finalizarPartida2(getGolsCasa(), getGolsFora(), golasd);
 					
 					dispose();
 					Menu.main(null);

@@ -63,10 +63,10 @@ public class PartidasMenu extends JFrame {
 			PartidasCriar.main(null);
 		});
 		
-		JToggleButton botaoEditar = new JToggleButton("Editar Partida");
-		getContentPane().add(botaoEditar);
-		botaoEditar.setBounds(286, 245, 175, 33);
-		botaoEditar.setFont(new Font("Arial", Font.PLAIN, 20));
+		JToggleButton botaoDeletar = new JToggleButton("Deletar Partida");
+		getContentPane().add(botaoDeletar);
+		botaoDeletar.setBounds(286, 245, 175, 33);
+		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
 		
 		JToggleButton botaoVer = new JToggleButton("Ver Partidas");
 		getContentPane().add(botaoVer);
