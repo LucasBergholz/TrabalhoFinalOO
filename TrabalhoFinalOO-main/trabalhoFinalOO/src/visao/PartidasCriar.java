@@ -30,6 +30,8 @@ import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PartidasCriar extends JFrame {
 
@@ -37,6 +39,9 @@ public class PartidasCriar extends JFrame {
 	private JScrollPane painelScrollGoleadores;
 	private Listas brasileirao = new Listas();
 	private int golsCasa, golsFora;
+	private Time timeCasa, timeFora;
+	private Estadios estadin;
+	private int golasd, index;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -170,13 +175,13 @@ public class PartidasCriar extends JFrame {
 			botaoProximo.setFont(new Font("Arial", Font.PLAIN, 20));
 			
 			//Adicionando itens para a escolha do estadio
-			DefaultListModel demoList = new DefaultListModel();
+			DefaultListModel<Estadios> demoList = new DefaultListModel<Estadios>();
 			for(int i = 0; i < 19; i++) {
 				demoList.addElement(Estadios.values()[i]);
 				
 			}
 			
-			JList estadios = new JList(demoList);
+			JList<Estadios> estadios = new JList<Estadios>(demoList);
 			estadios.setFont(new Font("Arial Black", Font.PLAIN, 11));
 			estadios.setBounds(266, 196, 197, 158);
 			
@@ -215,8 +220,9 @@ public class PartidasCriar extends JFrame {
 			painelScrollGoleadores.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			painelScrollGoleadores.setVisible(false);
 			painelScrollGoleadores.setViewportView(painelGoleadores);
-			painelScrollGoleadores.setLocation(60, 180);
-			painelScrollGoleadores.setSize(600, 300);
+			//painelScrollGoleadores.setLocation(60, 180);
+			painelScrollGoleadores.setBounds(60,180,600, 300);
+			painelGoleadores.setPreferredSize(new Dimension(600, 1500));
 			painelConteudo.add(painelScrollGoleadores);
 			painelGoleadores.setLayout(null);
 			
@@ -229,6 +235,14 @@ public class PartidasCriar extends JFrame {
 			textoGoleadoresCasa.setBackground(new Color(0, 0, 128));
 			textoGoleadoresCasa.setBounds(185, 111, 366, 35);
 			painelConteudo.add(textoGoleadoresCasa);
+			
+			
+			//Botao de criar a partida
+			JButton botaoCriar = new JButton("Criar");
+			painelConteudo.add(botaoCriar);
+			botaoCriar.setBounds(512, 492, 175, 33);
+			botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
+			botaoCriar.setVisible(false);
 			
 			//Lista de JList dos goleadores
 			ArrayList<JList> listaDeListas1 = new ArrayList<JList>();
@@ -264,6 +278,7 @@ public class PartidasCriar extends JFrame {
 						listaDePaineis1.add(i, new JScrollPane());
 						listaDePaineis1.get(i).setBounds(new Rectangle(0, (i*70), 180, 60));
 						listaDePaineis1.get(i).setViewportView(listaDeListas1.get(i));
+						listaDePaineis1.get(i).setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 						painelGoleadores.add(listaDePaineis1.get(i));
 					}
 					
@@ -275,22 +290,51 @@ public class PartidasCriar extends JFrame {
 						listaDePaineis2.add(i, new JScrollPane());
 						listaDePaineis2.get(i).setBounds(new Rectangle(410, (i*70), 180, 60));
 						listaDePaineis2.get(i).setViewportView(listaDeListas2.get(i));
+						listaDePaineis2.get(i).setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 						painelGoleadores.add(listaDePaineis2.get(i));
 					}
+					
+					botaoCriar.setVisible(true);
 					painelScrollGoleadores.setVisible(true);
 					textoGoleadoresCasa.setVisible(true);	
+					String fulanin, ciclanin;
+					estadin = estadios.getSelectedValue();
+					golasd = (int) Math.round((double) spinnerRodada.getValue());
+					fulanin = (String) timeCasa.getSelectedValue();
+					ciclanin = (String) timeFora.getSelectedValue();
+					for(int j = 0; j < 20; j++) {
+						if(fulanin == brasileirao.getTimes().get(j).getNome()) {
+							setTimeCasa(brasileirao.getTimes().get(j));
+						} else if(ciclanin == brasileirao.getTimes().get(j).getNome()) {
+							setTimeFora(brasileirao.getTimes().get(j));
+						}
+					}
 				}
 			});
 				
 			
 			
+			//Funcao de criar partida
+			botaoCriar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					Listas.partidas.add(new Partida(getTimeCasa(), getTimeFora(), estadin));
+					index = Listas.partidas.size()-1;
+					Listas.partidas.get(index).finalizarPartida(getGolsCasa(), getGolsFora(), golasd);
+					
+					dispose();
+					Menu.main(null);
+				}
+			});
+			
 		}
 	
+	//Funcao que tira os jogadores do time e coloca ele na JList dos goleadores
 	 public void jogadoresParaGols(JList listaTime, DefaultListModel listaJogadores) {
-		String timeCasa = listaTime.getSelectedValue().toString();
+		String time = listaTime.getSelectedValue().toString();
 		
 		for(int i = 0; i < 20; i++) {
-			if(brasileirao.getTimes().get(i).getNome() == timeCasa) {
+			if(brasileirao.getTimes().get(i).getNome() == time) {
 				for(int j = 0; j < 11; j++) {
 					if(brasileirao.getTimes().get(i).getJogadores(j) != null) {
 						listaJogadores.addElement(brasileirao.getTimes().get(i).getJogadores(j).getNome());
@@ -315,5 +359,21 @@ public class PartidasCriar extends JFrame {
 
 	public void setGolsFora(int golsFora) {
 		this.golsFora = golsFora;
+	}
+
+	public Time getTimeCasa() {
+		return timeCasa;
+	}
+
+	public void setTimeCasa(Time timeCasa) {
+		this.timeCasa = timeCasa;
+	}
+
+	public Time getTimeFora() {
+		return timeFora;
+	}
+
+	public void setTimeFora(Time timeFora) {
+		this.timeFora = timeFora;
 	}
 }
