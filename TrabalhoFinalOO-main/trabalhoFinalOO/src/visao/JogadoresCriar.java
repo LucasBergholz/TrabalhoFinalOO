@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -20,6 +21,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import bancoDeDados.Listas;
+import modelo.Posicao;
+import modelo.Time;
 
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
@@ -31,6 +34,7 @@ public class JogadoresCriar extends JFrame {
 
 	private JPanel painelConteudo;
 	private JTextField txtNome;
+	//ArrayList<Posicao> posicoes = new ArrayList<Posicao>();
 	private Listas brasileirao = new Listas();
 	private JTextField txtPosicao;
 
@@ -86,10 +90,8 @@ public class JogadoresCriar extends JFrame {
 		//Criando a lista de times
 		brasileirao.inicializarTimes();
 		DefaultListModel listaTimes = new DefaultListModel();
-		DefaultListModel listaTimes2 = new DefaultListModel();
 		for(int i = 0; i < 19; i++) {
 			listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
-			
 		}
 		
 		JList listagemTime = new JList(listaTimes);
@@ -122,11 +124,26 @@ public class JogadoresCriar extends JFrame {
 		lblPosicao.setBounds(25, 166, 101, 24);
 		painelCadastro.add(lblPosicao);
 		
-		txtPosicao = new JTextField();
-		txtPosicao.setFont(new Font("Arial", Font.PLAIN, 20));
-		txtPosicao.setColumns(10);
-		txtPosicao.setBounds(136, 166, 358, 24);
-		painelCadastro.add(txtPosicao);
+		//Instanciando a Lista de posicões
+		DefaultListModel listaPosicao = new DefaultListModel();
+		listaPosicao.addElement(Posicao.ATACANTE);
+		listaPosicao.addElement(Posicao.GOLEIRO);
+		listaPosicao.addElement(Posicao.LATERAL);
+		listaPosicao.addElement(Posicao.MEIA);
+		listaPosicao.addElement(Posicao.PONTA);
+		listaPosicao.addElement(Posicao.VOLANTE);
+		listaPosicao.addElement(Posicao.ZAGUEIRO);
+		
+		JList listagemPosicao = new JList(listaPosicao);
+		listagemPosicao.setFont(new Font("Arial Black", Font.PLAIN, 11));
+		listagemPosicao.setBounds(136, 166, 358, 80);
+		painelCadastro.add(listagemPosicao);
+		
+		JScrollPane srclPosicao = new JScrollPane(listagemPosicao);
+		painelCadastro.add(srclPosicao);
+		srclPosicao.setSize(197, 80);
+		srclPosicao.setLocation(136, 166);
+		
 		
 		JButton botaoVoltar = new JButton("Voltar");
 		botaoVoltar.setBounds(10, 35, 85, 21);
