@@ -59,7 +59,7 @@ public class JogadoresMenu extends JFrame {
 		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoCriar.addActionListener((event) -> {
 			this.dispose();
-			//PartidasCriar.main(null);
+			JogadoresCriar.main(null);
 		});
 		
 		JToggleButton botaoEditar = new JToggleButton("Editar Jogador");

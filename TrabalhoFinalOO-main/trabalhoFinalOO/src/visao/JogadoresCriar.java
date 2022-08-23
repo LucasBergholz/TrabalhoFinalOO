@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -19,13 +22,17 @@ import javax.swing.event.ListSelectionListener;
 import bancoDeDados.Listas;
 
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.JSpinner;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JogadoresCriar extends JFrame {
 
 	private JPanel painelConteudo;
-	private JTextField textField;
+	private JTextField txtNome;
 	private Listas brasileirao = new Listas();
+	private JTextField txtPosicao;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -61,15 +68,15 @@ public class JogadoresCriar extends JFrame {
 		
 		//Criando o painel onde vai ser cadastrado o jogador
 		JPanel painelCadastro = new JPanel();
-		painelCadastro.setBounds(49, 110, 635, 422);
+		painelCadastro.setBounds(49, 110, 635, 400);
 		painelCadastro.setLayout(null);
 		painelConteudo.add(painelCadastro);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Arial", Font.PLAIN, 20));
-		textField.setBounds(136, 49, 358, 24);
-		painelCadastro.add(textField);
-		textField.setColumns(10);
+		txtNome = new JTextField();
+		txtNome.setFont(new Font("Arial", Font.PLAIN, 20));
+		txtNome.setBounds(136, 49, 358, 24);
+		painelCadastro.add(txtNome);
+		txtNome.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -105,10 +112,42 @@ public class JogadoresCriar extends JFrame {
 		lblIdade.setBounds(25, 106, 101, 24);
 		painelCadastro.add(lblIdade);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(136, 106, 49, 26);
-		painelCadastro.add(spinner);
+		JSpinner spnIdade = new JSpinner();
+		spnIdade.setBounds(136, 106, 49, 26);
+		spnIdade.setModel(new SpinnerNumberModel(18.0, 18.0, 100.0, 1.0));
+		painelCadastro.add(spnIdade);
 		
+		JLabel lblPosicao = new JLabel("Posição");
+		lblPosicao.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblPosicao.setBounds(25, 166, 101, 24);
+		painelCadastro.add(lblPosicao);
+		
+		txtPosicao = new JTextField();
+		txtPosicao.setFont(new Font("Arial", Font.PLAIN, 20));
+		txtPosicao.setColumns(10);
+		txtPosicao.setBounds(136, 166, 358, 24);
+		painelCadastro.add(txtPosicao);
+		
+		JButton botaoVoltar = new JButton("Voltar");
+		botaoVoltar.setBounds(10, 35, 85, 21);
+		painelConteudo.add(botaoVoltar);
+		botaoVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				JogadoresMenu.main(null);
+			}
+		});
+		
+		//Botao de criar O Jogador
+		JButton botaoCriar = new JButton("Criar");
+		botaoCriar.setBounds(551, 520, 175, 33);
+		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
+		painelConteudo.add(botaoCriar);
+		botaoCriar.addActionListener((event) -> {
+			this.dispose();
+			//JogadoresVer.main;
+		});
 		
 		
 	}
