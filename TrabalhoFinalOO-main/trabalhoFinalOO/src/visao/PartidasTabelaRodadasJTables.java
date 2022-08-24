@@ -133,7 +133,7 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		JPanel caixaDentroCaixa = new JPanel();
 		caixaDentroCaixa.setBackground(new Color(0, 0, 128));
 		caixaDentroCaixa.setLayout(null);
-		caixaDentroCaixa.setPreferredSize(new Dimension(600, 1100));
+		caixaDentroCaixa.setPreferredSize(new Dimension(600, numPartidas*110));
 		caixaVertical.setSize(587, 350);
 		painelConteudo.add(caixaVertical);
 		caixaVertical.setLocation(70, 179);
