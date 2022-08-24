@@ -93,16 +93,15 @@ public class PartidasDeletar extends JFrame {
 			ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
 			botoesDeletar.clear();
 			int rodada = (Integer)spnRodada.getValue();
+			int contador = 0;
 			for(int i = 0; i < Listas.partidas.size(); i++) {
-				
-				final int posicaoLista;
 				if(Listas.partidas.get(i).getRodada() == rodada) {
+					int posicaoLista = i;
 					botoesDeletar.add(new JButton(Listas.partidas.get(i).toString()));
-					botoesDeletar.get(i).setBounds(new Rectangle(0, (i*70), 400, 60));
-					botoesDeletar.get(i).setFont(new Font("Arial Black", Font.PLAIN, 11));
-					posicaoLista = i;
-					painelPartidas.add(botoesDeletar.get(i));
-					botoesDeletar.get(i).addActionListener( new ActionListener() {
+					botoesDeletar.get(contador).setBounds(new Rectangle(0, (contador*70), 400, 60));
+					botoesDeletar.get(contador).setFont(new Font("Arial Black", Font.PLAIN, 11));
+					painelPartidas.add(botoesDeletar.get(contador));
+					botoesDeletar.get(contador).addActionListener( new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {				
 							JFrame jFrame = new JFrame();
@@ -120,9 +119,11 @@ public class PartidasDeletar extends JFrame {
 							}
 						}
 					});
+					contador++;
 				}
 				
 			}
+			
 			painelPartidasScroll.setVisible(false);
 			painelPartidasScroll.setVisible(true);
 		});
