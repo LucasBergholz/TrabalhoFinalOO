@@ -167,8 +167,7 @@ public class Partida {
 
 	@Override
 	public String toString() {
-		return "Partida [timeCasa=" + timeCasa.getNome() + ", timeFora=" + timeFora.getNome() + ", estadio=" + estadio + ", rodada="
-				+ rodada + "]";
+		return timeCasa.getNome() + " " + getGolsCasa() + " X " + getGolsFora() + " " + timeFora.getNome();
 	}
 	
 	

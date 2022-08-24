@@ -67,6 +67,10 @@ public class PartidasMenu extends JFrame {
 		getContentPane().add(botaoDeletar);
 		botaoDeletar.setBounds(286, 245, 175, 33);
 		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoDeletar.addActionListener((event) -> {
+			this.dispose();
+			PartidasDeletar.main(null);
+		});
 		
 		JToggleButton botaoVer = new JToggleButton("Ver Partidas");
 		getContentPane().add(botaoVer);
