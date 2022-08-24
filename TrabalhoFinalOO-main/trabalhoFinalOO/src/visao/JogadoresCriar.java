@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import bancoDeDados.Listas;
+import modelo.Jogador;
 import modelo.Posicao;
 import modelo.Time;
 
@@ -34,9 +35,9 @@ public class JogadoresCriar extends JFrame {
 
 	private JPanel painelConteudo;
 	private JTextField txtNome;
-	//ArrayList<Posicao> posicoes = new ArrayList<Posicao>();
 	private Listas brasileirao = new Listas();
-	private JTextField txtPosicao;
+	private Time timeJog;
+	private Posicao posicJog;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -161,11 +162,60 @@ public class JogadoresCriar extends JFrame {
 		botaoCriar.setBounds(551, 520, 175, 33);
 		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
 		painelConteudo.add(botaoCriar);
+		
 		botaoCriar.addActionListener((event) -> {
-			this.dispose();
-			//JogadoresVer.main;
+			//Conferindo se os dados do Jogador foram adcionados
+			if(!listagemPosicao.isSelectionEmpty() && !listagemTime.isSelectionEmpty() && !txtNome.getText().isBlank()) {
+				
+				String posicString = (String) listagemPosicao.getSelectedValue();
+				
+				//Analizando a Posicao selecionada --ERRO NO CASTING DO ENUM PRA STRING
+				if(posicString.equals(Posicao.ATACANTE.name())) {
+					setPosicJog(Posicao.ATACANTE);
+				}else if(posicString.equals(Posicao.GOLEIRO.name())) {
+					setPosicJog(Posicao.GOLEIRO);
+				}else if(posicString.equals(Posicao.LATERAL.name())) {
+					setPosicJog(Posicao.LATERAL);
+				} else if(posicString.equals(Posicao.MEIA.name())){
+					setPosicJog(Posicao.MEIA);
+				}else if(posicString.equals(Posicao.PONTA.name())) {
+					setPosicJog(Posicao.PONTA);
+				} else if(posicString.equals(Posicao.VOLANTE.name())) {
+					setPosicJog(Posicao.VOLANTE);
+				}else {
+					setPosicJog(Posicao.ZAGUEIRO);
+				}
+				//Atribuindo o nome do time a uma variavel auxiliar
+				String nomeTime = (String) listagemTime.getSelectedValue();	
+				
+				for(int i =0; i<20; i++) {
+					if(brasileirao.getTimes().get(i).getNome() == nomeTime) {
+						brasileirao.getTimes().get(i).addJogador(txtNome.getText().toUpperCase(), 
+																			getPosicJog());	
+					}
+				}
+				this.dispose();
+				
+				Artilharia.main(null);
+			}
 		});
 		
 		
+	}
+
+	public Time getTimeJog() {
+		return timeJog;
+	}
+
+	public void setTimeJog(Time timeJog) {
+		this.timeJog = timeJog;
+	}
+
+	public Posicao getPosicJog() {
+		return posicJog;
+	}
+
+	public void setPosicJog(Posicao posicJog) {
+		this.posicJog = posicJog;
 	}
 }
