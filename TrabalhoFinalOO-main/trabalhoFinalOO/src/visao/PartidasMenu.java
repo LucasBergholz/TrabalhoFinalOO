@@ -78,7 +78,7 @@ public class PartidasMenu extends JFrame {
 		botaoVer.setBounds(286, 345, 175, 33);
 		botaoVer.addActionListener((event) -> {
 			this.dispose();
-			PartidasTabelaRodadas.main(null);
+			PartidasTabelaRodadasJTables.main(null);
 		});
 		
 		JButton botaoVoltar = new JButton("Voltar");
