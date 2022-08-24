@@ -109,6 +109,7 @@ public class PartidasDeletar extends JFrame {
 							int result = JOptionPane.showConfirmDialog(jFrame, "Voce realmente quer deletar " + Listas.partidas.get(posicaoLista));
 							
 							if (result == 0) {
+								Listas.partidas.get(posicaoLista).deletarPartida();
 								Listas.partidas.remove(posicaoLista);
 								dispose();
 								PartidasMenu.main(null);
@@ -135,7 +136,7 @@ public class PartidasDeletar extends JFrame {
 		painelPartidasScroll.setVisible(true);
 		painelPartidasScroll.setViewportView(painelPartidas);
 		painelPartidasScroll.setBounds(170,200,400, 300);
-		painelPartidas.setPreferredSize(new Dimension(600, 600));
+		painelPartidas.setPreferredSize(new Dimension(600, 700));
 		painelConteudo.add(painelPartidasScroll);
 		painelPartidas.setLayout(null);
 		

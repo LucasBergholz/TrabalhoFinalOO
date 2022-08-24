@@ -34,11 +34,13 @@ public class Partida {
 		for(int i = 0; i < golsCasa; i++) {
 			int j = gerador.nextInt(3);
 			this.getTimeCasa().getJogadores(j).fazerGol();
+			jogadorCasa.add(getTimeCasa().getJogadores(j));
 		}
 		
 		for(int i = 0; i < golsFora; i++) {
 			int j = gerador.nextInt(3);
 			this.getTimeFora().getJogadores(j).fazerGol();
+			jogadorFora.add(getTimeFora().getJogadores(j));
 		}
 		
 		//Checando se os times ja jogaram na rodada escolhida
@@ -113,6 +115,49 @@ public class Partida {
 	
 	public void addGolFora(Jogador jogador) {
 		jogadorFora.add(jogador);
+	}
+	
+	//Funcao que dados dos times e dos goleadores
+	public void deletarPartida() {
+		if(golsCasa > golsFora) {
+			//Vitoria do time mandante
+			this.getTimeCasa().setVitorias(getTimeCasa().getVitorias()-1);
+			this.getTimeCasa().setPontosTotais(getTimeCasa().getPontosTotais()-3);
+			this.getTimeFora().setDerrotas(getTimeFora().getDerrotas()-1);
+			this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() - (golsCasa - golsFora));
+			this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() - (golsFora - golsCasa));
+		}else if(golsCasa < golsFora) {
+			//Vitoria do time visitante
+			this.getTimeFora().setVitorias(getTimeFora().getVitorias()-1);
+			this.getTimeFora().setPontosTotais(getTimeFora().getPontosTotais()-3);
+			this.getTimeCasa().setDerrotas(getTimeCasa().getDerrotas()-1);
+			this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() - (golsCasa - golsFora));
+			this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() - (golsFora - golsCasa));
+		}else if(golsCasa == golsFora){
+			//Empate entre as equipes
+			this.getTimeCasa().setEmpates(getTimeCasa().getEmpates()-1);
+			this.getTimeCasa().setPontosTotais(getTimeCasa().getPontosTotais()-1);
+			this.getTimeFora().setEmpates(getTimeFora().getEmpates()-1);
+			this.getTimeFora().setPontosTotais(getTimeFora().getPontosTotais()-1);
+		}
+		this.getTimeCasa().setNumJogos(getTimeCasa().getNumJogos()-1);
+		this.getTimeFora().setNumJogos(getTimeFora().getNumJogos()-1);
+		
+		//Retirar o gol do jogador
+		for(int i = 0; i < 11; i++){
+			for(int j = 0; j < jogadorCasa.size(); j++){
+				if(this.getTimeCasa().getJogadores(i) == jogadorCasa.get(j)) {
+					this.getTimeCasa().getJogadores(i).setTotalGols(getTimeCasa().getJogadores(i).getTotalGols()-1);
+				}
+			}
+		}
+		for(int i = 0; i < 11; i++){
+			for(int j = 0; j < jogadorFora.size(); j++){
+				if(this.getTimeFora().getJogadores(i) == jogadorFora.get(j)) {
+					this.getTimeFora().getJogadores(i).setTotalGols(getTimeFora().getJogadores(i).getTotalGols()-1);
+				}
+			}
+		}
 	}
 	
 	//Getters e Setters

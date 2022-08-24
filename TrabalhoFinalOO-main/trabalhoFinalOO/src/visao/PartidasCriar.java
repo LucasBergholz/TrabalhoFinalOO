@@ -327,7 +327,20 @@ public class PartidasCriar extends JFrame {
 							if(getTimeCasa().getJogadores(j) != null && listaDeListas1.get(i).getSelectedValue() == getTimeCasa().getJogadores(j).getNome()) {
 								for(int k = 0; k < 20; k++) {
 									if(Listas.times.get(k) == getTimeCasa()) {
-										Listas.times.get(k).getJogadores(j).fazerGol();			
+										Listas.times.get(k).getJogadores(j).fazerGol();
+										Listas.partidas.get(index).addGolCasa(getTimeCasa().getJogadores(j));
+									}
+								}
+							}
+						}		
+					}
+					for(int i = 0; i < getGolsFora(); i ++) {
+						for(int j = 0; j < 11; j++) {
+							if(getTimeFora().getJogadores(j) != null && listaDeListas2.get(i).getSelectedValue() == getTimeFora().getJogadores(j).getNome()) {
+								for(int k = 0; k < 20; k++) {
+									if(Listas.times.get(k) == getTimeFora()) {
+										Listas.times.get(k).getJogadores(j).fazerGol();
+										Listas.partidas.get(index).addGolFora(getTimeFora().getJogadores(j));
 									}
 								}
 							}
