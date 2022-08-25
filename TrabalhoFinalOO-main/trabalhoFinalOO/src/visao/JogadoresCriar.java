@@ -167,31 +167,16 @@ public class JogadoresCriar extends JFrame {
 			//Conferindo se os dados do Jogador foram adcionados
 			if(!listagemPosicao.isSelectionEmpty() && !listagemTime.isSelectionEmpty() && !txtNome.getText().isBlank()) {
 				
-				String posicString = (String) listagemPosicao.getSelectedValue();
+				setPosicJog( (Posicao) listagemPosicao.getSelectedValue());
 				
-				//Analizando a Posicao selecionada --ERRO NO CASTING DO ENUM PRA STRING
-				if(posicString.equals(Posicao.ATACANTE.name())) {
-					setPosicJog(Posicao.ATACANTE);
-				}else if(posicString.equals(Posicao.GOLEIRO.name())) {
-					setPosicJog(Posicao.GOLEIRO);
-				}else if(posicString.equals(Posicao.LATERAL.name())) {
-					setPosicJog(Posicao.LATERAL);
-				} else if(posicString.equals(Posicao.MEIA.name())){
-					setPosicJog(Posicao.MEIA);
-				}else if(posicString.equals(Posicao.PONTA.name())) {
-					setPosicJog(Posicao.PONTA);
-				} else if(posicString.equals(Posicao.VOLANTE.name())) {
-					setPosicJog(Posicao.VOLANTE);
-				}else {
-					setPosicJog(Posicao.ZAGUEIRO);
-				}
 				//Atribuindo o nome do time a uma variavel auxiliar
 				String nomeTime = (String) listagemTime.getSelectedValue();	
 				
 				for(int i =0; i<20; i++) {
-					if(brasileirao.getTimes().get(i).getNome() == nomeTime) {
-						brasileirao.getTimes().get(i).addJogador(txtNome.getText().toUpperCase(), 
-																			getPosicJog());	
+					if(brasileirao.getTimes().get(i).getNome().equals(nomeTime)) {
+						setTimeJog(brasileirao.getTimes().get(i));
+						getTimeJog().addJogador(txtNome.getText().toUpperCase(), getPosicJog());	
+						
 					}
 				}
 				this.dispose();
