@@ -201,7 +201,7 @@ public class Time {
 		return numJogos;
 	}
 
-	private void setNumJogos(int numJogos) {
+	public void setNumJogos(int numJogos) {
 		this.numJogos = numJogos;
 	}
 
@@ -241,7 +241,7 @@ public class Time {
 		return pontosTotais;
 	}
 
-	private void setPontosTotais(int pontosTotais) {
+	public void setPontosTotais(int pontosTotais) {
 		this.pontosTotais = pontosTotais;
 	}
 

@@ -63,10 +63,14 @@ public class PartidasMenu extends JFrame {
 			PartidasCriar.main(null);
 		});
 		
-		JToggleButton botaoEditar = new JToggleButton("Editar Partida");
-		getContentPane().add(botaoEditar);
-		botaoEditar.setBounds(286, 245, 175, 33);
-		botaoEditar.setFont(new Font("Arial", Font.PLAIN, 20));
+		JToggleButton botaoDeletar = new JToggleButton("Deletar Partida");
+		getContentPane().add(botaoDeletar);
+		botaoDeletar.setBounds(286, 245, 175, 33);
+		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoDeletar.addActionListener((event) -> {
+			this.dispose();
+			PartidasDeletar.main(null);
+		});
 		
 		JToggleButton botaoVer = new JToggleButton("Ver Partidas");
 		getContentPane().add(botaoVer);
@@ -74,7 +78,7 @@ public class PartidasMenu extends JFrame {
 		botaoVer.setBounds(286, 345, 175, 33);
 		botaoVer.addActionListener((event) -> {
 			this.dispose();
-			PartidasTabelaRodadas.main(null);
+			PartidasTabelaRodadasJTables.main(null);
 		});
 		
 		JButton botaoVoltar = new JButton("Voltar");

@@ -119,13 +119,12 @@ public class PartidasTabelaRodadas extends JFrame {
 		titulo.setFont(new Font("Arial", Font.BOLD, 50));
 		titulo.setBounds(0, 0, 736, 83);
 		painelConteudo.add(titulo);
-		Menu menu = new Menu();
 		//Recebendo o dados necessarios para instanciar os componentes
 		int numPartidas = brasileirao.getPartidas().size();
 		int rod =(int) Math.round((double) spnRodada.getValue());
 		int partRod = 1;
 		
-		for (int i = 0; i < numPartidas-1; i++) {
+		for (int i = 0; i < numPartidas; i++) {
 			if(brasileirao.getPartidas().get(i).getRodada() == rod) {
 				partRod++;
 			}	
@@ -140,8 +139,8 @@ public class PartidasTabelaRodadas extends JFrame {
 		painelConteudo.add(caixaVertical);
 		caixaVertical.setLocation(20, 179);
 		
-		for (int i = 0; i < numPartidas-1; i++) {
-			if(menu.getBrasileirao().getPartidas().get(i).getRodada() == rod) {
+		for (int i = 0; i < numPartidas; i++) {
+			if(brasileirao.getPartidas().get(i).getRodada() == rod) {
 				Box caixaHorizontal = Box.createHorizontalBox();
 				caixaHorizontal.setMaximumSize(new Dimension(1355, 3000));
 				Border blackline = BorderFactory.createLineBorder(Color.black, 3, true);
@@ -213,13 +212,13 @@ public class PartidasTabelaRodadas extends JFrame {
 				int partRod =1;
 				int rodada =(int) Math.round((double) spnRodada.getValue());
 				caixaVertical.removeAll();
-				for (int i = 0; i < numPartidas-1; i++) {
+				for (int i = 0; i < numPartidas; i++) {
 					if(brasileirao.getPartidas().get(i).getRodada() == rodada) {
 						partRod++;
 					}	
 				}
 				caixaVertical.setSize(736, 150*partRod);
-				 for (int i = 0; i < numPartidas-1; i++) {
+				 for (int i = 0; i < numPartidas; i++) {
 						if(brasileirao.getPartidas().get(i).getRodada() == rodada) {
 							Box caixaHorizontal = Box.createHorizontalBox();
 							caixaHorizontal.setMaximumSize(new Dimension(1355, 3000));
