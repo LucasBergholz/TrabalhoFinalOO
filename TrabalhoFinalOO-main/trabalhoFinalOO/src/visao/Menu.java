@@ -65,7 +65,7 @@ public class Menu extends JFrame {
 		
 		JToggleButton botaoPartidas = new JToggleButton("Partidas");
 		getContentPane().add(botaoPartidas);
-		botaoPartidas.setBounds(286, 245, 175, 33);
+		botaoPartidas.setBounds(286, 212, 175, 33);
 		botaoPartidas.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoPartidas.addActionListener((event) -> {
 			this.dispose();
@@ -75,7 +75,7 @@ public class Menu extends JFrame {
 		JToggleButton botaoArtilharia = new JToggleButton("Artilharia");
 		getContentPane().add(botaoArtilharia);
 		botaoArtilharia.setFont(new Font("Arial", Font.PLAIN, 20));
-		botaoArtilharia.setBounds(286, 345, 175, 33);
+		botaoArtilharia.setBounds(286, 291, 175, 33);
 		botaoArtilharia.addActionListener((event) -> {
 			this.dispose();
 			Artilharia.main(null);
@@ -85,6 +85,17 @@ public class Menu extends JFrame {
 		getContentPane().add(botaoSair);
 		botaoSair.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoSair.setBounds(286, 445, 175, 33);
+		
+		JToggleButton botaoJogadores = new JToggleButton("Jogadores");
+		botaoJogadores.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoJogadores.setBounds(286, 363, 175, 33);
+		getContentPane().add(botaoJogadores);
+		botaoJogadores.addActionListener((event) -> {
+			this.dispose();
+			JogadoresMenu.main(null);
+		});
+		
+		//Eventos
 		botaoSair.addActionListener((event) -> System.exit(0));
 		
 	}
@@ -93,7 +104,4 @@ public class Menu extends JFrame {
 		Menu menu = new Menu();
 		menu.setVisible(true);
 	}
-
-	
-	
 }

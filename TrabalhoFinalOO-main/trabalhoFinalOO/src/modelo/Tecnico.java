@@ -4,11 +4,12 @@ public class Tecnico extends Pessoa {
 	private int vitorias;
 	private int derrotas;
 	
-	public Tecnico() {
+	public Tecnico(String nome, String time) {
 		super();
 		this.vitorias = 0;
 		this.derrotas = 0;
-		// TODO Auto-generated constructor stub
+		this.setNome(nome);
+		this.setTime(time);
 	}
 	
 	public String visualizarAproveitamento(){

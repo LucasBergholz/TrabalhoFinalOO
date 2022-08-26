@@ -10,26 +10,26 @@ public class Listas {
 		public static final ArrayList<Partida> partidas = new ArrayList<>();
 		
 		public void inicializarTimes() {
-			times.add(new Time("AMERICA-MG", "#00FF00", "#FFFFFF", Estadios.INDEPENDENCIA)); //0
-			times.add(new Time("ATHLETICO-PR", "#FF0000", "#000000", Estadios.ARENA_DA_BAIXADA));//1
-			times.add(new Time("ATLETICO-GO", "#FFFFFF", "#000000", Estadios.ANTONIO_ACCIOLY));//2
-			times.add(new Time("ATLETICO-MG", "#000000", "#FFFFFF", Estadios.MINEIRAO));//3
-			times.add(new Time("AVAI", "#0000FF", "#FFFFFF", Estadios.RESSACADA));//4
-			times.add(new Time("BOTAFOGO", "#000000", "#FFFFFF", Estadios.NILTON_SANTOS));//5
-			times.add(new Time("CEARA", "#000000", "#FFFFFF", Estadios.CASTELAO));//6
-			times.add(new Time("CORINTHIANS", "#FFFFFF", "#000000", Estadios.NEO_QUIMICA_ARENA));//7
-			times.add(new Time("CORITIBA", "#008000", "#FFFFFF", Estadios.COUTO_PEREIRA));//8
-			times.add(new Time("CUIABA", "#008000", "#FFEE05", Estadios.ARENA_PANTANAL));//9
-			times.add(new Time("FLAMENGO", "#FF0000", "#000000", Estadios.MARACANA));//10
-			times.add(new Time("FLUMINENSE", "#831D1C", "#146b02", Estadios.MARACANA));//11
-			times.add(new Time("FORTALEZA", "#0000FF", "#FF0000", Estadios.CASTELAO));//12
-			times.add(new Time("GOIAS", "#008000", "#FFFFFF", Estadios.SERRINHA));//13
-			times.add(new Time("INTERNACIONAL", "#FF0000", "#FFFFFF", Estadios.BEIRA_RIO));//14
-			times.add(new Time("JUVENTUDE", "#008000", "#FFFFFF", Estadios.ALFREDO_JACONI));//15
-			times.add(new Time("PALMEIRAS", "#008000", "#FFFFFF", Estadios.ALLIANZ_PARQUE));//16
-			times.add(new Time("RB BRAGANTINO", "#FFFFFF", "#FF0000", Estadios.NABI_ABI_CHEDID));//17
-			times.add(new Time("SANTOS", "#0000000", "#FFFFFF", Estadios.VILA_BELMIRO));//18
-			times.add(new Time("SAO PAULO", "#FF0000", "#FFFFFF", Estadios.MORUMBI));//19
+			times.add(new Time("AMERICA-MG", "#00FF00", "#FFFFFF","VAGNER MANCINI", Estadios.INDEPENDENCIA)); //0
+			times.add(new Time("ATHLETICO-PR", "#FF0000", "#000000","FELIPAO", Estadios.ARENA_DA_BAIXADA));//1
+			times.add(new Time("ATLETICO-GO", "#FFFFFF", "#000000","JORGUINHO", Estadios.ANTONIO_ACCIOLY));//2
+			times.add(new Time("ATLETICO-MG", "#000000", "#FFFFFF","CUCA", Estadios.MINEIRAO));//3
+			times.add(new Time("AVAI", "#0000FF", "#FFFFFF","EDUARDO BARROCA", Estadios.RESSACADA));//4
+			times.add(new Time("BOTAFOGO", "#000000", "#FFFFFF","LUIS CASTRO", Estadios.NILTON_SANTOS));//5
+			times.add(new Time("CEARA", "#000000", "#FFFFFF","MARQUINHOS SANTOS", Estadios.CASTELAO));//6
+			times.add(new Time("CORINTHIANS", "#FFFFFF", "#000000","VITOR PEREIRA", Estadios.NEO_QUIMICA_ARENA));//7
+			times.add(new Time("CORITIBA", "#008000", "#FFFFFF","GUTO FERREIRA", Estadios.COUTO_PEREIRA));//8
+			times.add(new Time("CUIABA", "#008000", "#FFEE05","ANTONIO OLIVEIRA", Estadios.ARENA_PANTANAL));//9
+			times.add(new Time("FLAMENGO", "#FF0000", "#000000","DORVAL JUNIOR", Estadios.MARACANA));//10
+			times.add(new Time("FLUMINENSE", "#831D1C", "#146b02","FERNANDO DINIZ", Estadios.MARACANA));//11
+			times.add(new Time("FORTALEZA", "#0000FF", "#FF0000","JUAN VOJVODA", Estadios.CASTELAO));//12
+			times.add(new Time("GOIAS", "#008000", "#FFFFFF","JAIR VENTURA", Estadios.SERRINHA));//13
+			times.add(new Time("INTERNACIONAL", "#FF0000", "#FFFFFF","MANO MENEZES", Estadios.BEIRA_RIO));//14
+			times.add(new Time("JUVENTUDE", "#008000", "#FFFFFF","UMBERTO LOUZER", Estadios.ALFREDO_JACONI));//15
+			times.add(new Time("PALMEIRAS", "#008000", "#FFFFFF","ABEL FERREIRA", Estadios.ALLIANZ_PARQUE));//16
+			times.add(new Time("RB BRAGANTINO", "#FFFFFF", "#FF0000","MAURICIO BARBIERI", Estadios.NABI_ABI_CHEDID));//17
+			times.add(new Time("SANTOS", "#0000000", "#FFFFFF","FABIAN BUSTOS", Estadios.VILA_BELMIRO));//18
+			times.add(new Time("SAO PAULO", "#FF0000", "#FFFFFF","ROGERIO CENI", Estadios.MORUMBI));//19
 		}
 
 		public void inicializarJogadores() {
