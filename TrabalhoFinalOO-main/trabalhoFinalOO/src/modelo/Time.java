@@ -74,24 +74,14 @@ public class Time {
 		jogadores.get(j).setTime(this.getNome());
 	}	
 	
-	//Permitindo um usuario criar o jogador
-	/*public void addJogador() {
-		int j;
-		Scanner in = new Scanner(System.in);
-		for(j = 0; j< 11; j++) {
-			if(this.jogadores[j] == null) {
-				this.jogadores[j] = new Jogador();
-				System.out.println("Escreva o nome do jogador: ");
-				String name = in.nextLine();
-				this.jogadores[j].setNome(name);
-				System.out.println("Escreva a posicao do jogador: ");
-				String posicao = in.nextLine();
-				this.jogadores[j].setPosicao(posicao);
-				break;
-			}	
+	//Deletar jogador
+	public void deletarJogador(Jogador jogador) {
+		for(int i = 0; i < jogadores.size(); i++) {
+			if(jogador == jogadores.get(i)) {
+				jogadores.remove(i);
+			}
 		}
-		System.out.println("Escreva o nome do jogador: ");
-	}*/
+	}
 	
 	//Metodos usados na criacao de uma partida
 	private void addJogo() {

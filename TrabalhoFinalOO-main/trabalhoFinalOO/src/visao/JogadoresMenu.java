@@ -62,10 +62,14 @@ public class JogadoresMenu extends JFrame {
 			JogadoresCriar.main(null);
 		});
 		
-		JToggleButton botaoEditar = new JToggleButton("Editar Jogador");
-		getContentPane().add(botaoEditar);
-		botaoEditar.setBounds(280, 245, 200, 33);
-		botaoEditar.setFont(new Font("Arial", Font.PLAIN, 20));
+		JToggleButton botaoDeletar = new JToggleButton("Deletar Jogador");
+		getContentPane().add(botaoDeletar);
+		botaoDeletar.setBounds(280, 245, 200, 33);
+		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoDeletar.addActionListener((event) -> {
+			this.dispose();
+			JogadoresDeletar.main(null);
+		});
 		
 		JToggleButton botaoVer = new JToggleButton("Ver Jogadores");
 		getContentPane().add(botaoVer);
