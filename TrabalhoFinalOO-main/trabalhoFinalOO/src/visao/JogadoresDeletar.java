@@ -113,11 +113,11 @@ public class JogadoresDeletar extends JFrame {
 								if (result == 0) {
 									Listas.times.get(index).deletarJogador(Listas.times.get(index).getJogadores(index2));
 									dispose();
-									PartidasMenu.main(null);
+									JogadoresMenu.main(null);
 								}
 								else if (result == 1) {
 									dispose();
-									PartidasMenu.main(null);
+									JogadoresMenu.main(null);
 								}
 							}
 						});
