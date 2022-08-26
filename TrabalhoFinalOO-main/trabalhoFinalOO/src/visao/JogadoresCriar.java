@@ -37,7 +37,7 @@ public class JogadoresCriar extends JFrame {
 	private JTextField txtNome;
 	private Listas brasileirao = new Listas();
 	private Time timeJog;
-	private Posicao posicJog;
+	private Posicao posicaoJogador;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -91,7 +91,7 @@ public class JogadoresCriar extends JFrame {
 		//Criando a lista de times
 		brasileirao.inicializarTimes();
 		DefaultListModel listaTimes = new DefaultListModel();
-		for(int i = 0; i < 19; i++) {
+		for(int i = 0; i < 20; i++) {
 			listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
 		}
 		
@@ -167,7 +167,7 @@ public class JogadoresCriar extends JFrame {
 			//Conferindo se os dados do Jogador foram adcionados
 			if(!listagemPosicao.isSelectionEmpty() && !listagemTime.isSelectionEmpty() && !txtNome.getText().isBlank()) {
 				
-				setPosicJog( (Posicao) listagemPosicao.getSelectedValue());
+				setPosicaoJogador( (Posicao) listagemPosicao.getSelectedValue());
 				
 				//Atribuindo o nome do time a uma variavel auxiliar
 				String nomeTime = (String) listagemTime.getSelectedValue();	
@@ -175,13 +175,13 @@ public class JogadoresCriar extends JFrame {
 				for(int i =0; i<20; i++) {
 					if(brasileirao.getTimes().get(i).getNome().equals(nomeTime)) {
 						setTimeJog(brasileirao.getTimes().get(i));
-						getTimeJog().addJogador(txtNome.getText().toUpperCase(), getPosicJog());	
+						getTimeJog().addJogador(txtNome.getText().toUpperCase(), getPosicaoJogador());	
 						
 					}
 				}
 				this.dispose();
 				
-				Artilharia.main(null);
+				JogadoresMenu.main(null);
 			}
 		});
 		
@@ -196,11 +196,11 @@ public class JogadoresCriar extends JFrame {
 		this.timeJog = timeJog;
 	}
 
-	public Posicao getPosicJog() {
-		return posicJog;
+	public Posicao getPosicaoJogador() {
+		return posicaoJogador;
 	}
 
-	public void setPosicJog(Posicao posicJog) {
-		this.posicJog = posicJog;
+	public void setPosicaoJogador(Posicao posicJog) {
+		this.posicaoJogador = posicJog;
 	}
 }

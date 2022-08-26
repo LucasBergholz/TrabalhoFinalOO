@@ -323,7 +323,7 @@ public class PartidasCriar extends JFrame {
 					Listas.partidas.add(new Partida(getTimeCasa(), getTimeFora(), estadio));
 					index = Listas.partidas.size()-1;
 					for(int i = 0; i < getGolsCasa(); i ++) {
-						for(int j = 0; j < 11; j++) {
+						for(int j = 0; j < getTimeCasa().getJogadoresSize(); j++) {
 							if(getTimeCasa().getJogadores(j) != null && listaDeListas1.get(i).getSelectedValue() == getTimeCasa().getJogadores(j).getNome()) {
 								for(int k = 0; k < 20; k++) {
 									if(Listas.times.get(k) == getTimeCasa()) {
@@ -361,7 +361,7 @@ public class PartidasCriar extends JFrame {
 		
 		for(int i = 0; i < 20; i++) {
 			if(brasileirao.getTimes().get(i).getNome() == time) {
-				for(int j = 0; j < 11; j++) {
+				for(int j = 0; j < brasileirao.getTimes().get(i).getJogadoresSize(); j++) {
 					if(brasileirao.getTimes().get(i).getJogadores(j) != null) {
 						listaJogadores.addElement(brasileirao.getTimes().get(i).getJogadores(j).getNome());
 					}

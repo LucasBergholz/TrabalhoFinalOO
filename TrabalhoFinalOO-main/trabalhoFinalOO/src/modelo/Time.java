@@ -1,12 +1,12 @@
 package modelo;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Time {
 	//Atributos
 	private String nome;
 	private Tecnico tecnico;
-	private Jogador[] jogadores = new Jogador[11];
+	private ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
 	private Partida[] partidas = new Partida[18];
 	private Estadios estadio;
 	private String cor1;
@@ -59,9 +59,9 @@ public class Time {
 		this.derrotas = 0;
 		this.saldoGols = 0;
 		this.pontosTotais = 0;
-		this.jogadores[0] = jogador;
-		this.jogadores[1] = jogador2;
-		this.jogadores[2] = jogador3;
+		jogadores.add(jogador);
+		jogadores.add(jogador2);
+		jogadores.add(jogador3);
 		this.setTecnico(new Tecnico(nome, this.getNome()));
 	}
 
@@ -69,16 +69,10 @@ public class Time {
 	
 	//Criar jogador para o time
 	public void addJogador(String nome, Posicao posicao) {
-		int  j;
-		//Checar se o time ja possui 11 jogadores
-		for(j = 0; j< 11; j++) {
-			if(this.jogadores[j] == null) {
-				this.jogadores[j] = new Jogador(nome, posicao);
-				this.jogadores[j].setTime(this.getNome());
-				break;
-			}	
-		}	
-	}
+		int j = jogadores.size();
+		jogadores.add(new Jogador(nome, posicao));
+		jogadores.get(j).setTime(this.getNome());
+	}	
 	
 	//Permitindo um usuario criar o jogador
 	/*public void addJogador() {
@@ -143,22 +137,16 @@ public class Time {
 	}
 
 	public Jogador getJogadores(int i) {
-		return jogadores[i];
+		return jogadores.get(i);
 	}
 	
-	public Jogador[] getJogadores() {
-		return jogadores;
+	public int getJogadoresSize() {
+		return jogadores.size();
 	}
 	
 	//Caso passe apenas um jogador
 	public void setJogadores(Jogador jogador) {
-		int n = this.getJogadores().length;
-		this.jogadores[n] = jogador;
-	}
-	//Caso passe o time completo
-	public void setJogadores(Jogador[] time) {
-		if (time.length == 11)
-			this.jogadores = time;
+		jogadores.add(jogador);
 	}
 
 	public Partida[] getPartidas() {

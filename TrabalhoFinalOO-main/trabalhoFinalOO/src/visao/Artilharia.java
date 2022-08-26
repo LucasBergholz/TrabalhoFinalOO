@@ -118,7 +118,7 @@ public class Artilharia extends JFrame {
 		
 		//Tirando os jogadores dos times
 		for(int i = 0; i < 20; i++) {
-			for(int j = 0; j < 11; j++) {
+			for(int j = 0; j < times.get(i).getJogadoresSize(); j++) {
 				if(times.get(i).getJogadores(j) != null) {
 					jogadores.add(times.get(i).getJogadores(j));
 				}
