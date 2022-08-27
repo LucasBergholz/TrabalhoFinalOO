@@ -181,7 +181,7 @@ public class JogadoresCriar extends JFrame {
 				}
 				this.dispose();
 				
-				JogadoresMenu.main(null);
+				JogadoresVer.main(null);
 			}
 		});
 		

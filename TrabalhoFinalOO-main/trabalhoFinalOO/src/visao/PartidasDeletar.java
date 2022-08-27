@@ -111,9 +111,9 @@ public class PartidasDeletar extends JFrame {
 								Listas.partidas.get(posicaoLista).deletarPartida();
 								Listas.partidas.remove(posicaoLista);
 								dispose();
-								PartidasMenu.main(null);
+								PartidasTabelaRodadasJTables.main(null);
 							}
-							else if (result == 1) {
+							else {
 								dispose();
 								PartidasMenu.main(null);
 							}

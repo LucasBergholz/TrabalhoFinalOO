@@ -335,7 +335,7 @@ public class PartidasCriar extends JFrame {
 						}		
 					}
 					for(int i = 0; i < getGolsFora(); i ++) {
-						for(int j = 0; j < 11; j++) {
+						for(int j = 0; j < getTimeFora().getJogadoresSize(); j++) {
 							if(getTimeFora().getJogadores(j) != null && listaDeListas2.get(i).getSelectedValue() == getTimeFora().getJogadores(j).getNome()) {
 								for(int k = 0; k < 20; k++) {
 									if(Listas.times.get(k) == getTimeFora()) {
@@ -349,7 +349,7 @@ public class PartidasCriar extends JFrame {
 					Listas.partidas.get(index).finalizarPartida2(getGolsCasa(), getGolsFora(), golasd);
 					
 					dispose();
-					Menu.main(null);
+					PartidasTabelaRodadasJTables.main(null);
 				}
 			});
 			
