@@ -33,19 +33,12 @@ public class JogadoresDeletar extends JFrame {
 	private Listas brasileirao = new Listas();
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JogadoresDeletar frame = new JogadoresDeletar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		JogadoresDeletar frame = new JogadoresDeletar();
+		frame.setVisible(true);
 	}
 
 	public JogadoresDeletar() {
+		//Padronizando o frame
 		setTitle("Brasileirao 2022");
 		painelConteudo = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,7 +104,7 @@ public class JogadoresDeletar extends JFrame {
 								int result = JOptionPane.showConfirmDialog(jFrame, "Voce realmente quer deletar " + Listas.times.get(index).getJogadores(index2).getNome());
 								
 								if (result == 0) {
-									Listas.times.get(index).deletarJogador(Listas.times.get(index).getJogadores(index2));
+									brasileirao.getTimes().get(index).deletarJogador(brasileirao.getTimes().get(index).getJogadores(index2));
 									dispose();
 									JogadoresVer.main(null);
 								}

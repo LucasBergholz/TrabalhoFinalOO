@@ -20,16 +20,8 @@ public class PartidasMenu extends JFrame {
 	private JPanel painelConteudo;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PartidasMenu frame = new PartidasMenu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		PartidasMenu frame = new PartidasMenu();
+		frame.setVisible(true);
 	}
 
 	

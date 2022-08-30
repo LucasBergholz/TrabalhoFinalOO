@@ -1,6 +1,5 @@
-package controlador;
+package visao;
 
-import visao.Menu;
 import bancoDeDados.*;
 import modelo.*;
 import java.io.IOException;

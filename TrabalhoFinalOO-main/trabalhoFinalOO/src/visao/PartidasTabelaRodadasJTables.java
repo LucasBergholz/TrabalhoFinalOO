@@ -15,6 +15,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import bancoDeDados.Listas;
+import controlador.ControlePartidas;
 
 import javax.swing.JSpinner;
 import javax.swing.ScrollPaneConstants;
@@ -53,16 +54,8 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 
 	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PartidasTabelaRodadasJTables frame = new PartidasTabelaRodadasJTables();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		PartidasTabelaRodadasJTables frame = new PartidasTabelaRodadasJTables();
+		frame.setVisible(true);
 	}
 
 	public PartidasTabelaRodadasJTables() {
@@ -105,7 +98,7 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		JSpinner spnRodada = new JSpinner();
 		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
 		spnRodada.setBounds(304, 10, 126, 40);
-		spnRodada.setModel(new SpinnerNumberModel(1.0, 1.0, 38.0, 1.0));
+		spnRodada.setModel(new SpinnerNumberModel(0.0, 0.0, 38.0, 1.0));
 		panel.add(spnRodada);
 		
 		JLabel titulo = new JLabel("PARTIDAS");
@@ -137,104 +130,12 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		caixaVertical.setSize(587, 350);
 		painelConteudo.add(caixaVertical);
 		caixaVertical.setLocation(70, 179);
-		
-		for (int i = 0; i < numPartidas; i++) {
-			if(brasileirao.getPartidas().get(i).getRodada() == rod) {
-				Border blackline = BorderFactory.createLineBorder(Color.black, 3, true);
-				
-				JPanel painelPartidas = new JPanel();
-				painelPartidas.setBounds(0, i*110, 570, 100);
-				painelPartidas.setBackground(new Color(255,255,255));
-				painelPartidas.setBorder(blackline);
-				painelPartidas.setLayout(null);
-				
-				JLabel lblTimeCasa = new JLabel(brasileirao.getPartidas().get(i).getTimeCasa().getNome());
-				lblTimeCasa.setBounds(15, 40, 103, 13);
-				painelPartidas.add(lblTimeCasa);
-				
-				JLabel lblTimeFora = new JLabel(brasileirao.getPartidas().get(i).getTimeFora().getNome());
-				lblTimeFora.setBounds(445, 40, 103, 13);
-				painelPartidas.add(lblTimeFora);
-				
-				JLabel lblEstadio = new JLabel(brasileirao.getPartidas().get(i).getEstadio().toString());
-				lblEstadio.setBounds(205, 70, 150, 13);
-				painelPartidas.add(lblEstadio);
-				
-				JLabel lblX = new JLabel("X");
-				lblX.setFont(new Font("Tahoma", Font.PLAIN, 31));
-				lblX.setBounds(242, 40, 45, 13);
-				painelPartidas.add(lblX);
-				
-				JLabel lblGolsCasa = new JLabel(Integer.toString(brasileirao.getPartidas().get(i).getGolsCasa()));
-				lblGolsCasa.setBounds(175, 40, 45, 13);
-				painelPartidas.add(lblGolsCasa);
-				
-				JLabel lblGolsFora = new JLabel(Integer.toString(brasileirao.getPartidas().get(i).getGolsFora()));
-				lblGolsFora.setBounds(328, 40, 45, 13);
-				painelPartidas.add(lblGolsFora);
-				
-				//Adcionando as Listas
-				caixaDentroCaixa.add(painelPartidas);
-				caixaVertical.setViewportView(caixaDentroCaixa);
-			}	
-		}
+		caixaVertical.setViewportView(caixaDentroCaixa);
 		
 		//Metodos
 		//Funcao que muda a posicao vertical dos elementos durante o scroll
-		spnRodada.addChangeListener(new ChangeListener() {
-			
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				int rodada =(int) Math.round((double) spnRodada.getValue());
-				caixaDentroCaixa.removeAll();
-				caixaDentroCaixa.setLayout(null);
-				int posicaoPainel = 0;
-				for (int i = 0; i < numPartidas; i++) {
-					if(brasileirao.getPartidas().get(i).getRodada() == rodada) {
-						Border blackline = BorderFactory.createLineBorder(Color.black, 3, true);
-						
-						JPanel painelPartidas = new JPanel();
-						painelPartidas.setBounds(0, posicaoPainel*110, 570, 100);
-						painelPartidas.setBackground(new Color(255,255,255));
-						painelPartidas.setBorder(blackline);
-						painelPartidas.setLayout(null);
-						
-						JLabel lblTimeCasa = new JLabel(brasileirao.getPartidas().get(i).getTimeCasa().getNome());
-						lblTimeCasa.setBounds(15, 40, 103, 13);
-						painelPartidas.add(lblTimeCasa);
-						
-						JLabel lblTimeFora = new JLabel(brasileirao.getPartidas().get(i).getTimeFora().getNome());
-						lblTimeFora.setBounds(445, 40, 103, 13);
-						painelPartidas.add(lblTimeFora);
-						
-						JLabel lblEstadio = new JLabel(brasileirao.getPartidas().get(i).getEstadio().toString());
-						lblEstadio.setBounds(205, 70, 150, 13);
-						painelPartidas.add(lblEstadio);
-						
-						JLabel lblX = new JLabel("X");
-						lblX.setFont(new Font("Tahoma", Font.PLAIN, 31));
-						lblX.setBounds(242, 40, 45, 13);
-						painelPartidas.add(lblX);
-						
-						JLabel lblGolsCasa = new JLabel(Integer.toString(brasileirao.getPartidas().get(i).getGolsCasa()));
-						lblGolsCasa.setBounds(175, 40, 45, 13);
-						painelPartidas.add(lblGolsCasa);
-						
-						JLabel lblGolsFora = new JLabel(Integer.toString(brasileirao.getPartidas().get(i).getGolsFora()));
-						lblGolsFora.setBounds(328, 40, 45, 13);
-						painelPartidas.add(lblGolsFora);
-						
-						//Adcionando as Listas
-						caixaDentroCaixa.add(painelPartidas);
-						caixaVertical.setVisible(false);
-						caixaVertical.setVisible(true);
-						caixaVertical.setViewportView(caixaDentroCaixa);
-						posicaoPainel++;
-					}	
-				}
-			}
-		
-		
+		spnRodada.addChangeListener((event) -> {
+			ControlePartidas.partidasVer(spnRodada, caixaVertical, caixaDentroCaixa, numPartidas, brasileirao);
 		});
 	}
 }
