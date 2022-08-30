@@ -144,14 +144,14 @@ public class Partida {
 		this.getTimeFora().setNumJogos(getTimeFora().getNumJogos()-1);
 		
 		//Retirar o gol do jogador
-		for(int i = 0; i < 11; i++){
+		for(int i = 0; i < getTimeCasa().getJogadoresSize(); i++){
 			for(int j = 0; j < jogadorCasa.size(); j++){
 				if(this.getTimeCasa().getJogadores(i) == jogadorCasa.get(j)) {
 					this.getTimeCasa().getJogadores(i).setTotalGols(getTimeCasa().getJogadores(i).getTotalGols()-1);
 				}
 			}
 		}
-		for(int i = 0; i < 11; i++){
+		for(int i = 0; i < getTimeFora().getJogadoresSize(); i++){
 			for(int j = 0; j < jogadorFora.size(); j++){
 				if(this.getTimeFora().getJogadores(i) == jogadorFora.get(j)) {
 					this.getTimeFora().getJogadores(i).setTotalGols(getTimeFora().getJogadores(i).getTotalGols()-1);

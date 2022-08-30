@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import bancoDeDados.Listas;
+import controlador.ControleJogadores;
 import modelo.Jogador;
 import modelo.Posicao;
 import modelo.Time;
@@ -37,22 +38,15 @@ public class JogadoresCriar extends JFrame {
 	private JTextField txtNome;
 	private Listas brasileirao = new Listas();
 	private Time timeJog;
-	private Posicao posicJog;
+	private Posicao posicaoJogador;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JogadoresCriar frame = new JogadoresCriar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		JogadoresCriar frame = new JogadoresCriar();
+		frame.setVisible(true);
 	}
 
 	public JogadoresCriar() {
+		//Adicionando titulo ao frame, tamanho e cor
 		setTitle("Brasileirao 2022");
 		painelConteudo = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,22 +71,23 @@ public class JogadoresCriar extends JFrame {
 		painelCadastro.setLayout(null);
 		painelConteudo.add(painelCadastro);
 		
+		//Input de texto que o usuario coloca o nome do jogador
 		txtNome = new JTextField();
 		txtNome.setFont(new Font("Arial", Font.PLAIN, 20));
 		txtNome.setBounds(136, 49, 358, 24);
 		painelCadastro.add(txtNome);
 		txtNome.setColumns(10);
 		
+		//Texto para auxilio do usuario entender o programa
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNome.setBounds(25, 49, 101, 24);
 		painelCadastro.add(lblNome);
 		
 		//Criando a lista de times
-		brasileirao.inicializarTimes();
 		DefaultListModel listaTimes = new DefaultListModel();
-		for(int i = 0; i < 19; i++) {
-			listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
+		for(int i = 0; i < 20; i++) {
+			listaTimes.addElement(Listas.times.get(i).getNome());
 		}
 		
 		JList listagemTime = new JList(listaTimes);
@@ -165,23 +160,13 @@ public class JogadoresCriar extends JFrame {
 		
 		botaoCriar.addActionListener((event) -> {
 			//Conferindo se os dados do Jogador foram adcionados
-			if(!listagemPosicao.isSelectionEmpty() && !listagemTime.isSelectionEmpty() && !txtNome.getText().isBlank()) {
+			if(!listagemPosicao.isSelectionEmpty() && !listagemTime.isSelectionEmpty() && !txtNome.getText().isBlank()) {			
+				setPosicaoJogador( (Posicao) listagemPosicao.getSelectedValue());
 				
-				setPosicJog( (Posicao) listagemPosicao.getSelectedValue());
-				
-				//Atribuindo o nome do time a uma variavel auxiliar
-				String nomeTime = (String) listagemTime.getSelectedValue();	
-				
-				for(int i =0; i<20; i++) {
-					if(brasileirao.getTimes().get(i).getNome().equals(nomeTime)) {
-						setTimeJog(brasileirao.getTimes().get(i));
-						getTimeJog().addJogador(txtNome.getText().toUpperCase(), getPosicJog());	
-						
-					}
-				}
+				//Funcao que cria o jogador
+				ControleJogadores.criandoJogador(listagemTime, txtNome, brasileirao, this);
 				this.dispose();
-				
-				Artilharia.main(null);
+				JogadoresVer.main(null);
 			}
 		});
 		
@@ -196,11 +181,11 @@ public class JogadoresCriar extends JFrame {
 		this.timeJog = timeJog;
 	}
 
-	public Posicao getPosicJog() {
-		return posicJog;
+	public Posicao getPosicaoJogador() {
+		return posicaoJogador;
 	}
 
-	public void setPosicJog(Posicao posicJog) {
-		this.posicJog = posicJog;
+	public void setPosicaoJogador(Posicao posicJog) {
+		this.posicaoJogador = posicJog;
 	}
 }

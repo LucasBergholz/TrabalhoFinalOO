@@ -1,6 +1,7 @@
 package visao;
 
 import bancoDeDados.*;
+import controlador.ControleClassificacao;
 import modelo.*;
 
 import java.awt.EventQueue;
@@ -26,21 +27,12 @@ public class Classificacao extends JFrame {
 
 	private JPanel painelConteudo;
 	private JTable tabelaClassificacao;
-	private Listas brasileirao = new Listas();
-	ArrayList<Time> times = new ArrayList<Time>();
+	private ArrayList<Time> times = new ArrayList<Time>();
 
 	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Classificacao frame = new Classificacao();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		Classificacao frame = new Classificacao();
+		frame.setVisible(true);
 	}
 
 	
@@ -77,6 +69,7 @@ public class Classificacao extends JFrame {
 		tabelaClassificacao.setFont(new Font("Arial", Font.PLAIN, 20));
 		tabelaClassificacao.setBounds(40, 100, 650, 525);
 		tabelaClassificacao.setRowSelectionAllowed(false);
+		//Adicionando tabela no painelScroll e o pianelScroll no painel principal
 		painelScroll.setViewportView(tabelaClassificacao);
 		painelConteudo.add(painelScroll);
 		
@@ -90,7 +83,7 @@ public class Classificacao extends JFrame {
 		tabelaClassificacao.setValueAt("SG",0,6);
 		
 		//Inicializando a tabela
-		inicializarTabela();
+		ControleClassificacao.inicializarTabela(times, tabelaClassificacao);
 		
 		//Titulo para a pagina
 		JLabel titulo = new JLabel("CLASSIFICAÇÃO");
@@ -100,6 +93,7 @@ public class Classificacao extends JFrame {
 		titulo.setBounds(0, 0, 751, 100);
 		painelConteudo.add(titulo);
 		
+		//Botao para voltar
 		JButton botaoVoltar = new JButton("Voltar");
 		botaoVoltar.setBounds(10, 35, 85, 21);
 		painelConteudo.add(botaoVoltar);
@@ -112,48 +106,5 @@ public class Classificacao extends JFrame {
 			}
 		});
 	}
-		
-		public void inicializarTabela() {
-			times.clear();
-			//Adicionando os dados a tabela
-			
-			//Tirando os dados do banco de dados
-			for(int i = 0; i < 20; i++) {
-				times.add(brasileirao.getTimes().get(i));		
-			}
-			
-			//Fazendo bubble sort para elencar eles por numero de pontos e posteriormente por saldo de gol
-			for(int i = 0; i < 20; i++) {
-				ArrayList<Time> auxiliar = new ArrayList<Time>();
-				auxiliar.clear();
-				int auxCounter = 0;
-				for(int j = 0; j < 19; j++) {
-					if(times.get(j).getPontosTotais() < times.get(j+1).getPontosTotais()) {
-						auxiliar.add(times.get(j));
-						times.set(j, times.get(j+1));
-						times.set(j+1, auxiliar.get(auxCounter));
-						auxCounter++;
-					} else if((times.get(j).getPontosTotais() == times.get(j+1).getPontosTotais()) &&
-							  (times.get(j).getSaldoGols() < times.get(j+1).getSaldoGols())) {
-						auxiliar.add(times.get(j));
-						times.set(j, times.get(j+1));
-						times.set(j+1, auxiliar.get(auxCounter));
-						auxCounter++;
-					}
-					
-				}
-			}
-			
-			//Passando os valores para a tabela
-			for(int i = 1; i < 21; i++) {
-				tabelaClassificacao.setValueAt(i + " - " + times.get(i-1).getNome(),i,0);
-				tabelaClassificacao.setValueAt(times.get(i-1).getNumJogos(),i,1);
-				tabelaClassificacao.setValueAt(times.get(i-1).getPontosTotais(),i,2);
-				tabelaClassificacao.setValueAt(times.get(i-1).getVitorias(),i,3);
-				tabelaClassificacao.setValueAt(times.get(i-1).getEmpates(),i,4);
-				tabelaClassificacao.setValueAt(times.get(i-1).getDerrotas(),i,5);
-				tabelaClassificacao.setValueAt(times.get(i-1).getSaldoGols(),i,6);
-			}
-		 }
 
 }

@@ -2,6 +2,7 @@ package visao;
 
 import modelo.*;
 import bancoDeDados.*;
+import controlador.ControlePartidas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -40,20 +41,12 @@ public class PartidasCriar extends JFrame {
 	private Listas brasileirao = new Listas();
 	private int golsCasa, golsFora;
 	private Time timeCasa, timeFora;
-	private Estadios estadio;
-	private int golasd, index;
+	public Estadios estadio;
+	public int valorRodada, index;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PartidasCriar frame = new PartidasCriar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		PartidasCriar frame = new PartidasCriar();
+		frame.setVisible(true);
 	}
 
 	public PartidasCriar() {
@@ -116,15 +109,13 @@ public class PartidasCriar extends JFrame {
 			//Usuario escolher os times e o placar
 			
 			//Adicionando itens para a escolha do estadio
-			brasileirao.inicializarTimes();
 			DefaultListModel listaTimes = new DefaultListModel();
 			DefaultListModel listaTimes2 = new DefaultListModel();
 			DefaultListModel listaJogadores1 = new DefaultListModel();
 			DefaultListModel listaJogadores2 = new DefaultListModel();
 			
 			for(int i = 0; i < 20; i++) {
-				listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
-				
+				listaTimes.addElement(brasileirao.getTimes().get(i).getNome());	
 			}
 			
 			JList timeCasa = new JList(listaTimes);
@@ -270,7 +261,7 @@ public class PartidasCriar extends JFrame {
 					spinnerRodada.setVisible(false);
 					listaEstadios.setVisible(false);
 					botaoProximo.setVisible(false);
-					this.jogadoresParaGols(timeCasa, listaJogadores1);
+					ControlePartidas.partidasCriarJogadoresGols(timeCasa, listaJogadores1, brasileirao);
 					
 					//De acordo com o valor que o usuario escolheu para os gols, printar na tela "n" JLists com os jogadores do time
 					for(int i = 0; i < getGolsCasa(); i++) {
@@ -284,7 +275,7 @@ public class PartidasCriar extends JFrame {
 						painelGoleadores.add(listaDePaineis1.get(i));
 					}
 					
-					this.jogadoresParaGols(timeFora, listaJogadores2);
+					ControlePartidas.partidasCriarJogadoresGols(timeFora, listaJogadores2, brasileirao);
 					for(int i = 0; i < getGolsFora(); i++) {
 						listaDeListas2.add(i, new JList<String>(listaJogadores2));
 						listaDeListas2.get(i).setBounds(new Rectangle(0, (i*60), 200, 60));
@@ -301,7 +292,7 @@ public class PartidasCriar extends JFrame {
 					textoGoleadoresCasa.setVisible(true);	
 					String timeCasaString, timeForaString;
 					estadio = estadios.getSelectedValue();
-					golasd = (int) Math.round((double) spinnerRodada.getValue());
+					valorRodada = (int) Math.round((double) spinnerRodada.getValue());
 					timeCasaString = (String) timeCasa.getSelectedValue();
 					timeForaString = (String) timeFora.getSelectedValue();
 					for(int j = 0; j < 20; j++) {
@@ -317,58 +308,12 @@ public class PartidasCriar extends JFrame {
 			
 			
 			//Funcao de criar partida
-			botaoCriar.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					Listas.partidas.add(new Partida(getTimeCasa(), getTimeFora(), estadio));
-					index = Listas.partidas.size()-1;
-					for(int i = 0; i < getGolsCasa(); i ++) {
-						for(int j = 0; j < 11; j++) {
-							if(getTimeCasa().getJogadores(j) != null && listaDeListas1.get(i).getSelectedValue() == getTimeCasa().getJogadores(j).getNome()) {
-								for(int k = 0; k < 20; k++) {
-									if(Listas.times.get(k) == getTimeCasa()) {
-										Listas.times.get(k).getJogadores(j).fazerGol();
-										Listas.partidas.get(index).addGolCasa(getTimeCasa().getJogadores(j));
-									}
-								}
-							}
-						}		
-					}
-					for(int i = 0; i < getGolsFora(); i ++) {
-						for(int j = 0; j < 11; j++) {
-							if(getTimeFora().getJogadores(j) != null && listaDeListas2.get(i).getSelectedValue() == getTimeFora().getJogadores(j).getNome()) {
-								for(int k = 0; k < 20; k++) {
-									if(Listas.times.get(k) == getTimeFora()) {
-										Listas.times.get(k).getJogadores(j).fazerGol();
-										Listas.partidas.get(index).addGolFora(getTimeFora().getJogadores(j));
-									}
-								}
-							}
-						}		
-					}
-					Listas.partidas.get(index).finalizarPartida2(getGolsCasa(), getGolsFora(), golasd);
-					
-					dispose();
-					Menu.main(null);
-				}
+			botaoCriar.addActionListener((event) -> {
+					ControlePartidas.partidasCriar(this, listaDeListas1, listaDeListas2);
+				
 			});
 			
 		}
-	
-	//Funcao que tira os jogadores do time e coloca ele na JList dos goleadores
-	 public void jogadoresParaGols(JList listaTime, DefaultListModel listaJogadores) {
-		String time = listaTime.getSelectedValue().toString();
-		
-		for(int i = 0; i < 20; i++) {
-			if(brasileirao.getTimes().get(i).getNome() == time) {
-				for(int j = 0; j < 11; j++) {
-					if(brasileirao.getTimes().get(i).getJogadores(j) != null) {
-						listaJogadores.addElement(brasileirao.getTimes().get(i).getJogadores(j).getNome());
-					}
-				}
-			}
-		}
-	 }
 	
 
 	public int getGolsCasa() {

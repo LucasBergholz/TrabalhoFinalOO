@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import bancoDeDados.Listas;
+import controlador.ControlePartidas;
 
 public class PartidasDeletar extends JFrame {
 
@@ -30,16 +31,8 @@ public class PartidasDeletar extends JFrame {
 	private JScrollPane painelPartidasScroll;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PartidasDeletar frame = new PartidasDeletar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		PartidasDeletar frame = new PartidasDeletar();
+		frame.setVisible(true);
 	}
 
 	
@@ -89,43 +82,7 @@ public class PartidasDeletar extends JFrame {
 		spnRodada.setModel(new SpinnerNumberModel(0, 0, 38, 1));
 		//Atualizar o que a tela mostra de acordo com a rodada do spinner
 		spnRodada.addChangeListener((event)->{
-			painelPartidas.removeAll();
-			ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
-			botoesDeletar.clear();
-			int rodada = (Integer)spnRodada.getValue();
-			int contador = 0;
-			for(int i = 0; i < Listas.partidas.size(); i++) {
-				if(Listas.partidas.get(i).getRodada() == rodada) {
-					int posicaoLista = i;
-					botoesDeletar.add(new JButton(Listas.partidas.get(i).toString()));
-					botoesDeletar.get(contador).setBounds(new Rectangle(0, (contador*70), 400, 60));
-					botoesDeletar.get(contador).setFont(new Font("Arial Black", Font.PLAIN, 11));
-					painelPartidas.add(botoesDeletar.get(contador));
-					botoesDeletar.get(contador).addActionListener( new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {				
-							JFrame jFrame = new JFrame();
-							int result = JOptionPane.showConfirmDialog(jFrame, "Voce realmente quer deletar " + Listas.partidas.get(posicaoLista));
-							
-							if (result == 0) {
-								Listas.partidas.get(posicaoLista).deletarPartida();
-								Listas.partidas.remove(posicaoLista);
-								dispose();
-								PartidasMenu.main(null);
-							}
-							else if (result == 1) {
-								dispose();
-								PartidasMenu.main(null);
-							}
-						}
-					});
-					contador++;
-				}
-				
-			}
-			
-			painelPartidasScroll.setVisible(false);
-			painelPartidasScroll.setVisible(true);
+			ControlePartidas.partidasDeletar(painelPartidasScroll, painelPartidas, spnRodada, this);
 		});
 		panel.add(spnRodada);
 		

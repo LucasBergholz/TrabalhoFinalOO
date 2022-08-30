@@ -20,16 +20,8 @@ public class JogadoresMenu extends JFrame {
 	private JPanel painelConteudo;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JogadoresMenu frame = new JogadoresMenu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		JogadoresMenu frame = new JogadoresMenu();
+		frame.setVisible(true);
 	}
 
 	public JogadoresMenu() {
@@ -53,6 +45,7 @@ public class JogadoresMenu extends JFrame {
 		painelConteudo.add(titulo);
 		
 		//Criando botoes
+		//Leva pra pagina de criar jogador
 		JToggleButton botaoCriar = new JToggleButton("Cadastrar Jogador");
 		getContentPane().add(botaoCriar);
 		botaoCriar.setBounds(280, 145, 200, 33);
@@ -62,20 +55,27 @@ public class JogadoresMenu extends JFrame {
 			JogadoresCriar.main(null);
 		});
 		
-		JToggleButton botaoEditar = new JToggleButton("Editar Jogador");
-		getContentPane().add(botaoEditar);
-		botaoEditar.setBounds(280, 245, 200, 33);
-		botaoEditar.setFont(new Font("Arial", Font.PLAIN, 20));
+		//Leva pra pagina de deletar jogador
+		JToggleButton botaoDeletar = new JToggleButton("Deletar Jogador");
+		getContentPane().add(botaoDeletar);
+		botaoDeletar.setBounds(280, 245, 200, 33);
+		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoDeletar.addActionListener((event) -> {
+			this.dispose();
+			JogadoresDeletar.main(null);
+		});
 		
+		//Leva pra pagina de ver jogador
 		JToggleButton botaoVer = new JToggleButton("Ver Jogadores");
 		getContentPane().add(botaoVer);
 		botaoVer.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoVer.setBounds(280, 345, 200, 33);
 		botaoVer.addActionListener((event) -> {
 			this.dispose();
-			//PartidasTabelaRodadas.main(null);
+			JogadoresVer.main(null);
 		});
 		
+		//Leva pra pagina anterior
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
