@@ -29,6 +29,15 @@ public class PartidasDeletar extends JFrame {
 
 	private JPanel painelConteudo, painelPartidas;
 	private JScrollPane painelPartidasScroll;
+	private JSpinner spnRodada = new JSpinner(new SpinnerNumberModel(0, 0, 38, 1));
+	
+	//ArrayList com botoes, os quais cada um representara uma partida
+	private ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
+	
+	//Inteiro que sera usado para a confirmacao final de deletar a partida
+	private Integer result;
+	
+
 
 	public static void main(String[] args) {
 		PartidasDeletar frame = new PartidasDeletar();
@@ -65,26 +74,16 @@ public class PartidasDeletar extends JFrame {
 		painelConteudo.add(titulo);
 		
 		//Criando os blocos das partidas
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0x274360));
-		panel.setBounds(0, 98, 736, 64);
-		painelConteudo.add(panel);
-		panel.setLayout(null);
+		JPanel painelRodadas = new JPanel();
+		painelRodadas.setBackground(new Color(0x274360));
+		painelRodadas.setBounds(0, 98, 736, 64);
+		painelConteudo.add(painelRodadas);
+		painelRodadas.setLayout(null);
 		
 		JLabel lblSpinner = new JLabel("RODADA");
 		lblSpinner.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblSpinner.setBounds(304, 10, 100, 40);
-		panel.add(lblSpinner);
-		
-		JSpinner spnRodada = new JSpinner();
-		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
-		spnRodada.setBounds(304, 10, 126, 40);
-		spnRodada.setModel(new SpinnerNumberModel(0, 0, 38, 1));
-		//Atualizar o que a tela mostra de acordo com a rodada do spinner
-		spnRodada.addChangeListener((event)->{
-			ControlePartidas.partidasDeletar(painelPartidasScroll, painelPartidas, spnRodada, this);
-		});
-		panel.add(spnRodada);
+		painelRodadas.add(lblSpinner);
 		
 		painelPartidasScroll = new JScrollPane();
 		painelPartidas = new JPanel();
@@ -98,6 +97,76 @@ public class PartidasDeletar extends JFrame {
 		painelConteudo.add(painelPartidasScroll);
 		painelPartidas.setLayout(null);
 		
+		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
+		spnRodada.setBounds(304, 10, 126, 40);
+		//Atualizar o que a tela mostra de acordo com a rodada do spinner
+		spnRodada.addChangeListener((event)->{
+			ControlePartidas.partidasDeletar(result, botoesDeletar, painelPartidasScroll, painelPartidas, spnRodada, this);
+		});
+		painelRodadas.add(spnRodada);
+		
+
+	}
+	
+	
+	//Getter & Setters
+	public JPanel getPainelConteudo() {
+		return painelConteudo;
+	}
+
+
+	public void setPainelConteudo(JPanel painelConteudo) {
+		this.painelConteudo = painelConteudo;
+	}
+
+
+	public JPanel getPainelPartidas() {
+		return painelPartidas;
+	}
+
+
+	public void setPainelPartidas(JPanel painelPartidas) {
+		this.painelPartidas = painelPartidas;
+	}
+
+
+	public JScrollPane getPainelPartidasScroll() {
+		return painelPartidasScroll;
+	}
+
+
+	public void setPainelPartidasScroll(JScrollPane painelPartidasScroll) {
+		this.painelPartidasScroll = painelPartidasScroll;
+	}
+
+
+	public JSpinner getSpnRodada() {
+		return spnRodada;
+	}
+
+
+	public void setSpnRodada(JSpinner spnRodada) {
+		this.spnRodada = spnRodada;
+	}
+
+
+	public ArrayList<JButton> getBotoesDeletar() {
+		return botoesDeletar;
+	}
+
+
+	public void setBotoesDeletar(ArrayList<JButton> botoesDeletar) {
+		this.botoesDeletar = botoesDeletar;
+	}
+
+
+	public Integer getResult() {
+		return result;
+	}
+
+
+	public void setResult(Integer result) {
+		this.result = result;
 	}
 
 }

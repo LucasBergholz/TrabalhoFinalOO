@@ -84,22 +84,24 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		
 		//Criando os blocos das partidas
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0x274360));
-		panel.setBounds(0, 78, 736, 64);
-		painelConteudo.add(panel);
-		panel.setLayout(null);
+		JPanel painelRodadas = new JPanel();
+		painelRodadas.setBackground(new Color(0x274360));
+		painelRodadas.setBounds(0, 78, 736, 64);
+		painelConteudo.add(painelRodadas);
+		painelRodadas.setLayout(null);
 		
+		//Label que indica a utilidade do Spinner
 		JLabel lblSpinner = new JLabel("RODADA");
 		lblSpinner.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblSpinner.setBounds(304, 10, 100, 40);
-		panel.add(lblSpinner);
+		painelRodadas.add(lblSpinner);
 		
+		//Criando o Spinner que controla a Rodada que será mostrada no Frame
 		JSpinner spnRodada = new JSpinner();
 		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
 		spnRodada.setBounds(304, 10, 126, 40);
 		spnRodada.setModel(new SpinnerNumberModel(0.0, 0.0, 38.0, 1.0));
-		panel.add(spnRodada);
+		painelRodadas.add(spnRodada);
 		
 		JLabel titulo = new JLabel("PARTIDAS");
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -107,16 +109,10 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		titulo.setFont(new Font("Arial", Font.BOLD, 50));
 		titulo.setBounds(0, 0, 736, 83);
 		painelConteudo.add(titulo);
+		
 		//Recebendo o dados necessarios para instanciar os componentes
 		int numPartidas = brasileirao.getPartidas().size();
 		int rod =(int) Math.round((double) spnRodada.getValue());
-		int partRod = 1;
-		
-		for (int i = 0; i < numPartidas; i++) {
-			if(brasileirao.getPartidas().get(i).getRodada() == rod) {
-				partRod++;
-			}	
-		}
 		
 		
 		List<JPanel> listaPainelPartidas = new ArrayList<>();
@@ -137,5 +133,11 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		spnRodada.addChangeListener((event) -> {
 			ControlePartidas.partidasVer(spnRodada, caixaVertical, caixaDentroCaixa, numPartidas, brasileirao);
 		});
+		
+		
+		//Realocando o valor do spinner para Rodada 01
+		spnRodada.setValue(1.0);
+		//Definindo o Novo minimo para a Primeira Rodada
+		spnRodada.setModel(new SpinnerNumberModel(1.0, 1.0, 38.0, 1.0));
 	}
 }

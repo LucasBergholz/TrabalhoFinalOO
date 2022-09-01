@@ -28,10 +28,20 @@ import bancoDeDados.Listas;
 
 public class JogadoresDeletar extends JFrame {
 
-	private JPanel painelConteudo, painelPartidas;
-	private JScrollPane painelPartidasScroll;
 	private Listas brasileirao = new Listas();
 
+	//Componentes Visuais
+	private JPanel painelConteudo, painelPartidas;
+	private JScrollPane painelPartidasScroll;
+	private DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
+	private JList<String> listaDeTimes ;
+	private ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
+	private JFrame frameOpcao = new JFrame();
+	private Integer result;
+	private static JOptionPane painelOpcao;
+	
+	
+	//Metodos
 	public static void main(String[] args) {
 		JogadoresDeletar frame = new JogadoresDeletar();
 		frame.setVisible(true);
@@ -75,33 +85,44 @@ public class JogadoresDeletar extends JFrame {
 
 		//Criando JList com times que aparecerão para o usuário
 		JScrollPane painelTimes = new JScrollPane();
-		DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
-		for(int i = 0; i < 20; i++) {
-			listaDeTimesModelo.addElement(Listas.times.get(i).getNome());
-		}
-		JList<String> listaDeTimes = new JList<String>(listaDeTimesModelo);
-		painelTimes.setBounds(267, 0, 197, 64);
 		
+		for(int i = 0; i < 20; i++) {
+			listaDeTimesModelo.addElement(brasileirao.getTimes().get(i).getNome());
+		}
+		
+		painelPartidasScroll = new JScrollPane();
+		painelPartidas = new JPanel();
+		painelPartidas.setBackground(new Color(0, 0, 128));
+		painelPartidasScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		painelPartidasScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		painelPartidasScroll.setVisible(true);
+		painelPartidasScroll.setViewportView(painelPartidas);
+		painelPartidasScroll.setBounds(170,200,400, 300);
+		painelConteudo.add(painelPartidasScroll);
+		painelPartidas.setLayout(null);
+		
+		painelTimes.setBounds(267, 0, 197, 64);
+		listaDeTimes = new JList<String>(listaDeTimesModelo);
 		//Atualizar o que a tela mostra de acordo com a escolha do time
 		listaDeTimes.addListSelectionListener((event)->{
 			painelPartidas.removeAll();
-			ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
 			botoesDeletar.clear();
 			int contador = 0;
 			for(int i = 0; i < 20; i++) {
-				if(listaDeTimes.getSelectedValue() == Listas.times.get(i).getNome()) {
-					for(int j = 0; j < Listas.times.get(i).getJogadoresSize(); j++) {
+				if(listaDeTimes.getSelectedValue() == brasileirao.getTimes().get(i).getNome()) {
+					for(int j = 0; j < brasileirao.getTimes().get(i).getJogadoresSize(); j++) {
 						int index = i;
 						int index2 = j;
-						botoesDeletar.add(new JButton(Listas.times.get(i).getJogadores(j).getNome()));
+						botoesDeletar.add(new JButton(brasileirao.getTimes().get(i).getJogadores(j).getNome()));
 						botoesDeletar.get(contador).setBounds(new Rectangle(0, contador*70, 400, 60));
 						botoesDeletar.get(contador).setFont(new Font("Arial Black", Font.PLAIN, 11));
 						painelPartidas.add(botoesDeletar.get(contador));
 						botoesDeletar.get(contador).addActionListener( new ActionListener() {
 							@Override
-							public void actionPerformed(ActionEvent e) {				
-								JFrame jFrame = new JFrame();
-								int result = JOptionPane.showConfirmDialog(jFrame, "Voce realmente quer deletar " + Listas.times.get(index).getJogadores(index2).getNome());
+							public void actionPerformed(ActionEvent e) {
+								if(result == null) {
+									result = JOptionPane.showConfirmDialog(frameOpcao, "Voce realmente quer deletar " + brasileirao.getTimes().get(index).getJogadores(index2).getNome());
+								}
 								
 								if (result == 0) {
 									brasileirao.getTimes().get(index).deletarJogador(brasileirao.getTimes().get(index).getJogadores(index2));
@@ -126,16 +147,79 @@ public class JogadoresDeletar extends JFrame {
 		painelTimes.setViewportView(listaDeTimes);
 		panel.add(painelTimes);
 		
-		painelPartidasScroll = new JScrollPane();
-		painelPartidas = new JPanel();
-		painelPartidas.setBackground(new Color(0, 0, 128));
-		painelPartidasScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		painelPartidasScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		painelPartidasScroll.setVisible(true);
-		painelPartidasScroll.setViewportView(painelPartidas);
-		painelPartidasScroll.setBounds(170,200,400, 300);
-		painelConteudo.add(painelPartidasScroll);
-		painelPartidas.setLayout(null);
+	}
+	
+	
+	//Getters & Setters
+	public Listas getBrasileirao() {
+		return brasileirao;
 	}
 
+	public void setBrasileirao(Listas brasileirao) {
+		this.brasileirao = brasileirao;
+	}
+
+	public JPanel getPainelConteudo() {
+		return painelConteudo;
+	}
+
+	public void setPainelConteudo(JPanel painelConteudo) {
+		this.painelConteudo = painelConteudo;
+	}
+
+	public JPanel getPainelPartidas() {
+		return painelPartidas;
+	}
+
+	public void setPainelPartidas(JPanel painelPartidas) {
+		this.painelPartidas = painelPartidas;
+	}
+
+	public JScrollPane getPainelPartidasScroll() {
+		return painelPartidasScroll;
+	}
+
+	public void setPainelPartidasScroll(JScrollPane painelPartidasScroll) {
+		this.painelPartidasScroll = painelPartidasScroll;
+	}
+
+	public DefaultListModel<String> getListaDeTimesModelo() {
+		return listaDeTimesModelo;
+	}
+
+	public void setListaDeTimesModelo(DefaultListModel<String> listaDeTimesModelo) {
+		this.listaDeTimesModelo = listaDeTimesModelo;
+	}
+
+	public JList<String> getListaDeTimes() {
+		return listaDeTimes;
+	}
+
+	public void setListaDeTimes(JList<String> listaDeTimes) {
+		this.listaDeTimes = listaDeTimes;
+	}
+
+	public ArrayList<JButton> getBotoesDeletar() {
+		return botoesDeletar;
+	}
+
+	public void setBotoesDeletar(ArrayList<JButton> botoesDeletar) {
+		this.botoesDeletar = botoesDeletar;
+	}
+
+	public JFrame getFrameOpcao() {
+		return frameOpcao;
+	}
+
+	public void setFrameOpcao(JFrame frameOpcao) {
+		this.frameOpcao = frameOpcao;
+	}
+
+	public int getResult() {
+		return result;
+	}
+
+	public void setResult(int result) {
+		this.result = result;
+	}
 }

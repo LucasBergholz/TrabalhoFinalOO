@@ -34,11 +34,20 @@ import java.awt.event.ActionEvent;
 
 public class JogadoresCriar extends JFrame {
 
-	private JPanel painelConteudo;
-	private JTextField txtNome;
 	private Listas brasileirao = new Listas();
 	private Time timeJog;
 	private Posicao posicaoJogador;
+	
+	//Componentes Visuais
+	private JPanel painelConteudo;
+	private JTextField txtNome;
+	private JSpinner spnIdade = new JSpinner();
+	private JButton botaoVoltar = new JButton("Voltar");
+	private JButton botaoCriar = new JButton("Criar");
+	private DefaultListModel listaPosicao = new DefaultListModel();
+	private JList listagemPosicao ;
+	private JList listagemTime;
+
 
 	public static void main(String[] args) {
 		JogadoresCriar frame = new JogadoresCriar();
@@ -87,10 +96,10 @@ public class JogadoresCriar extends JFrame {
 		//Criando a lista de times
 		DefaultListModel listaTimes = new DefaultListModel();
 		for(int i = 0; i < 20; i++) {
-			listaTimes.addElement(Listas.times.get(i).getNome());
+			listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
 		}
 		
-		JList listagemTime = new JList(listaTimes);
+		listagemTime = new JList(listaTimes);
 		listagemTime.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		listagemTime.setBounds(136, 256, 197, 112);
 		painelCadastro.add(listagemTime);
@@ -110,7 +119,7 @@ public class JogadoresCriar extends JFrame {
 		lblIdade.setBounds(25, 106, 101, 24);
 		painelCadastro.add(lblIdade);
 		
-		JSpinner spnIdade = new JSpinner();
+	
 		spnIdade.setBounds(136, 106, 49, 26);
 		spnIdade.setModel(new SpinnerNumberModel(18.0, 18.0, 100.0, 1.0));
 		painelCadastro.add(spnIdade);
@@ -121,7 +130,6 @@ public class JogadoresCriar extends JFrame {
 		painelCadastro.add(lblPosicao);
 		
 		//Instanciando a Lista de posicões
-		DefaultListModel listaPosicao = new DefaultListModel();
 		listaPosicao.addElement(Posicao.ATACANTE);
 		listaPosicao.addElement(Posicao.GOLEIRO);
 		listaPosicao.addElement(Posicao.LATERAL);
@@ -130,7 +138,8 @@ public class JogadoresCriar extends JFrame {
 		listaPosicao.addElement(Posicao.VOLANTE);
 		listaPosicao.addElement(Posicao.ZAGUEIRO);
 		
-		JList listagemPosicao = new JList(listaPosicao);
+
+		listagemPosicao = new JList(listaPosicao);
 		listagemPosicao.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		listagemPosicao.setBounds(136, 166, 358, 80);
 		painelCadastro.add(listagemPosicao);
@@ -141,7 +150,7 @@ public class JogadoresCriar extends JFrame {
 		srclPosicao.setLocation(136, 166);
 		
 		
-		JButton botaoVoltar = new JButton("Voltar");
+		
 		botaoVoltar.setBounds(10, 35, 85, 21);
 		painelConteudo.add(botaoVoltar);
 		botaoVoltar.addMouseListener(new MouseAdapter() {
@@ -153,7 +162,6 @@ public class JogadoresCriar extends JFrame {
 		});
 		
 		//Botao de criar O Jogador
-		JButton botaoCriar = new JButton("Criar");
 		botaoCriar.setBounds(551, 520, 175, 33);
 		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
 		painelConteudo.add(botaoCriar);
@@ -164,7 +172,7 @@ public class JogadoresCriar extends JFrame {
 				setPosicaoJogador( (Posicao) listagemPosicao.getSelectedValue());
 				
 				//Funcao que cria o jogador
-				ControleJogadores.criandoJogador(listagemTime, txtNome, brasileirao, this);
+				ControleJogadores.criandoJogador(listagemTime, txtNome, brasileirao, this, spnIdade);
 				this.dispose();
 				JogadoresVer.main(null);
 			}
@@ -173,6 +181,7 @@ public class JogadoresCriar extends JFrame {
 		
 	}
 
+	//Getters & Setters
 	public Time getTimeJog() {
 		return timeJog;
 	}
@@ -188,4 +197,68 @@ public class JogadoresCriar extends JFrame {
 	public void setPosicaoJogador(Posicao posicJog) {
 		this.posicaoJogador = posicJog;
 	}
+	public JTextField getTxtNome() {
+		return txtNome;
+	}
+
+	public void setTxtNome(JTextField txtNome) {
+		this.txtNome = txtNome;
+	}
+
+	public Listas getBrasileirao() {
+		return brasileirao;
+	}
+
+	public void setBrasileirao(Listas brasileirao) {
+		this.brasileirao = brasileirao;
+	}
+
+	public JSpinner getSpnIdade() {
+		return spnIdade;
+	}
+
+	public void setSpnIdade(JSpinner spnIdade) {
+		this.spnIdade = spnIdade;
+	}
+
+	public JButton getBotaoVoltar() {
+		return botaoVoltar;
+	}
+
+	public void setBotaoVoltar(JButton botaoVoltar) {
+		this.botaoVoltar = botaoVoltar;
+	}
+
+	public JButton getBotaoCriar() {
+		return botaoCriar;
+	}
+
+	public void setBotaoCriar(JButton botaoCriar) {
+		this.botaoCriar = botaoCriar;
+	}
+
+	public DefaultListModel getListaPosicao() {
+		return listaPosicao;
+	}
+
+	public void setListaPosicao(DefaultListModel listaPosicao) {
+		this.listaPosicao = listaPosicao;
+	}
+
+	public JList getListagemPosicao() {
+		return listagemPosicao;
+	}
+
+	public void setListagemPosicao(JList listagemPosicao) {
+		this.listagemPosicao = listagemPosicao;
+	}
+	
+	public JList getListagemTime() {
+		return listagemTime;
+	}
+
+	public void setListagemTime(JList listagemTime) {
+		this.listagemTime = listagemTime;
+	}
+
 }

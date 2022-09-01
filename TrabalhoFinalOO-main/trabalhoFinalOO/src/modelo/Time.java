@@ -129,6 +129,9 @@ public class Time {
 	public Jogador getJogadores(int i) {
 		return jogadores.get(i);
 	}
+	public ArrayList<Jogador> getJogadores() {
+		return jogadores;
+	}
 	
 	public int getJogadoresSize() {
 		return jogadores.size();

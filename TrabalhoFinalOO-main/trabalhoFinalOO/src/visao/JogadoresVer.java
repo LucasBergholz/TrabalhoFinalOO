@@ -27,7 +27,8 @@ import controlador.ControleJogadores;
 import modelo.Time;
 
 public class JogadoresVer extends JFrame {
-
+	
+	private static Listas brasileirao = new Listas();
 	private JPanel painelConteudo;
 	private Time timeEscolhido;
 
@@ -76,7 +77,7 @@ public class JogadoresVer extends JFrame {
 		JScrollPane painelTimes = new JScrollPane();
 		DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
 		for(int i = 0; i < 20; i++) {
-			listaDeTimesModelo.addElement(Listas.times.get(i).getNome());
+			listaDeTimesModelo.addElement(brasileirao.getTimes().get(i).getNome());
 		}
 		JList<String> listaDeTimes = new JList<String>(listaDeTimesModelo);
 		painelTimes.setBounds(267, 0, 197, 64);
