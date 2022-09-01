@@ -28,9 +28,13 @@ import bancoDeDados.Listas;
 
 public class JogadoresDeletar extends JFrame {
 
+	private Listas brasileirao = new Listas();
+
+	//Componentes Visuais
 	private JPanel painelConteudo, painelPartidas;
 	private JScrollPane painelPartidasScroll;
-	private Listas brasileirao = new Listas();
+	private DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
+	private JList<String> listaDeTimes ;
 
 	public static void main(String[] args) {
 		JogadoresDeletar frame = new JogadoresDeletar();
@@ -75,13 +79,15 @@ public class JogadoresDeletar extends JFrame {
 
 		//Criando JList com times que aparecerão para o usuário
 		JScrollPane painelTimes = new JScrollPane();
-		DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
+		
+		
 		for(int i = 0; i < 20; i++) {
 			listaDeTimesModelo.addElement(Listas.times.get(i).getNome());
 		}
-		JList<String> listaDeTimes = new JList<String>(listaDeTimesModelo);
-		painelTimes.setBounds(267, 0, 197, 64);
 		
+		
+		painelTimes.setBounds(267, 0, 197, 64);
+		listaDeTimes = new JList<String>(listaDeTimesModelo);
 		//Atualizar o que a tela mostra de acordo com a escolha do time
 		listaDeTimes.addListSelectionListener((event)->{
 			painelPartidas.removeAll();

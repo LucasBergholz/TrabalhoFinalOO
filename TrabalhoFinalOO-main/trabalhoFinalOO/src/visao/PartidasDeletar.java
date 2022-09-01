@@ -29,6 +29,9 @@ public class PartidasDeletar extends JFrame {
 
 	private JPanel painelConteudo, painelPartidas;
 	private JScrollPane painelPartidasScroll;
+	private JSpinner spnRodada = new JSpinner(new SpinnerNumberModel(0, 0, 38, 1));
+	
+
 
 	public static void main(String[] args) {
 		PartidasDeletar frame = new PartidasDeletar();
@@ -76,20 +79,13 @@ public class PartidasDeletar extends JFrame {
 		lblSpinner.setBounds(304, 10, 100, 40);
 		painelRodadas.add(lblSpinner);
 		
-		JSpinner spnRodada = new JSpinner();
 		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
 		spnRodada.setBounds(304, 10, 126, 40);
-		spnRodada.setModel(new SpinnerNumberModel(0, 0, 38, 1));
 		//Atualizar o que a tela mostra de acordo com a rodada do spinner
 		spnRodada.addChangeListener((event)->{
 			ControlePartidas.partidasDeletar(painelPartidasScroll, painelPartidas, spnRodada, this);
 		});
 		painelRodadas.add(spnRodada);
-		
-		//Realocando o valor do spinner para Rodada 01
-		spnRodada.setValue(1.0);
-		//Definindo o Novo minimo para a Primeira Rodada
-		spnRodada.setModel(new SpinnerNumberModel(1.0, 1.0, 38.0, 1.0));
 		
 		
 		painelPartidasScroll = new JScrollPane();
@@ -104,6 +100,52 @@ public class PartidasDeletar extends JFrame {
 		painelConteudo.add(painelPartidasScroll);
 		painelPartidas.setLayout(null);
 		
+		/*//Realocando o valor do spinner para Rodada 01
+		spnRodada.setValue(1.0);
+		//Definindo o Novo minimo para a Primeira Rodada
+		spnRodada.setModel(new SpinnerNumberModel(1.0, 1.0, 38.0, 1.0));*/
+
+	}
+	
+	
+	//Getter & Setters
+	public JPanel getPainelConteudo() {
+		return painelConteudo;
+	}
+
+
+	public void setPainelConteudo(JPanel painelConteudo) {
+		this.painelConteudo = painelConteudo;
+	}
+
+
+	public JPanel getPainelPartidas() {
+		return painelPartidas;
+	}
+
+
+	public void setPainelPartidas(JPanel painelPartidas) {
+		this.painelPartidas = painelPartidas;
+	}
+
+
+	public JScrollPane getPainelPartidasScroll() {
+		return painelPartidasScroll;
+	}
+
+
+	public void setPainelPartidasScroll(JScrollPane painelPartidasScroll) {
+		this.painelPartidasScroll = painelPartidasScroll;
+	}
+
+
+	public JSpinner getSpnRodada() {
+		return spnRodada;
+	}
+
+
+	public void setSpnRodada(JSpinner spnRodada) {
+		this.spnRodada = spnRodada;
 	}
 
 }

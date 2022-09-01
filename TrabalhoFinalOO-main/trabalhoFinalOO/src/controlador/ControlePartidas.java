@@ -77,6 +77,7 @@ public class ControlePartidas {
 	}
 
 	public static void partidasDeletar(JScrollPane painelPartidasScroll, JPanel painelPartidas, JSpinner spnRodada, PartidasDeletar frame) {
+		
 		painelPartidas.removeAll();
 		ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
 		botoesDeletar.clear();

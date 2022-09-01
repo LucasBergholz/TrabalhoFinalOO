@@ -25,7 +25,7 @@ public class ControleJogadores {
 				int index = frame.getTimeJog().getJogadoresSize() - 1;
 				
 				//Colocando adicionando a Idade escolhida no Jogador 
-				frame.getTimeJog().getJogadores(index).setIdade((Integer) spnIdade.getValue());
+				frame.getTimeJog().getJogadores(index).setIdade((int) Math.round((double)spnIdade.getValue()));
 				
 			}
 		}
