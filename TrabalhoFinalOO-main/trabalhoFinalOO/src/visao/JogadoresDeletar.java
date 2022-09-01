@@ -35,7 +35,10 @@ public class JogadoresDeletar extends JFrame {
 	private JScrollPane painelPartidasScroll;
 	private DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
 	private JList<String> listaDeTimes ;
-
+	private ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
+	
+	
+	//Metodos
 	public static void main(String[] args) {
 		JogadoresDeletar frame = new JogadoresDeletar();
 		frame.setVisible(true);
@@ -91,7 +94,6 @@ public class JogadoresDeletar extends JFrame {
 		//Atualizar o que a tela mostra de acordo com a escolha do time
 		listaDeTimes.addListSelectionListener((event)->{
 			painelPartidas.removeAll();
-			ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
 			botoesDeletar.clear();
 			int contador = 0;
 			for(int i = 0; i < 20; i++) {
@@ -143,5 +145,62 @@ public class JogadoresDeletar extends JFrame {
 		painelConteudo.add(painelPartidasScroll);
 		painelPartidas.setLayout(null);
 	}
+	
+	
+	//Getters & Setters
+	public Listas getBrasileirao() {
+		return brasileirao;
+	}
 
+	public void setBrasileirao(Listas brasileirao) {
+		this.brasileirao = brasileirao;
+	}
+
+	public JPanel getPainelConteudo() {
+		return painelConteudo;
+	}
+
+	public void setPainelConteudo(JPanel painelConteudo) {
+		this.painelConteudo = painelConteudo;
+	}
+
+	public JPanel getPainelPartidas() {
+		return painelPartidas;
+	}
+
+	public void setPainelPartidas(JPanel painelPartidas) {
+		this.painelPartidas = painelPartidas;
+	}
+
+	public JScrollPane getPainelPartidasScroll() {
+		return painelPartidasScroll;
+	}
+
+	public void setPainelPartidasScroll(JScrollPane painelPartidasScroll) {
+		this.painelPartidasScroll = painelPartidasScroll;
+	}
+
+	public DefaultListModel<String> getListaDeTimesModelo() {
+		return listaDeTimesModelo;
+	}
+
+	public void setListaDeTimesModelo(DefaultListModel<String> listaDeTimesModelo) {
+		this.listaDeTimesModelo = listaDeTimesModelo;
+	}
+
+	public JList<String> getListaDeTimes() {
+		return listaDeTimes;
+	}
+
+	public void setListaDeTimes(JList<String> listaDeTimes) {
+		this.listaDeTimes = listaDeTimes;
+	}
+
+	public ArrayList<JButton> getBotoesDeletar() {
+		return botoesDeletar;
+	}
+
+	public void setBotoesDeletar(ArrayList<JButton> botoesDeletar) {
+		this.botoesDeletar = botoesDeletar;
+	}
 }
