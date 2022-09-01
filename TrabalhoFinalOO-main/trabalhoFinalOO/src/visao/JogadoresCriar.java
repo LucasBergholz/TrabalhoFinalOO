@@ -45,8 +45,8 @@ public class JogadoresCriar extends JFrame {
 	private JButton botaoVoltar = new JButton("Voltar");
 	private JButton botaoCriar = new JButton("Criar");
 	private DefaultListModel listaPosicao = new DefaultListModel();
-	private JList listagemPosicao = new JList(listaPosicao);
-	
+	private JList listagemPosicao ;
+	private JList listagemTime;
 
 
 	public static void main(String[] args) {
@@ -99,7 +99,7 @@ public class JogadoresCriar extends JFrame {
 			listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
 		}
 		
-		JList listagemTime = new JList(listaTimes);
+		listagemTime = new JList(listaTimes);
 		listagemTime.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		listagemTime.setBounds(136, 256, 197, 112);
 		painelCadastro.add(listagemTime);
@@ -139,7 +139,7 @@ public class JogadoresCriar extends JFrame {
 		listaPosicao.addElement(Posicao.ZAGUEIRO);
 		
 
-			
+		listagemPosicao = new JList(listaPosicao);
 		listagemPosicao.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		listagemPosicao.setBounds(136, 166, 358, 80);
 		painelCadastro.add(listagemPosicao);
@@ -252,4 +252,13 @@ public class JogadoresCriar extends JFrame {
 	public void setListagemPosicao(JList listagemPosicao) {
 		this.listagemPosicao = listagemPosicao;
 	}
+	
+	public JList getListagemTime() {
+		return listagemTime;
+	}
+
+	public void setListagemTime(JList listagemTime) {
+		this.listagemTime = listagemTime;
+	}
+
 }
