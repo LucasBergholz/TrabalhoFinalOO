@@ -1,7 +1,17 @@
 package modelo;
 
 import java.util.ArrayList;
-
+/**
+ * Classe que Representa os Times que Participam da Serie A do Brasileirão 2022, tendo como Atributos seu nome, Jogadores, estadio, cores, jogos, etc..
+ * 
+ * @author Guilherme Rodrigues
+ * @author Lucas Gobbi
+ * 
+ * @see Jogador
+ * @see Estadios
+ * @see Tecnico
+ * @see Partida
+ */
 public class Time {
 	//Atributos
 	private String nome;
@@ -19,7 +29,20 @@ public class Time {
 	private int pontosTotais;
 	
 	//Construtores
-	
+	/**
+	 * Construtor da Classe Time
+	 * 
+	 * @param nome do time
+	 * @param Cor principal do time em Hexadecimal
+	 * @param cor secundaria  em Hexadecimal
+	 * @param nome do Tecnico
+	 * @param estadio do Time
+	 * 
+	 * @see Jogador
+	 * @see Estadios
+	 * @see Tecnico
+	 * @see Partida
+	 */
 	public Time(String nome, String cor1, String cor2,String nomeTecnico ,Estadios estadio) {
 		
 		this.nome = nome;
@@ -34,6 +57,20 @@ public class Time {
 		this.pontosTotais = 0;
 		this.setTecnico(new Tecnico(nome, this.getNome()));
 	}
+	
+	/**
+	 * Construtor da Classe Time
+	 * 
+	 * @param nome do time
+	 * @param Cor principal do time em Hexadecimal
+	 * @param cor secundaria em Hexadecimal
+	 * @param estadio do Time
+	 * 
+	 * @see Jogador
+	 * @see Estadios
+	 * @see Tecnico
+	 * @see Partida
+	 */
 	public Time(String nome, String cor1, String cor2, Estadios estadio) {
 			
 			this.nome = nome;
@@ -47,6 +84,23 @@ public class Time {
 			this.saldoGols = 0;
 			this.pontosTotais = 0;
 	}
+	/**
+	 * Construtor da Classe Time
+	 * 
+	 * @param nome
+	 * @param cor1
+	 * @param cor2
+	 * @param estadio
+	 * @param jogador
+	 * @param jogador2
+	 * @param jogador3
+	 * @param nomeTecnico
+	 * 
+	 * @see Jogador
+	 * @see Estadios
+	 * @see Tecnico
+	 * @see Partida
+	 */
 	public Time(String nome, String cor1, String cor2, Estadios estadio, Jogador jogador, Jogador jogador2, Jogador jogador3, String nomeTecnico) {
 		
 		this.nome = nome;
@@ -67,14 +121,26 @@ public class Time {
 
 	//Metodos Concretos
 	
-	//Criar jogador para o time
+	/**
+	 * Metodo que instancia um jogador no Time
+	 * 
+	 * @param nome do Jogador
+	 * @param posicao do Jogador
+	 * 
+	 * @see Posicao
+	 * @see Jogador
+	 */
 	public void addJogador(String nome, Posicao posicao) {
 		int j = jogadores.size();
 		jogadores.add(new Jogador(nome, posicao));
 		jogadores.get(j).setTime(this.getNome());
 	}	
 	
-	//Deletar jogador
+	/**
+	 * Metodo que remove o Jogador Passado como Parametro do Time
+	 * 
+	 * @param jogador
+	 */
 	public void deletarJogador(Jogador jogador) {
 		for(int i = 0; i < jogadores.size(); i++) {
 			if(jogador == jogadores.get(i)) {
@@ -84,30 +150,46 @@ public class Time {
 	}
 	
 	//Metodos usados na criacao de uma partida
+	/**
+	 * Metodo que adiciona em +1 o numero de Partidas Jogadas pelo Time no Campeonato
+	 */
 	private void addJogo() {
 		this.setNumJogos(this.getNumJogos() + 1);
 	}
-	
+	/**
+	 * Metodo que Adciona uma vitória ao Historico do time, atualizando tambem sua pontuação e numero de jogos jogados
+	 * 
+	 */
 	public void addVitoria() {
 		this.addJogo();
 		this.setVitorias(this.getVitorias()+1);;
 		this.setPontosTotais(this.getPontosTotais()+3);
 	}
-	
+	/**
+	 * Metodo que Adciona um empate ao Historico do time, atualizando tambem sua pontuação e numero de jogos jogados
+	 */
 	public void addEmpate() {
 		this.addJogo();
 		this.setEmpates(this.getEmpates()+1);
 		this.setPontosTotais(this.getPontosTotais()+1);
 	}
-	
+	/**
+	 * Metodo que Adciona uma derrota ao Historico do time, atualizando tambem seu número de jogos jogados
+	 */
 	public void addDerrota() {
 		this.addJogo();
 		this.setDerrotas(this.getDerrotas()+1);
 	}
-	
+	/**
+	 * Metodo que atualiza o Saldo de Gols do Time no Campeonato
+	 * 
+	 * @param gols feitos pelo Time
+	 */
 	public void addSaldoGol(int gols) {
 		this.saldoGols = this.saldoGols + gols;
 	}
+	
+	
 	
 	//Getters & Setters
 	public String getNome() {

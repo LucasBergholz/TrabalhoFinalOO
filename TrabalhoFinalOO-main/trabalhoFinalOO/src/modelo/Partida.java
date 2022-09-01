@@ -2,7 +2,14 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * Classe utilizada para representar os dados das partidas do Brasileirão
+ * 
+ * @author Guilherme Rodrigues
+ * @author Lucas Gobbi
+ * 
+ * @see Time
+ */
 public class Partida {
 	private Time timeCasa;
 	private Time timeFora;
@@ -13,6 +20,16 @@ public class Partida {
 	private int golsCasa, golsFora;
 	
 	//Constructor
+	/**
+	 * Construtor da Classe Partida
+	 * 
+	 * @param time jogando Casa
+	 * @param time jogando Fora
+	 * @param estadio em que a partida vai ser realizada
+	 * 
+	 * @see Time
+	 * @see Estadios
+	 */
 	public Partida(Time timeCasa, Time timeFora, Estadios estadio) {
 		super();
 		this.timeCasa = timeCasa;
@@ -23,6 +40,15 @@ public class Partida {
 	}
 	
 	//Analiza se tudo está correto para finalizar a partida
+	/**
+	 * Metodo que finaliza as Partidas Criadas previamente e distribui os gols entre os jogadores dos times
+	 * 
+	 * @param gols do time de Casa
+	 * @param gols do time de Fora
+	 * @param rodada da partida
+	 * 
+	 * @return False em caso de erro
+	 */
 	public boolean finalizarPartida(int golsCasa, int golsFora, int rodada) {
 		
 		this.rodada = rodada;
@@ -72,7 +98,17 @@ public class Partida {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * Metodo Utilizado para finalizar as Partidas e atualizar os dados dos times 
+	 * 
+	 * @param gols do time de Casa
+	 * @param gols do time de Fora
+	 * @param rodada da partida
+	 * 
+	 * 
+	 * @return False em caso de Erro
+	 */
 	public boolean finalizarPartida2(int golsCasa, int golsFora, int rodada) {
 		this.rodada = rodada;
 		this.golsCasa = golsCasa;
@@ -109,15 +145,26 @@ public class Partida {
 	}
 	
 	//Adicionar quem fez o gol de cada time
+	/**
+	 * Metodo que adciona a Partida o Jogador que realizou o gol do time de Casa
+	 * @param jogador
+	 */
 	public void addGolCasa(Jogador jogador) {
 		jogadorCasa.add(jogador);
 	}
 	
+	/**
+	 * Metodo que adciona a Partida o Jogador que realizou o gol do time de Fora
+	 * @param jogador
+	 */
 	public void addGolFora(Jogador jogador) {
 		jogadorFora.add(jogador);
 	}
 	
 	//Funcao que dados dos times e dos goleadores
+	/**
+	 * Metodo Utilizado para Deletar a Partida do Campenato e do Histórico dos Times que Jogaram ela, atualizando assim os dados do Time
+	 */
 	public void deletarPartida() {
 		if(golsCasa > golsFora) {
 			//Vitoria do time mandante

@@ -1,5 +1,14 @@
 package modelo;
 
+/**
+ * Classe Abstrata reprensentando uma Pessoa Generica
+ * 
+ * @author Guilherme Rodrigues
+ * @author Lucas Gobbi
+ * 
+ * @see Jogador
+ * @see Tecnico
+ */
 public abstract class Pessoa {
 	
 	private String nome;
@@ -7,13 +16,21 @@ public abstract class Pessoa {
 	private int idade;
 	private int numeroPartidas;
 	
-	
+	/**
+	 * Construtor da Classe Pessoa usado como base para suas SubClasses
+	 * 
+	 * @see Jogador
+	 * @see Tecnico
+	 */
 	public Pessoa() {
 		super();
 		this.setNumeroPartidas(0);
 		this.setIdade(0);
 	}
-
+	
+	/**
+	 * Metodo que adciona em +1 a quantidade de partidas que a Pessoa Jogou/Participou
+	 */
 	public void jogarPartida() {
 		this.setNumeroPartidas(this.getNumeroPartidas() + 1);
 	}

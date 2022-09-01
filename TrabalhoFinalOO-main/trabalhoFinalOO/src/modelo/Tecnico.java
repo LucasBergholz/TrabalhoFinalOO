@@ -1,9 +1,25 @@
 package modelo;
 
+/**
+ * 
+ * Classe Reponsavel por guardar os dados do Tecnicos dos Times do Brasileirão.  Utiliza como Base a SuperClasse Pessoa
+ * 
+ * @author Lucas Gobbi
+ * @author Guilherme Rodrigues
+ * 
+ * @see Pessoa
+ * @see Time
+ */
 public class Tecnico extends Pessoa {
 	private int vitorias;
 	private int derrotas;
 	
+	/**
+	 * Construtor da Classe Tecnico
+	 * @param nome do Tecninco: String
+	 * @param nome do Time: String
+	 * @see Pessoa
+	 */
 	public Tecnico(String nome, String time) {
 		super();
 		this.vitorias = 0;
@@ -12,6 +28,11 @@ public class Tecnico extends Pessoa {
 		this.setTime(time);
 	}
 	
+	/**
+	 * Metodo que Calcula o aproveitamento de vitórias do Tecnico em função do número de Partidadas que ele comandou
+	 * 
+	 * @return aproveitamento em formato de porcentagem
+	 */
 	public String visualizarAproveitamento(){
 		double aproveitamento = (double) this.getVitorias()/this.getNumeroPartidas();
 		
