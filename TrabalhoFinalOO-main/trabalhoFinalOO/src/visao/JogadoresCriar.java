@@ -164,7 +164,7 @@ public class JogadoresCriar extends JFrame {
 				setPosicaoJogador( (Posicao) listagemPosicao.getSelectedValue());
 				
 				//Funcao que cria o jogador
-				ControleJogadores.criandoJogador(listagemTime, txtNome, brasileirao, this);
+				ControleJogadores.criandoJogador(listagemTime, txtNome, brasileirao, this, spnIdade);
 				this.dispose();
 				JogadoresVer.main(null);
 			}

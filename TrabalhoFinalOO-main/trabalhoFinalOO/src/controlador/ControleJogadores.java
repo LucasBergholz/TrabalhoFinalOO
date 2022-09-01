@@ -4,6 +4,7 @@ import java.awt.Font;
 
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -11,14 +12,20 @@ import bancoDeDados.Listas;
 import visao.JogadoresCriar;
 
 public class ControleJogadores {
-	public static void criandoJogador(JList listagemTime, JTextField txtNome, Listas brasileirao, JogadoresCriar frame) {
+	public static void criandoJogador(JList listagemTime, JTextField txtNome, Listas brasileirao, JogadoresCriar frame, JSpinner spnIdade) {
 		//Atribuindo o nome do time a uma variavel auxiliar
 		String nomeTime = (String) listagemTime.getSelectedValue();	
 		
 		for(int i =0; i<20; i++) {
 			if(brasileirao.getTimes().get(i).getNome().equals(nomeTime)) {
 				frame.setTimeJog(brasileirao.getTimes().get(i));
-				frame.getTimeJog().addJogador(txtNome.getText().toUpperCase(), frame.getPosicaoJogador());	
+				frame.getTimeJog().addJogador(txtNome.getText().toUpperCase(), frame.getPosicaoJogador());
+				
+				//Pegando a posição do Jogador recem Criado no vetor
+				int index = frame.getTimeJog().getJogadoresSize() - 1;
+				
+				//Colocando adicionando a Idade escolhida no Jogador 
+				frame.getTimeJog().getJogadores(index).setIdade((Integer) spnIdade.getValue());
 				
 			}
 		}

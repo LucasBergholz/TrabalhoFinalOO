@@ -65,16 +65,16 @@ public class PartidasDeletar extends JFrame {
 		painelConteudo.add(titulo);
 		
 		//Criando os blocos das partidas
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0x274360));
-		panel.setBounds(0, 98, 736, 64);
-		painelConteudo.add(panel);
-		panel.setLayout(null);
+		JPanel painelRodadas = new JPanel();
+		painelRodadas.setBackground(new Color(0x274360));
+		painelRodadas.setBounds(0, 98, 736, 64);
+		painelConteudo.add(painelRodadas);
+		painelRodadas.setLayout(null);
 		
 		JLabel lblSpinner = new JLabel("RODADA");
 		lblSpinner.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblSpinner.setBounds(304, 10, 100, 40);
-		panel.add(lblSpinner);
+		painelRodadas.add(lblSpinner);
 		
 		JSpinner spnRodada = new JSpinner();
 		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -84,7 +84,13 @@ public class PartidasDeletar extends JFrame {
 		spnRodada.addChangeListener((event)->{
 			ControlePartidas.partidasDeletar(painelPartidasScroll, painelPartidas, spnRodada, this);
 		});
-		panel.add(spnRodada);
+		painelRodadas.add(spnRodada);
+		
+		//Realocando o valor do spinner para Rodada 01
+		spnRodada.setValue(1.0);
+		//Definindo o Novo minimo para a Primeira Rodada
+		spnRodada.setModel(new SpinnerNumberModel(1.0, 1.0, 38.0, 1.0));
+		
 		
 		painelPartidasScroll = new JScrollPane();
 		painelPartidas = new JPanel();
