@@ -85,7 +85,7 @@ public class JogadoresDeletar extends JFrame {
 		
 		
 		for(int i = 0; i < 20; i++) {
-			listaDeTimesModelo.addElement(Listas.times.get(i).getNome());
+			listaDeTimesModelo.addElement(brasileirao.getTimes().get(i).getNome());
 		}
 		
 		
@@ -97,11 +97,11 @@ public class JogadoresDeletar extends JFrame {
 			botoesDeletar.clear();
 			int contador = 0;
 			for(int i = 0; i < 20; i++) {
-				if(listaDeTimes.getSelectedValue() == Listas.times.get(i).getNome()) {
-					for(int j = 0; j < Listas.times.get(i).getJogadoresSize(); j++) {
+				if(listaDeTimes.getSelectedValue() == brasileirao.getTimes().get(i).getNome()) {
+					for(int j = 0; j < brasileirao.getTimes().get(i).getJogadoresSize(); j++) {
 						int index = i;
 						int index2 = j;
-						botoesDeletar.add(new JButton(Listas.times.get(i).getJogadores(j).getNome()));
+						botoesDeletar.add(new JButton(brasileirao.getTimes().get(i).getJogadores(j).getNome()));
 						botoesDeletar.get(contador).setBounds(new Rectangle(0, contador*70, 400, 60));
 						botoesDeletar.get(contador).setFont(new Font("Arial Black", Font.PLAIN, 11));
 						painelPartidas.add(botoesDeletar.get(contador));
@@ -109,7 +109,7 @@ public class JogadoresDeletar extends JFrame {
 							@Override
 							public void actionPerformed(ActionEvent e) {				
 								JFrame jFrame = new JFrame();
-								int result = JOptionPane.showConfirmDialog(jFrame, "Voce realmente quer deletar " + Listas.times.get(index).getJogadores(index2).getNome());
+								int result = JOptionPane.showConfirmDialog(jFrame, "Voce realmente quer deletar " + brasileirao.getTimes().get(index).getJogadores(index2).getNome());
 								
 								if (result == 0) {
 									brasileirao.getTimes().get(index).deletarJogador(brasileirao.getTimes().get(index).getJogadores(index2));

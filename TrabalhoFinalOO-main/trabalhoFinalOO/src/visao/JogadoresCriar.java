@@ -96,7 +96,7 @@ public class JogadoresCriar extends JFrame {
 		//Criando a lista de times
 		DefaultListModel listaTimes = new DefaultListModel();
 		for(int i = 0; i < 20; i++) {
-			listaTimes.addElement(Listas.times.get(i).getNome());
+			listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
 		}
 		
 		JList listagemTime = new JList(listaTimes);

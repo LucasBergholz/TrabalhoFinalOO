@@ -8,6 +8,7 @@ import bancoDeDados.Listas;
 import modelo.Time;
 
 public class ControleClassificacao {
+	private static Listas brasileirao = new Listas();
 	
 	public static void inicializarTabela(ArrayList<Time> times, JTable tabelaClassificacao) {
 		times.clear();
@@ -15,7 +16,7 @@ public class ControleClassificacao {
 		
 		//Tirando os dados do banco de dados
 		for(int i = 0; i < 20; i++) {
-			times.add(Listas.times.get(i));		
+			times.add(brasileirao.getTimes().get(i));		
 		}
 		
 		//Fazendo a distribuicao dos times por numero de pontos e posteriormente por saldo de gol

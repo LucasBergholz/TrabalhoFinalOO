@@ -10,6 +10,8 @@ import modelo.Time;
 
 public class ControleArtilharia {
 	
+	private static Listas brasileirao = new Listas();
+	
 	//Funcao que puxa os dados do banco de dados e imprime na JTable de artilharia
 	public static void inicializarTabela(ArrayList<Time> times, JTable tabelaArtilharia) {
 		ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
@@ -18,7 +20,7 @@ public class ControleArtilharia {
 		
 		//Tirando os dados do banco de dados
 		for(int i = 0; i < 20; i++) {
-			times.add(Listas.times.get(i));		
+			times.add(brasileirao.getTimes().get(i));		
 		}
 		
 		//Tirando os jogadores dos times e colocando na arraylist interna da funcao
