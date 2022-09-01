@@ -52,7 +52,7 @@ public class PartidasCriar extends JFrame {
 	private JButton botaoCriar = new JButton("Criar");
 	private JSpinner spnGolsCasa = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
 	private JSpinner spnGolsFora = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
-	private JSpinner spinnerRodada = new JSpinner(new SpinnerNumberModel(1, 1, 38.0, 1.0));
+	private JSpinner spinnerRodada = new JSpinner(new SpinnerNumberModel(1, 1, 38, 1));
 	
 	
 	//Listas
@@ -60,8 +60,10 @@ public class PartidasCriar extends JFrame {
 	private DefaultListModel listaTimes2 = new DefaultListModel();
 	private DefaultListModel listaJogadores1 = new DefaultListModel();
 	private DefaultListModel listaJogadores2 = new DefaultListModel();
+	private DefaultListModel<Estadios> listaDefaultEstadios;
 	private JList timesCasa;
-	private JList timesFora ;
+	private JList timesFora;
+	private JList<Estadios> jListEstadios;
 	//Lista de JList dos goleadores
 	private ArrayList<JList> listaDeListas1 = new ArrayList<JList>();
 	private ArrayList<JList> listaDeListas2 = new ArrayList<JList>();
@@ -190,18 +192,18 @@ public class PartidasCriar extends JFrame {
 		botaoProximo.setFont(new Font("Arial", Font.PLAIN, 20));
 		
 		//Adicionando itens para a escolha do estadio
-		DefaultListModel<Estadios> demoList = new DefaultListModel<Estadios>();
+		listaDefaultEstadios = new DefaultListModel<Estadios>();
 		for(int i = 0; i < 19; i++) {
-			demoList.addElement(Estadios.values()[i]);
+			listaDefaultEstadios.addElement(Estadios.values()[i]);
 			
 		}
 		
-		JList<Estadios> estadios = new JList<Estadios>(demoList);
-		estadios.setFont(new Font("Arial Black", Font.PLAIN, 11));
-		estadios.setBounds(266, 196, 197, 158);
+		jListEstadios = new JList<Estadios>(listaDefaultEstadios);
+		jListEstadios.setFont(new Font("Arial Black", Font.PLAIN, 11));
+		jListEstadios.setBounds(266, 196, 197, 158);
 		
 		//Lista de estadios com scroll
-		JScrollPane listaEstadios = new JScrollPane(estadios);
+		JScrollPane listaEstadios = new JScrollPane(jListEstadios);
 		listaEstadios.setLocation(490, 300);
 		listaEstadios.setSize(195, 152);
 		painelConteudo.add(listaEstadios);
@@ -261,7 +263,7 @@ public class PartidasCriar extends JFrame {
 		
 		//Botao para mudar a tela do placar para a tela dos goleadores da partida
 		botaoProximo.addActionListener((event) -> {
-			if((timesCasa.isSelectionEmpty() == false) && (timesFora.isSelectionEmpty() == false) && (estadios.isSelectionEmpty() == false)) {
+			if((timesCasa.isSelectionEmpty() == false) && (timesFora.isSelectionEmpty() == false) && (jListEstadios.isSelectionEmpty() == false)) {
 				listaTimesScroll1.setVisible(false);
 				listaTimesScroll2.setVisible(false);
 				textoTimeCasa.setVisible(false);
@@ -305,8 +307,8 @@ public class PartidasCriar extends JFrame {
 				painelScrollGoleadores.setVisible(true);
 				textoGoleadoresCasa.setVisible(true);	
 				String timeCasaString, timeForaString;
-				estadio = estadios.getSelectedValue();
-				valorRodada = (int) Math.round((double) spinnerRodada.getValue());
+				estadio = jListEstadios.getSelectedValue();
+				valorRodada = (int)spinnerRodada.getValue();
 				timeCasaString = (String) timesCasa.getSelectedValue();
 				timeForaString = (String) timesFora.getSelectedValue();
 				for(int j = 0; j < 20; j++) {
@@ -497,6 +499,14 @@ public class PartidasCriar extends JFrame {
 
 	public void setListaJogadores2(DefaultListModel listaJogadores2) {
 		this.listaJogadores2 = listaJogadores2;
+	}
+
+	public JList<Estadios> getjListEstadios() {
+		return jListEstadios;
+	}
+
+	public void setjListEstadios(JList<Estadios> jListEstadios) {
+		this.jListEstadios = jListEstadios;
 	}
 
 	public JList getTimesCasa() {

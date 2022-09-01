@@ -36,6 +36,9 @@ public class JogadoresDeletar extends JFrame {
 	private DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
 	private JList<String> listaDeTimes ;
 	private ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
+	private JFrame frameOpcao = new JFrame();
+	private Integer result;
+	private static JOptionPane painelOpcao;
 	
 	
 	//Metodos
@@ -83,11 +86,20 @@ public class JogadoresDeletar extends JFrame {
 		//Criando JList com times que aparecerão para o usuário
 		JScrollPane painelTimes = new JScrollPane();
 		
-		
 		for(int i = 0; i < 20; i++) {
 			listaDeTimesModelo.addElement(brasileirao.getTimes().get(i).getNome());
 		}
 		
+		painelPartidasScroll = new JScrollPane();
+		painelPartidas = new JPanel();
+		painelPartidas.setBackground(new Color(0, 0, 128));
+		painelPartidasScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		painelPartidasScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		painelPartidasScroll.setVisible(true);
+		painelPartidasScroll.setViewportView(painelPartidas);
+		painelPartidasScroll.setBounds(170,200,400, 300);
+		painelConteudo.add(painelPartidasScroll);
+		painelPartidas.setLayout(null);
 		
 		painelTimes.setBounds(267, 0, 197, 64);
 		listaDeTimes = new JList<String>(listaDeTimesModelo);
@@ -107,9 +119,10 @@ public class JogadoresDeletar extends JFrame {
 						painelPartidas.add(botoesDeletar.get(contador));
 						botoesDeletar.get(contador).addActionListener( new ActionListener() {
 							@Override
-							public void actionPerformed(ActionEvent e) {				
-								JFrame jFrame = new JFrame();
-								int result = JOptionPane.showConfirmDialog(jFrame, "Voce realmente quer deletar " + brasileirao.getTimes().get(index).getJogadores(index2).getNome());
+							public void actionPerformed(ActionEvent e) {
+								if(result == null) {
+									result = JOptionPane.showConfirmDialog(frameOpcao, "Voce realmente quer deletar " + brasileirao.getTimes().get(index).getJogadores(index2).getNome());
+								}
 								
 								if (result == 0) {
 									brasileirao.getTimes().get(index).deletarJogador(brasileirao.getTimes().get(index).getJogadores(index2));
@@ -134,16 +147,6 @@ public class JogadoresDeletar extends JFrame {
 		painelTimes.setViewportView(listaDeTimes);
 		panel.add(painelTimes);
 		
-		painelPartidasScroll = new JScrollPane();
-		painelPartidas = new JPanel();
-		painelPartidas.setBackground(new Color(0, 0, 128));
-		painelPartidasScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		painelPartidasScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		painelPartidasScroll.setVisible(true);
-		painelPartidasScroll.setViewportView(painelPartidas);
-		painelPartidasScroll.setBounds(170,200,400, 300);
-		painelConteudo.add(painelPartidasScroll);
-		painelPartidas.setLayout(null);
 	}
 	
 	
@@ -202,5 +205,21 @@ public class JogadoresDeletar extends JFrame {
 
 	public void setBotoesDeletar(ArrayList<JButton> botoesDeletar) {
 		this.botoesDeletar = botoesDeletar;
+	}
+
+	public JFrame getFrameOpcao() {
+		return frameOpcao;
+	}
+
+	public void setFrameOpcao(JFrame frameOpcao) {
+		this.frameOpcao = frameOpcao;
+	}
+
+	public int getResult() {
+		return result;
+	}
+
+	public void setResult(int result) {
+		this.result = result;
 	}
 }

@@ -31,6 +31,12 @@ public class PartidasDeletar extends JFrame {
 	private JScrollPane painelPartidasScroll;
 	private JSpinner spnRodada = new JSpinner(new SpinnerNumberModel(0, 0, 38, 1));
 	
+	//ArrayList com botoes, os quais cada um representara uma partida
+	private ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
+	
+	//Inteiro que sera usado para a confirmacao final de deletar a partida
+	private Integer result;
+	
 
 
 	public static void main(String[] args) {
@@ -79,15 +85,6 @@ public class PartidasDeletar extends JFrame {
 		lblSpinner.setBounds(304, 10, 100, 40);
 		painelRodadas.add(lblSpinner);
 		
-		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
-		spnRodada.setBounds(304, 10, 126, 40);
-		//Atualizar o que a tela mostra de acordo com a rodada do spinner
-		spnRodada.addChangeListener((event)->{
-			ControlePartidas.partidasDeletar(painelPartidasScroll, painelPartidas, spnRodada, this);
-		});
-		painelRodadas.add(spnRodada);
-		
-		
 		painelPartidasScroll = new JScrollPane();
 		painelPartidas = new JPanel();
 		painelPartidas.setBackground(new Color(0, 0, 128));
@@ -100,10 +97,14 @@ public class PartidasDeletar extends JFrame {
 		painelConteudo.add(painelPartidasScroll);
 		painelPartidas.setLayout(null);
 		
-		/*//Realocando o valor do spinner para Rodada 01
-		spnRodada.setValue(1.0);
-		//Definindo o Novo minimo para a Primeira Rodada
-		spnRodada.setModel(new SpinnerNumberModel(1.0, 1.0, 38.0, 1.0));*/
+		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
+		spnRodada.setBounds(304, 10, 126, 40);
+		//Atualizar o que a tela mostra de acordo com a rodada do spinner
+		spnRodada.addChangeListener((event)->{
+			ControlePartidas.partidasDeletar(result, botoesDeletar, painelPartidasScroll, painelPartidas, spnRodada, this);
+		});
+		painelRodadas.add(spnRodada);
+		
 
 	}
 	
@@ -146,6 +147,26 @@ public class PartidasDeletar extends JFrame {
 
 	public void setSpnRodada(JSpinner spnRodada) {
 		this.spnRodada = spnRodada;
+	}
+
+
+	public ArrayList<JButton> getBotoesDeletar() {
+		return botoesDeletar;
+	}
+
+
+	public void setBotoesDeletar(ArrayList<JButton> botoesDeletar) {
+		this.botoesDeletar = botoesDeletar;
+	}
+
+
+	public Integer getResult() {
+		return result;
+	}
+
+
+	public void setResult(Integer result) {
+		this.result = result;
 	}
 
 }

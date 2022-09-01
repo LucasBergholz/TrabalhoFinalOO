@@ -78,10 +78,9 @@ public class ControlePartidas {
 		}
 	}
 
-	public static void partidasDeletar(JScrollPane painelPartidasScroll, JPanel painelPartidas, JSpinner spnRodada, PartidasDeletar frame) {
+	public static void partidasDeletar(Integer result, ArrayList<JButton> botoesDeletar, JScrollPane painelPartidasScroll, JPanel painelPartidas, JSpinner spnRodada, PartidasDeletar frame) {
 		
 		painelPartidas.removeAll();
-		ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
 		botoesDeletar.clear();
 		int rodada = (Integer)spnRodada.getValue();
 		int contador = 0;
@@ -96,9 +95,13 @@ public class ControlePartidas {
 					@Override
 					public void actionPerformed(ActionEvent e) {				
 						JFrame jFrame = new JFrame();
-						int result = JOptionPane.showConfirmDialog(jFrame, "Voce realmente quer deletar " + brasileirao.getPartidas().get(posicaoLista));
+						int resultado = 0;
 						
-						if (result == 0) {
+						if(result == null) {
+							resultado = JOptionPane.showConfirmDialog(jFrame, "Voce realmente quer deletar " + brasileirao.getPartidas().get(posicaoLista));	
+						}
+						
+						if (resultado == 0) {
 							brasileirao.getPartidas().get(posicaoLista).deletarPartida();
 							brasileirao.getPartidas().remove(posicaoLista);
 							frame.dispose();
