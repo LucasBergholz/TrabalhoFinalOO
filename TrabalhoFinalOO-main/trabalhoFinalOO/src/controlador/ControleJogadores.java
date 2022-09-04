@@ -10,11 +10,21 @@ import javax.swing.JTextField;
 
 import bancoDeDados.Listas;
 import visao.JogadoresCriar;
+import visao.JogadoresEditar;
 
 public class ControleJogadores {
 	
 	private static Listas brasileirao = new Listas();
 	
+	
+	/**
+	 * Metodo que realiza a ação de Criar o Jogador com os dados inseridos e instancia-lo ao banco de Dados
+	 * @param listagemTime JList
+	 * @param txtNome JTextFiled
+	 * @param brasileirao Listas
+	 * @param frame JogadoresCriar
+	 * @param spnIdade Jspinner
+	 */
 	public static void criandoJogador(JList listagemTime, JTextField txtNome, Listas brasileirao, JogadoresCriar frame, JSpinner spnIdade) {
 		//Atribuindo o nome do time a uma variavel auxiliar
 		String nomeTime = (String) listagemTime.getSelectedValue();	
@@ -33,6 +43,11 @@ public class ControleJogadores {
 		}
 	}
 	
+	/**
+	 * Metodo que realiza a ação de resgatar os dados de Todos os jogadores do Banco de Dados e mostralos na Tela
+	 * @param listaDeTimes ArrayList de Strings
+	 * @param painelScroll JScrollPane
+	 */
 	public static void verJogadores(JList<String> listaDeTimes, JScrollPane painelScroll) {
 		for(int i = 0; i < 20; i++) {
 			if(listaDeTimes.getSelectedValue() == brasileirao.getTimes().get(i).getNome()) {
@@ -58,4 +73,31 @@ public class ControleJogadores {
 			
 		}
 	}
+	/**
+	 * Metodo que realiza a ação de Criar o Jogador com os dados inseridos e instancia-lo ao banco de Dados
+	 * @param listagemTime JList
+	 * @param txtNome JTextFiled
+	 * @param brasileirao Listas
+	 * @param frame JogadoresEditar
+	 * @param spnIdade Jspinner
+	 */
+	public static void atualizandoJogador(JList listagemTime, JTextField txtNome, Listas brasileirao, JogadoresEditar frame, JSpinner spnIdade) {
+		
+		//Atribuindo o nome do time a uma variavel auxiliar
+		String nomeTime = (String) listagemTime.getSelectedValue();	
+		for(int i =0; i<20; i++) {
+			if(brasileirao.getTimes().get(i).getNome().equals(nomeTime)) {
+				frame.setTimeJog(brasileirao.getTimes().get(i));
+				frame.getTimeJog().addJogador(txtNome.getText().toUpperCase(), frame.getPosicaoJogador());
+				
+				//Pegando a posição do Jogador recem Criado no vetor
+				int index = frame.getTimeJog().getJogadoresSize() - 1;
+				
+				//Colocando adicionando a Idade escolhida no Jogador 
+				frame.getTimeJog().getJogadores(index).setIdade((int) Math.round((double)spnIdade.getValue()));
+				
+			}
+		}
+	}
 }
+

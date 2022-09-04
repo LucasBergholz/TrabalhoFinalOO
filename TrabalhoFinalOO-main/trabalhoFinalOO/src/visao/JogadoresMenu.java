@@ -14,16 +14,30 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
+/**
+ * Frame Responsavel por mostrar as opções de ações que o usúrio pode tomar em relação aos Jogadores
+ * 
+ * @author Guilherme Rodrigues 
+ * @author Lucas Gobbi
+ *
+ */
 public class JogadoresMenu extends JFrame {
 
 	private JPanel painelConteudo;
-
+	
+	/**
+	 * Função do Menu de Jogadores que instancia o Frame e o torna visivel pro usuário
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		JogadoresMenu frame = new JogadoresMenu();
 		frame.setVisible(true);
 	}
-
+	
+	/**
+	 * Construtor do Frame Menu que instancia os componentes visiais do Menu de Jogadores
+	 */
 	public JogadoresMenu() {
 		//Painel e titulo instanciados
 		setTitle("Brasileirao 2022");
@@ -56,13 +70,13 @@ public class JogadoresMenu extends JFrame {
 		});
 		
 		//Leva pra pagina de deletar jogador
-		JToggleButton botaoDeletar = new JToggleButton("Deletar Jogador");
-		getContentPane().add(botaoDeletar);
-		botaoDeletar.setBounds(280, 245, 200, 33);
-		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
-		botaoDeletar.addActionListener((event) -> {
+		JToggleButton botaoEditar = new JToggleButton("Editar Jogador");
+		getContentPane().add(botaoEditar);
+		botaoEditar.setBounds(280, 210, 200, 33);
+		botaoEditar.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoEditar.addActionListener((event) -> {
 			this.dispose();
-			JogadoresDeletar.main(null);
+			JogadoresEditar.main(null);
 		});
 		
 		//Leva pra pagina de ver jogador
@@ -79,7 +93,12 @@ public class JogadoresMenu extends JFrame {
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
-		botaoVoltar.setBounds(280, 445, 200, 33);
+		botaoVoltar.setBounds(280, 421, 200, 33);
+		
+		JToggleButton botaoDeletar_1 = new JToggleButton("Deletar Jogador");
+		botaoDeletar_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoDeletar_1.setBounds(280, 276, 200, 33);
+		painelConteudo.add(botaoDeletar_1);
 		botaoVoltar.addActionListener((event) -> {
 			this.dispose();
 			Menu.main(null);

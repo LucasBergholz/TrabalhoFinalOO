@@ -48,12 +48,18 @@ public class JogadoresCriar extends JFrame {
 	private JList listagemPosicao ;
 	private JList listagemTime;
 
-
+	/**
+	 * Função da tela de criar Jogadores que instancia o Frame e o torna visivel pro usuário
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		JogadoresCriar frame = new JogadoresCriar();
 		frame.setVisible(true);
 	}
-
+	/**
+	 * Construtor da Tela de Criar Jogadores cuja a função é instanciar os componentes visiais do frame para o usuário
+	 */
 	public JogadoresCriar() {
 		//Adicionando titulo ao frame, tamanho e cor
 		setTitle("Brasileirao 2022");
@@ -150,9 +156,6 @@ public class JogadoresCriar extends JFrame {
 		srclPosicao.setLocation(136, 166);
 		
 		
-		
-		botaoVoltar.setBounds(10, 35, 85, 21);
-		painelConteudo.add(botaoVoltar);
 		botaoVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

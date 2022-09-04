@@ -25,7 +25,7 @@ public abstract class Pessoa {
 	public Pessoa() {
 		super();
 		this.setNumeroPartidas(0);
-		this.setIdade(0);
+		this.setIdade(18);
 	}
 	
 	/**
