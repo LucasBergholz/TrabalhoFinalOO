@@ -58,7 +58,7 @@ public class JogadoresEditar extends JFrame {
 	private JTextField txtNome;
 	private JSpinner spnIdade = new JSpinner();
 	private JButton botaoVoltar = new JButton("Voltar");
-	private JButton botaoCriar = new JButton("Atualizar");
+	private JButton botaoCriar;
 	private DefaultListModel listaPosicao = new DefaultListModel();
 	private JList listagemPosicao ;
 	private JList listagemTime;
@@ -128,6 +128,13 @@ public class JogadoresEditar extends JFrame {
 		
 		painelTimes.setBounds(267, 0, 197, 64);
 		listaDeTimes = new JList<String>(listaDeTimesModelo);
+		
+		botaoCriar = new JButton("Atualizar");
+		botaoCriar.setBounds(551, 520, 175, 33);
+		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoCriar.setVisible(false);
+		painelConteudo.add(botaoCriar);
+		
 		//Atualizar o que a tela mostra de acordo com a escolha do time
 		listaDeTimes.addListSelectionListener((event)->{
 			painelPartidas.removeAll();
@@ -149,9 +156,9 @@ public class JogadoresEditar extends JFrame {
 								painelPartidas.setVisible(false);
 								painelPartidasScroll.setVisible(false);
 								botaoVoltar.setVisible(false);
+								botaoCriar.setVisible(true);
 								panel.setVisible(false);
-								
-								editarJogador(brasileirao.getTimes().get(index).getJogadores(index2));
+								editarJogador(brasileirao.getTimes().get(index).getJogadores(index2), index, index2);
 								
 							}
 						});
@@ -174,7 +181,7 @@ public class JogadoresEditar extends JFrame {
 	 * 
 	 * @param jogadorEscolhido no painel inicial
 	 */
-	private void editarJogador(Jogador jogadorEscolhido) {
+	private void editarJogador(Jogador jogadorEscolhido, int index, int index2) {
 		JPanel painelCadastro = new JPanel();
 		painelCadastro.setBounds(49, 110, 635, 400);
 		painelCadastro.setLayout(null);
@@ -263,11 +270,6 @@ public class JogadoresEditar extends JFrame {
 		});
 		
 		//Botao de criar O Jogador
-		botaoCriar.setBounds(551, 520, 175, 33);
-		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
-		botaoCriar.setVisible(true);
-		painelConteudo.add(botaoCriar);
-		
 		botaoCriar.addActionListener((event) -> {
 			//Conferindo se os dados do Jogador foram adcionados
 			if(!listagemPosicao.isSelectionEmpty() && !listagemTime.isSelectionEmpty() && !txtNome.getText().isBlank()) {			
@@ -275,6 +277,7 @@ public class JogadoresEditar extends JFrame {
 				
 				//Funcao que cria o jogador
 				ControleJogadores.atualizandoJogador(listagemTime, txtNome, brasileirao, this, spnIdade);
+				brasileirao.getTimes().get(index).deletarJogador(brasileirao.getTimes().get(index).getJogadores(index2));
 				this.dispose();
 				JogadoresVer.main(null);
 			}

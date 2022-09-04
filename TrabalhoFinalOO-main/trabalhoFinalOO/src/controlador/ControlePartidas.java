@@ -23,6 +23,7 @@ import bancoDeDados.Listas;
 import modelo.Partida;
 import visao.PartidasCriar;
 import visao.PartidasDeletar;
+import visao.PartidasEditar;
 import visao.PartidasMenu;
 import visao.PartidasTabelaRodadasJTables;
 
@@ -169,4 +170,41 @@ public class ControlePartidas {
 		PartidasTabelaRodadasJTables.main(null);
 	}
 	
+	public static void atualizarPartida(PartidasEditar frame, ArrayList<JList> listaDeListas1, ArrayList<JList> listaDeListas2, Partida partidaEscolhida, int posicaoPartida){
+		//Removendo os dados Antigos da Partida
+		partidaEscolhida.deletarPartida();
+		brasileirao.getPartidas().remove(posicaoPartida);
+		
+		//Instanciando uma nova partida com os dados da Antiga
+		brasileirao.getPartidas().add(new Partida(frame.getTimeCasa(), frame.getTimeFora(), frame.estadio));
+		int index = brasileirao.getPartidas().size()-1;
+		for(int i = 0; i < frame.getGolsCasa(); i ++) {
+			for(int j = 0; j < frame.getTimeCasa().getJogadoresSize(); j++) {
+				if(frame.getTimeCasa().getJogadores(j) != null && listaDeListas1.get(i).getSelectedValue() == frame.getTimeCasa().getJogadores(j).getNome()) {
+					for(int k = 0; k < 20; k++) {
+						if(brasileirao.getTimes().get(k) == frame.getTimeCasa()) {
+							brasileirao.getTimes().get(k).getJogadores(j).fazerGol();
+							brasileirao.getPartidas().get(index).addGolCasa(frame.getTimeCasa().getJogadores(j));
+						}
+					}
+				}
+			}		
+		}
+		for(int i = 0; i < frame.getGolsFora(); i ++) {
+			for(int j = 0; j < frame.getTimeFora().getJogadoresSize(); j++) {
+				if(frame.getTimeFora().getJogadores(j) != null && listaDeListas2.get(i).getSelectedValue() == frame.getTimeFora().getJogadores(j).getNome()) {
+					for(int k = 0; k < 20; k++) {
+						if(brasileirao.getTimes().get(k) == frame.getTimeFora()) {
+							brasileirao.getTimes().get(k).getJogadores(j).fazerGol();
+							brasileirao.getPartidas().get(index).addGolFora(frame.getTimeFora().getJogadores(j));
+						}
+					}
+				}
+			}		
+		}
+		brasileirao.getPartidas().get( index).finalizarPartida2(frame.getGolsCasa(), frame.getGolsFora(), frame.getValorRodada());
+		
+		frame.dispose();
+		PartidasTabelaRodadasJTables.main(null);
+	}
 }

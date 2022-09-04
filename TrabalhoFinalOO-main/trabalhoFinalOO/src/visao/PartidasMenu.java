@@ -55,19 +55,19 @@ public class PartidasMenu extends JFrame {
 			PartidasCriar.main(null);
 		});
 		
-		JToggleButton botaoDeletar = new JToggleButton("Deletar Partida");
-		getContentPane().add(botaoDeletar);
-		botaoDeletar.setBounds(286, 245, 175, 33);
-		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
-		botaoDeletar.addActionListener((event) -> {
+		JToggleButton botaoEditar = new JToggleButton("Editar Partida");
+		getContentPane().add(botaoEditar);
+		botaoEditar.setBounds(286, 213, 175, 33);
+		botaoEditar.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoEditar.addActionListener((event) -> {
 			this.dispose();
-			PartidasDeletar.main(null);
+			PartidasEditar.main(null);
 		});
 		
 		JToggleButton botaoVer = new JToggleButton("Ver Partidas");
 		getContentPane().add(botaoVer);
 		botaoVer.setFont(new Font("Arial", Font.PLAIN, 20));
-		botaoVer.setBounds(286, 345, 175, 33);
+		botaoVer.setBounds(286, 341, 175, 33);
 		botaoVer.addActionListener((event) -> {
 			this.dispose();
 			PartidasTabelaRodadasJTables.main(null);
@@ -76,10 +76,15 @@ public class PartidasMenu extends JFrame {
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
-		botaoVoltar.setBounds(286, 445, 175, 33);
+		botaoVoltar.setBounds(286, 419, 175, 33);
+		
+		JToggleButton botaoDeletar = new JToggleButton("Deletar Partida");
+		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoDeletar.setBounds(286, 276, 175, 33);
+		painelConteudo.add(botaoDeletar);
 		botaoVoltar.addActionListener((event) -> {
 			this.dispose();
-			Menu.main(null);
+			JogadoresDeletar.main(null);
 		});
 		
 		

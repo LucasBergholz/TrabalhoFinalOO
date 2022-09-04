@@ -70,6 +70,15 @@ public class JogadoresMenu extends JFrame {
 		});
 		
 		//Leva pra pagina de deletar jogador
+		JToggleButton botaoDeletar = new JToggleButton("Deletar Jogador");
+		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
+		botaoDeletar.setBounds(280, 276, 200, 33);
+		painelConteudo.add(botaoDeletar);
+		botaoDeletar.addActionListener((event) -> {
+			this.dispose();
+			JogadoresDeletar.main(null);
+		});
+		//Leva pra pagina de Editar Jogador
 		JToggleButton botaoEditar = new JToggleButton("Editar Jogador");
 		getContentPane().add(botaoEditar);
 		botaoEditar.setBounds(280, 210, 200, 33);
@@ -94,14 +103,12 @@ public class JogadoresMenu extends JFrame {
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoVoltar.setBounds(280, 421, 200, 33);
-		
-		JToggleButton botaoDeletar_1 = new JToggleButton("Deletar Jogador");
-		botaoDeletar_1.setFont(new Font("Arial", Font.PLAIN, 20));
-		botaoDeletar_1.setBounds(280, 276, 200, 33);
-		painelConteudo.add(botaoDeletar_1);
 		botaoVoltar.addActionListener((event) -> {
 			this.dispose();
 			Menu.main(null);
 		});
+		
+		
+		
 	}
 }
