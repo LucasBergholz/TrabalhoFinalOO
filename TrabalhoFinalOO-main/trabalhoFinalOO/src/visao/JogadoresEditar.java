@@ -34,8 +34,10 @@ import modelo.Posicao;
 import modelo.Time;
 /**
  * Frame Responsavel pela Edição dos dados dos Jogadores
- * @author Colemar
+ * @author Guilherme Rodrigues Costa
+ * @author Lucas Gobbit
  *
+ *@see JogadoresMenu
  */
 public class JogadoresEditar extends JFrame {
 
