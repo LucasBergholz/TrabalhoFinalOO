@@ -226,13 +226,13 @@ public class PartidasEditar extends JFrame {
 				PartidasEditar.main(null);
 			}
 		});
-		
+	
 		spnGolsCasa.setBounds(248, 183, 47, 45);
-		spnGolsCasa.setValue((double) partidaEscolhida.getGolsCasa());
+		spnGolsCasa.setModel(new SpinnerNumberModel((double) partidaEscolhida.getGolsCasa(), 0, 100, 1.0));
 		painelConteudo.add(spnGolsCasa);
 		
 		spnGolsFora.setBounds(445, 183, 47, 45);
-		spnGolsFora.setValue((double) partidaEscolhida.getGolsFora());
+		spnGolsFora.setModel(new SpinnerNumberModel((double) partidaEscolhida.getGolsFora(), 0, 100, 1.0));
 		painelConteudo.add(spnGolsFora);
 		
 		
@@ -314,8 +314,8 @@ public class PartidasEditar extends JFrame {
 		botaoProximo.addActionListener((event) -> {
 			if( jListEstadios.isSelectionEmpty() == false) {
 				
-				golsCasa = (int) spnGolsCasa.getValue() ;
-				golsFora = (int) spnGolsFora.getValue() ;
+				golsCasa = Integer.parseInt(String.format("%.0f", spnGolsCasa.getValue()));
+				golsFora = Integer.parseInt(String.format("%.0f", spnGolsFora.getValue()));
 				labelCasa.setVisible(false);
 				labelFora.setVisible(false);
 				textoTimeCasa.setVisible(false);

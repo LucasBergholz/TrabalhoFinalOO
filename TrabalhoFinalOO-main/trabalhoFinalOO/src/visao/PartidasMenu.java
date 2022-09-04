@@ -77,16 +77,19 @@ public class PartidasMenu extends JFrame {
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoVoltar.setBounds(286, 419, 175, 33);
+		botaoVoltar.addActionListener((event) -> {
+			this.dispose();
+			Menu.main(null);
+		});
 		
 		JToggleButton botaoDeletar = new JToggleButton("Deletar Partida");
 		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoDeletar.setBounds(286, 276, 175, 33);
 		painelConteudo.add(botaoDeletar);
-		botaoVoltar.addActionListener((event) -> {
+		botaoDeletar.addActionListener((event) -> {
 			this.dispose();
-			JogadoresDeletar.main(null);
+			PartidasDeletar.main(null);
 		});
-		
 		
 	}
 
