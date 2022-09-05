@@ -55,7 +55,7 @@ public class Time {
 		this.derrotas = 0;
 		this.saldoGols = 0;
 		this.pontosTotais = 0;
-		this.setTecnico(new Tecnico(nome, this.getNome()));
+		this.setTecnico(new Tecnico(nomeTecnico, this.getNome()));
 	}
 	
 	/**
@@ -116,7 +116,7 @@ public class Time {
 		jogadores.add(jogador);
 		jogadores.add(jogador2);
 		jogadores.add(jogador3);
-		this.setTecnico(new Tecnico(nome, this.getNome()));
+		this.setTecnico(new Tecnico(nomeTecnico, this.getNome()));
 	}
 
 	//Metodos Concretos
@@ -134,6 +134,23 @@ public class Time {
 		int j = jogadores.size();
 		jogadores.add(new Jogador(nome, posicao));
 		jogadores.get(j).setTime(this.getNome());
+	}	
+	
+	/**
+	 * Metodo que instancia um jogador no Time com sua idade
+	 * 
+	 * @param nome do Jogador
+	 * @param posicao do Jogador
+	 * @param idade do Jogador
+	 * 
+	 * @see Posicao
+	 * @see Jogador
+	 */
+	public void addJogador(String nome, Posicao posicao, int idade) {
+		int j = jogadores.size();
+		jogadores.add(new Jogador(nome, posicao));
+		jogadores.get(j).setTime(this.getNome());
+		jogadores.get(j).setIdade(idade);
 	}	
 	
 	/**

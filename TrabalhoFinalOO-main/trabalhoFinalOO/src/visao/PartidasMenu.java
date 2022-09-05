@@ -15,16 +15,34 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import bancoDeDados.Listas;
+import modelo.Jogador;
+import modelo.Partida;
+import modelo.Time;
+
+/**
+ * Tela responsável por ser um menu das possiveis acoes com partidas
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Listas
+ * @see Partida
+ */
 public class PartidasMenu extends JFrame {
 
 	private JPanel painelConteudo;
 
+	/**
+	 * Método de inicializacao da tela de menu das partidas.
+	 */
 	public static void main(String[] args) {
 		PartidasMenu frame = new PartidasMenu();
 		frame.setVisible(true);
 	}
 
-	
+	/**
+	 * Construtor da tela de menu das partidas, responsavel por instanciar os componentes visuais e seus valores internos.
+	 * @see PartidasMenu
+	 */
 	public PartidasMenu() {
 		//Painel e titulo instanciados
 		setTitle("Brasileirao 2022");
@@ -55,6 +73,7 @@ public class PartidasMenu extends JFrame {
 			PartidasCriar.main(null);
 		});
 		
+		//Botao de editar partidas
 		JToggleButton botaoEditar = new JToggleButton("Editar Partida");
 		getContentPane().add(botaoEditar);
 		botaoEditar.setBounds(286, 213, 175, 33);
@@ -64,6 +83,7 @@ public class PartidasMenu extends JFrame {
 			PartidasEditar.main(null);
 		});
 		
+		//Botao de ver partidas
 		JToggleButton botaoVer = new JToggleButton("Ver Partidas");
 		getContentPane().add(botaoVer);
 		botaoVer.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -73,6 +93,7 @@ public class PartidasMenu extends JFrame {
 			PartidasTabelaRodadasJTables.main(null);
 		});
 		
+		//Botao de voltar para o menu
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -82,6 +103,7 @@ public class PartidasMenu extends JFrame {
 			Menu.main(null);
 		});
 		
+		//Botao de deletar uma partida
 		JToggleButton botaoDeletar = new JToggleButton("Deletar Partida");
 		botaoDeletar.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoDeletar.setBounds(286, 276, 175, 33);

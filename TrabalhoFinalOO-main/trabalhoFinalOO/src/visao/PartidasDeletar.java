@@ -24,7 +24,19 @@ import javax.swing.border.EmptyBorder;
 
 import bancoDeDados.Listas;
 import controlador.ControlePartidas;
+import modelo.Jogador;
+import modelo.Partida;
+import modelo.Time;
 
+/**
+ * Tela responsável por deletar uma partida do banco de dados
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Listas
+ * @see Partida
+ * @see Jogador
+ * @see Time
+ */
 public class PartidasDeletar extends JFrame {
 
 	private JPanel painelConteudo, painelPartidas;
@@ -38,14 +50,20 @@ public class PartidasDeletar extends JFrame {
 	private Integer result;
 	
 
-
+	/**
+	 * Método de inicializacao da tela de deletar partida.
+	 */
 	public static void main(String[] args) {
 		PartidasDeletar frame = new PartidasDeletar();
 		frame.setVisible(true);
 	}
 
-	
+	/**
+	 * Construtor da tela de deletar partida, responsavel por instanciar os componentes visuais e seus valores internos.
+	 * @see PartidasDeletar
+	 */
 	public PartidasDeletar() {
+		//Padronizando o frame
 		setTitle("Brasileirao 2022");
 		painelConteudo = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,6 +74,7 @@ public class PartidasDeletar extends JFrame {
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
+		//Botao para voltar pro menu de partidas
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -80,11 +99,13 @@ public class PartidasDeletar extends JFrame {
 		painelConteudo.add(painelRodadas);
 		painelRodadas.setLayout(null);
 		
+		//Label com texto auxiliar ao usuario
 		JLabel lblSpinner = new JLabel("RODADA");
 		lblSpinner.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblSpinner.setBounds(304, 10, 100, 40);
 		painelRodadas.add(lblSpinner);
 		
+		//Instanciando painel de partidas e seu painel "pai" que e scrollavel
 		painelPartidasScroll = new JScrollPane();
 		painelPartidas = new JPanel();
 		painelPartidas.setBackground(new Color(0, 0, 128));
@@ -97,6 +118,7 @@ public class PartidasDeletar extends JFrame {
 		painelConteudo.add(painelPartidasScroll);
 		painelPartidas.setLayout(null);
 		
+		//Estilizando spinner de rodada
 		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
 		spnRodada.setBounds(304, 10, 126, 40);
 		//Atualizar o que a tela mostra de acordo com a rodada do spinner

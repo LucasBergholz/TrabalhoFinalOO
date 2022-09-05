@@ -22,16 +22,31 @@ import bancoDeDados.Listas;
 import controlador.ControleArtilharia;
 import modelo.*;
 
+/**
+ * Tela responsável por elencar os jogadores de todos os times por numero de gols
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see ControleArtilharia
+ * @see Jogador
+ */
+
 public class Artilharia extends JFrame {
 
 	private ArrayList<Time> times = new ArrayList<Time>();
 	private JTable tabelaArtilharia;
-
+	
+	/**
+	 * Método de inicializacao da tela de artilharia.
+	 */
 	public static void main(String[] args) {
 		Artilharia frame = new Artilharia();
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Construtor da tela de artilharia, responsavel por instanciar os componentes como JTable e seus valores internos.
+	 * @see Artilharia
+	 */
 	public Artilharia() {
 		//Criando titulo do frame e definindo caracteristicas do painel de conteudo
 		JPanel painelConteudo = new JPanel();

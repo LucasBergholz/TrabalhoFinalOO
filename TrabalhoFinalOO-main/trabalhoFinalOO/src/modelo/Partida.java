@@ -115,34 +115,30 @@ public class Partida {
 		this.golsFora = golsFora;
 		
 		//Checando se os times ja jogaram na rodada escolhida
-		if((this.getTimeCasa().getPartidas((rodada-1)) == null) && (this.getTimeFora().getPartidas((rodada-1)) == null)) {
-			if(golsCasa > golsFora) {
-				//Vitoria do time mandante
-				this.getTimeCasa().addVitoria();
-				this.getTimeFora().addDerrota();
-				this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() + (golsCasa - golsFora));
-				this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() + (golsFora - golsCasa));
-				return true;
-			}else if(golsCasa < golsFora) {
-				//Vitoria do time visitante
-				this.getTimeFora().addVitoria();
-				this.getTimeCasa().addDerrota();
-				this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() + (golsCasa - golsFora));
-				this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() + (golsFora - golsCasa));
-				return true;
-			}else if(golsCasa == golsFora){
-				//Empate entre as equipes
-				this.getTimeCasa().addEmpate();
-				this.getTimeFora().addEmpate();
-				return true;
-			}else {
-				return false;
-			}
-			
+		if(golsCasa > golsFora) {
+			//Vitoria do time mandante
+			this.getTimeCasa().addVitoria();
+			this.getTimeFora().addDerrota();
+			this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() + (golsCasa - golsFora));
+			this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() + (golsFora - golsCasa));
+			return true;
+		}else if(golsCasa < golsFora) {
+			//Vitoria do time visitante
+			this.getTimeFora().addVitoria();
+			this.getTimeCasa().addDerrota();
+			this.timeCasa.setSaldoGols(this.timeCasa.getSaldoGols() + (golsCasa - golsFora));
+			this.timeFora.setSaldoGols(this.timeFora.getSaldoGols() + (golsFora - golsCasa));
+			return true;
+		}else if(golsCasa == golsFora){
+			//Empate entre as equipes
+			this.getTimeCasa().addEmpate();
+			this.getTimeFora().addEmpate();
+			return true;
 		}else {
 			return false;
 		}
 	}
+			
 	
 	//Adicionar quem fez o gol de cada time
 	/**

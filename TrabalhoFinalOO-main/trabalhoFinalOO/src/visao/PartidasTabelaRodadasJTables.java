@@ -16,6 +16,9 @@ import javax.swing.event.ChangeListener;
 
 import bancoDeDados.Listas;
 import controlador.ControlePartidas;
+import modelo.Jogador;
+import modelo.Partida;
+import modelo.Time;
 
 import javax.swing.JSpinner;
 import javax.swing.ScrollPaneConstants;
@@ -47,18 +50,34 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Cursor;
 import java.awt.Dimension;
 
+/**
+ * Tela responsável por verr uma partida do banco de dados
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Listas
+ * @see Partida
+ * @see Jogador
+ * @see Time
+ */
 public class PartidasTabelaRodadasJTables extends JFrame {
 
 	private JPanel painelConteudo;
 	private Listas brasileirao = new Listas();
 
-	
+	/**
+	 * Método de inicializacao da tela de ver partida.
+	 */
 	public static void main(String[] args) {
 		PartidasTabelaRodadasJTables frame = new PartidasTabelaRodadasJTables();
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Construtor da tela de ver partida, responsavel por instanciar os componentes visuais e seus valores internos.
+	 * @see PartidasTabelaRodadasJTables
+	 */
 	public PartidasTabelaRodadasJTables() {
+		//Padronizando o frame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setTitle("BRASILEIRAO 2022");
@@ -103,6 +122,7 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		spnRodada.setModel(new SpinnerNumberModel(0.0, 0.0, 38.0, 1.0));
 		painelRodadas.add(spnRodada);
 		
+		//Texto auxiliar
 		JLabel titulo = new JLabel("PARTIDAS");
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.setForeground(Color.WHITE);
@@ -114,9 +134,10 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		int numPartidas = brasileirao.getPartidas().size();
 		int rod =(int) Math.round((double) spnRodada.getValue());
 		
-		
+		//Instanciando listas de JPanels que serao adicionados paineis de acordo com o numero de partidas da rodada correspondente
 		List<JPanel> listaPainelPartidas = new ArrayList<>();
 		List<JLabel> labels = new ArrayList<>();
+		//Painel scroll das partidas
 		JScrollPane caixaVertical = new JScrollPane();
 		caixaVertical.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		JPanel caixaDentroCaixa = new JPanel();

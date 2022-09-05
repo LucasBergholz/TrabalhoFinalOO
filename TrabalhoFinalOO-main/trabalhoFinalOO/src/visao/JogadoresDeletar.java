@@ -26,13 +26,21 @@ import javax.swing.border.EmptyBorder;
 
 import bancoDeDados.Listas;
 
+/**
+ * Tela responsável por deletar os jogadores do banco de dados
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Listas
+ * @see Jogador
+ * @see Time
+ */
 public class JogadoresDeletar extends JFrame {
 
 	private Listas brasileirao = new Listas();
 
 	//Componentes Visuais
-	private JPanel painelConteudo, painelPartidas;
-	private JScrollPane painelPartidasScroll;
+	private JPanel painelConteudo, painelJogadores;
+	private JScrollPane painelJogadoresScroll;
 	private DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
 	private JList<String> listaDeTimes ;
 	private ArrayList<JButton> botoesDeletar = new ArrayList<JButton>();
@@ -40,13 +48,18 @@ public class JogadoresDeletar extends JFrame {
 	private Integer result;
 	private static JOptionPane painelOpcao;
 	
-	
-	//Metodos
+	/**
+	 * Método de inicializacao da tela de deletar jogador.
+	 */
 	public static void main(String[] args) {
 		JogadoresDeletar frame = new JogadoresDeletar();
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Construtor da tela de deletar jogador, responsavel por instanciar os componentes visuais e seus valores internos.
+	 * @see JogadoresDeletar
+	 */
 	public JogadoresDeletar() {
 		//Padronizando o frame
 		setTitle("Brasileirao 2022");
@@ -59,6 +72,7 @@ public class JogadoresDeletar extends JFrame {
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
+		//Botao para voltar para o menu de jogadores
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -85,41 +99,51 @@ public class JogadoresDeletar extends JFrame {
 
 		//Criando JList com times que aparecerão para o usuário
 		JScrollPane painelTimes = new JScrollPane();
+		painelTimes.setBounds(267, 0, 197, 64);
 		
+		//Loop que retira o nome dos times do banco de dados
 		for(int i = 0; i < 20; i++) {
 			listaDeTimesModelo.addElement(brasileirao.getTimes().get(i).getNome());
 		}
-		
-		painelPartidasScroll = new JScrollPane();
-		painelPartidas = new JPanel();
-		painelPartidas.setBackground(new Color(0, 0, 128));
-		painelPartidasScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		painelPartidasScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		painelPartidasScroll.setVisible(true);
-		painelPartidasScroll.setViewportView(painelPartidas);
-		painelPartidasScroll.setBounds(170,200,400, 300);
-		painelConteudo.add(painelPartidasScroll);
-		painelPartidas.setLayout(null);
-		
-		painelTimes.setBounds(267, 0, 197, 64);
+		//JList com os times do banco de dados
 		listaDeTimes = new JList<String>(listaDeTimesModelo);
+		
+		//Painel de jogadores onde o usuario escolhera qual deletar
+		painelJogadoresScroll = new JScrollPane();
+		painelJogadores = new JPanel();
+		painelJogadores.setBackground(new Color(0, 0, 128));
+		painelJogadoresScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		painelJogadoresScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		painelJogadoresScroll.setVisible(true);
+		painelJogadoresScroll.setViewportView(painelJogadores);
+		painelJogadoresScroll.setBounds(170,200,400, 300);
+		painelConteudo.add(painelJogadoresScroll);
+		painelJogadores.setLayout(null);
+		
 		//Atualizar o que a tela mostra de acordo com a escolha do time
 		listaDeTimes.addListSelectionListener((event)->{
-			painelPartidas.removeAll();
+			//Limpar o painel de jogadores e a arraylist de botoes
+			painelJogadores.removeAll();
 			botoesDeletar.clear();
 			int contador = 0;
+			//Loop realizado ate o time "i" do banco de dados ser igual ao time selecionado na JList
 			for(int i = 0; i < 20; i++) {
 				if(listaDeTimes.getSelectedValue() == brasileirao.getTimes().get(i).getNome()) {
+					//Loop que adicionara um botao por jogador existente no time
 					for(int j = 0; j < brasileirao.getTimes().get(i).getJogadoresSize(); j++) {
 						int index = i;
 						int index2 = j;
+						//Adicionando botao na arraylist de botoes
+						//Cada botao representa um jogador
 						botoesDeletar.add(new JButton(brasileirao.getTimes().get(i).getJogadores(j).getNome()));
 						botoesDeletar.get(contador).setBounds(new Rectangle(0, contador*70, 400, 60));
 						botoesDeletar.get(contador).setFont(new Font("Arial Black", Font.PLAIN, 11));
-						painelPartidas.add(botoesDeletar.get(contador));
+						painelJogadores.add(botoesDeletar.get(contador));
+						//Funcao que executa a delecao do jogador
 						botoesDeletar.get(contador).addActionListener( new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
+								//Criacao de um painel popup para confirmacao final do usuario sobre a delecao do jogador
 								if(result == null) {
 									result = JOptionPane.showConfirmDialog(frameOpcao, "Voce realmente quer deletar " + brasileirao.getTimes().get(index).getJogadores(index2).getNome());
 								}
@@ -137,12 +161,13 @@ public class JogadoresDeletar extends JFrame {
 						});
 						contador++;
 					}
-					painelPartidas.setPreferredSize(new Dimension(600, contador*70));
+					painelJogadores.setPreferredSize(new Dimension(600, contador*70));
 				}
 			}
 			
-			painelPartidasScroll.setVisible(false);
-			painelPartidasScroll.setVisible(true);
+			//Mudando a visibilidade do painel de scroll dos jogadores para atualizar os dados
+			painelJogadoresScroll.setVisible(false);
+			painelJogadoresScroll.setVisible(true);
 		});
 		painelTimes.setViewportView(listaDeTimes);
 		panel.add(painelTimes);
@@ -168,19 +193,19 @@ public class JogadoresDeletar extends JFrame {
 	}
 
 	public JPanel getPainelPartidas() {
-		return painelPartidas;
+		return painelJogadores;
 	}
 
 	public void setPainelPartidas(JPanel painelPartidas) {
-		this.painelPartidas = painelPartidas;
+		this.painelJogadores = painelPartidas;
 	}
 
 	public JScrollPane getPainelPartidasScroll() {
-		return painelPartidasScroll;
+		return painelJogadoresScroll;
 	}
 
 	public void setPainelPartidasScroll(JScrollPane painelPartidasScroll) {
-		this.painelPartidasScroll = painelPartidasScroll;
+		this.painelJogadoresScroll = painelPartidasScroll;
 	}
 
 	public DefaultListModel<String> getListaDeTimesModelo() {

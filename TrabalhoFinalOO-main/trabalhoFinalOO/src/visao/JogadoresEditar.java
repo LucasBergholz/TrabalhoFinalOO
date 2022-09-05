@@ -44,10 +44,11 @@ public class JogadoresEditar extends JFrame {
 	private Listas brasileirao = new Listas();
 	private Time timeJog;
 	private Posicao posicaoJogador;
+	private Jogador jogador;
 	
 	//Componentes Visuais
-	private JPanel painelConteudo, painelPartidas, painelEdicao;
-	private JScrollPane painelPartidasScroll;
+	private JPanel painelConteudo, painelJogadores, painelEdicao;
+	private JScrollPane painelJogadoresScroll;
 	private DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
 	private JList<String> listaDeTimes ;
 	private ArrayList<JButton> botoesEditar = new ArrayList<JButton>();
@@ -63,7 +64,9 @@ public class JogadoresEditar extends JFrame {
 	private JList listagemPosicao ;
 	private JList listagemTime;
 
-	//Metodos
+	/**
+	 * Método de inicializacao da tela de editar jogadores.
+	 */
 	public static void main(String[] args) {
 		JogadoresEditar frame = new JogadoresEditar();
 		frame.setVisible(true);
@@ -71,6 +74,7 @@ public class JogadoresEditar extends JFrame {
 	
 	/**
 	 * Construtor da Tela de Editar Jogadores cuja a função é inicialmente instanciar os componentes visiais do Painel de Escolha de Jogadores para a edição
+	 * @see JogadoresEditar
 	 */
 	public JogadoresEditar() {
 		//Padronizando o frame
@@ -84,6 +88,7 @@ public class JogadoresEditar extends JFrame {
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
+		//Botao de voltar para o menu de jogadores
 		botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -111,24 +116,27 @@ public class JogadoresEditar extends JFrame {
 		//Criando JList com times que aparecerão para o usuário
 		JScrollPane painelTimes = new JScrollPane();
 		
+		//Loop que retira os dados do banco de dados e adiciona os times em uma lista
 		for(int i = 0; i < 20; i++) {
 			listaDeTimesModelo.addElement(brasileirao.getTimes().get(i).getNome());
 		}
-		
-		painelPartidasScroll = new JScrollPane();
-		painelPartidas = new JPanel();
-		painelPartidas.setBackground(new Color(0, 0, 128));
-		painelPartidasScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		painelPartidasScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		painelPartidasScroll.setVisible(true);
-		painelPartidasScroll.setViewportView(painelPartidas);
-		painelPartidasScroll.setBounds(170,200,400, 300);
-		painelConteudo.add(painelPartidasScroll);
-		painelPartidas.setLayout(null);
-		
-		painelTimes.setBounds(267, 0, 197, 64);
+		//Instanciando JList usando a lista de times
 		listaDeTimes = new JList<String>(listaDeTimesModelo);
+		painelTimes.setBounds(267, 0, 197, 64);
 		
+		//Painel de jogadores onde o usuario escolhera qual editar
+		painelJogadoresScroll = new JScrollPane();
+		painelJogadores = new JPanel();
+		painelJogadores.setBackground(new Color(0, 0, 128));
+		painelJogadoresScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		painelJogadoresScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		painelJogadoresScroll.setVisible(true);
+		painelJogadoresScroll.setViewportView(painelJogadores);
+		painelJogadoresScroll.setBounds(170,200,400, 300);
+		painelConteudo.add(painelJogadoresScroll);
+		painelJogadores.setLayout(null);
+		
+		//Instanciando botao de criar o jogador
 		botaoCriar = new JButton("Atualizar");
 		botaoCriar.setBounds(551, 520, 175, 33);
 		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -137,39 +145,48 @@ public class JogadoresEditar extends JFrame {
 		
 		//Atualizar o que a tela mostra de acordo com a escolha do time
 		listaDeTimes.addListSelectionListener((event)->{
-			painelPartidas.removeAll();
+			//Limpando painel de jogadores e a arraylist de botoes
+			painelJogadores.removeAll();
 			botoesEditar.clear();
 			int contador = 0;
+			//Loop que ira parar quando o time "i" for igual ao time selecionado pelo usuario
 			for(int i = 0; i < 20; i++) {
 				if(listaDeTimes.getSelectedValue() == brasileirao.getTimes().get(i).getNome()) {
+					//Loop que adicionara um botao por jogador existente no time
 					for(int j = 0; j < brasileirao.getTimes().get(i).getJogadoresSize(); j++) {
 						int index = i;
 						int index2 = j;
+						//Adicionando botao na arraylist de botoes
+						//Cada botao representa um jogador
 						botoesEditar.add(new JButton(brasileirao.getTimes().get(i).getJogadores(j).getNome()));
 						botoesEditar.get(contador).setBounds(new Rectangle(0, contador*70, 400, 60));
 						botoesEditar.get(contador).setFont(new Font("Arial Black", Font.PLAIN, 11));
-						painelPartidas.add(botoesEditar.get(contador));
+						painelJogadores.add(botoesEditar.get(contador));
+						//Funcao que executa a edicao do jogador
 						botoesEditar.get(contador).addActionListener( new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								//Colocando o Painel como invisivel
-								painelPartidas.setVisible(false);
-								painelPartidasScroll.setVisible(false);
+								painelJogadores.setVisible(false);
+								painelJogadoresScroll.setVisible(false);
 								botaoVoltar.setVisible(false);
 								botaoCriar.setVisible(true);
 								panel.setVisible(false);
+								//Salvando o jogador escolhido
+								setJogador(brasileirao.getTimes().get(index).getJogadores(index2));
 								editarJogador(brasileirao.getTimes().get(index).getJogadores(index2), index, index2);
 								
 							}
 						});
 						contador++;
 					}
-					painelPartidas.setPreferredSize(new Dimension(600, contador*70));
+					painelJogadores.setPreferredSize(new Dimension(600, contador*70));
 				}
 			}
 			
-			painelPartidasScroll.setVisible(false);
-			painelPartidasScroll.setVisible(true);
+			//Mudando visibilidade do painel de jogadores para atualizar os dados da pagina
+			painelJogadoresScroll.setVisible(false);
+			painelJogadoresScroll.setVisible(true);
 		});
 		painelTimes.setViewportView(listaDeTimes);
 		panel.add(painelTimes);
@@ -182,6 +199,7 @@ public class JogadoresEditar extends JFrame {
 	 * @param jogadorEscolhido no painel inicial
 	 */
 	private void editarJogador(Jogador jogadorEscolhido, int index, int index2) {
+		//Painel com as opcoes de dados do jogador
 		JPanel painelCadastro = new JPanel();
 		painelCadastro.setBounds(49, 110, 635, 400);
 		painelCadastro.setLayout(null);
@@ -206,16 +224,19 @@ public class JogadoresEditar extends JFrame {
 			listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
 		}
 		
+		//Instanciando a JList com a lista de times
 		listagemTime = new JList(listaTimes);
 		listagemTime.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		listagemTime.setBounds(136, 256, 197, 112);
 		painelCadastro.add(listagemTime);
 		
+		//Painel scroll com a JList de times
 		JScrollPane listaTimesScroll = new JScrollPane(listagemTime);
 		painelCadastro.add(listaTimesScroll);
 		listaTimesScroll.setSize(197, 112);
 		listaTimesScroll.setLocation(136, 256);
 		
+		//Texto auxiliar do usuario indicando a funcao de cada input
 		JLabel lblTime = new JLabel("Time");
 		lblTime.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblTime.setBounds(25, 260, 101, 24);
@@ -226,15 +247,16 @@ public class JogadoresEditar extends JFrame {
 		lblIdade.setBounds(25, 106, 101, 24);
 		painelCadastro.add(lblIdade);
 		
-	
-		spnIdade.setBounds(136, 106, 49, 26);
-		spnIdade.setModel(new SpinnerNumberModel((double)jogadorEscolhido.getIdade(), 18.0, 100.0, 1.0));
-		painelCadastro.add(spnIdade);
-		
 		JLabel lblPosicao = new JLabel("Posição");
 		lblPosicao.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblPosicao.setBounds(25, 166, 101, 24);
 		painelCadastro.add(lblPosicao);
+
+		//Indicando tamanho e dados do spinner de rodada
+		spnIdade.setBounds(136, 106, 49, 26);
+		spnIdade.setModel(new SpinnerNumberModel((double)jogadorEscolhido.getIdade(), 18.0, 100.0, 1.0));
+		painelCadastro.add(spnIdade);
+		
 		
 		//Instanciando a Lista de posicões
 		listaPosicao.addElement(Posicao.ATACANTE);
@@ -245,18 +267,19 @@ public class JogadoresEditar extends JFrame {
 		listaPosicao.addElement(Posicao.VOLANTE);
 		listaPosicao.addElement(Posicao.ZAGUEIRO);
 		
-
+		//Criando JList com a lista de posicoes
 		listagemPosicao = new JList(listaPosicao);
 		listagemPosicao.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		listagemPosicao.setBounds(136, 166, 358, 80);
 		painelCadastro.add(listagemPosicao);
 		
+		//Painel scroll que contem a JList de posioes
 		JScrollPane srclPosicao = new JScrollPane(listagemPosicao);
 		painelCadastro.add(srclPosicao);
 		srclPosicao.setSize(197, 80);
 		srclPosicao.setLocation(136, 166);
 		
-		
+		//Segundo botao voltar, mas agora do painel de edicao dos jogadores
 		JButton botaoVoltar2 = new JButton("Voltar");
 		botaoVoltar2.setFont(new Font("Arial", Font.PLAIN, 16));
 		botaoVoltar2.setBounds(24, 35, 85, 28);
@@ -269,14 +292,15 @@ public class JogadoresEditar extends JFrame {
 			}
 		});
 		
-		//Botao de criar O Jogador
+		//Botao de criar o Jogador
 		botaoCriar.addActionListener((event) -> {
 			//Conferindo se os dados do Jogador foram adcionados
 			if(!listagemPosicao.isSelectionEmpty() && !listagemTime.isSelectionEmpty() && !txtNome.getText().isBlank()) {			
 				setPosicaoJogador( (Posicao) listagemPosicao.getSelectedValue());
 				
 				//Funcao que cria o jogador
-				ControleJogadores.atualizandoJogador(listagemTime, txtNome, brasileirao, this, spnIdade);
+				int gols = getJogador().getTotalGols();
+				ControleJogadores.atualizandoJogador(listagemTime, txtNome, brasileirao, this, spnIdade, gols);
 				brasileirao.getTimes().get(index).deletarJogador(brasileirao.getTimes().get(index).getJogadores(index2));
 				this.dispose();
 				JogadoresVer.main(null);
@@ -285,6 +309,7 @@ public class JogadoresEditar extends JFrame {
 	}
 	
 	
+	//Getters e Setters
 	public Time getTimeJog() {
 		return timeJog;
 	}
@@ -395,19 +420,19 @@ public class JogadoresEditar extends JFrame {
 	}
 
 	public JPanel getPainelPartidas() {
-		return painelPartidas;
+		return painelJogadores;
 	}
 
 	public void setPainelPartidas(JPanel painelPartidas) {
-		this.painelPartidas = painelPartidas;
+		this.painelJogadores = painelPartidas;
 	}
 
 	public JScrollPane getPainelPartidasScroll() {
-		return painelPartidasScroll;
+		return painelJogadoresScroll;
 	}
 
 	public void setPainelPartidasScroll(JScrollPane painelPartidasScroll) {
-		this.painelPartidasScroll = painelPartidasScroll;
+		this.painelJogadoresScroll = painelPartidasScroll;
 	}
 
 	public DefaultListModel<String> getListaDeTimesModelo() {
@@ -456,5 +481,13 @@ public class JogadoresEditar extends JFrame {
 
 	public void setTitulo(JLabel titulo) {
 		this.titulo = titulo;
+	}
+
+	public Jogador getJogador() {
+		return jogador;
+	}
+
+	public void setJogador(Jogador jogador) {
+		this.jogador = jogador;
 	}
 }

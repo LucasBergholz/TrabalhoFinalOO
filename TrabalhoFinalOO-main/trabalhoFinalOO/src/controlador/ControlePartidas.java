@@ -20,30 +20,55 @@ import javax.swing.JSpinner;
 import javax.swing.border.Border;
 
 import bancoDeDados.Listas;
+import modelo.Estadios;
+import modelo.Jogador;
 import modelo.Partida;
+import modelo.Tecnico;
+import modelo.Time;
 import visao.PartidasCriar;
 import visao.PartidasDeletar;
 import visao.PartidasEditar;
 import visao.PartidasMenu;
 import visao.PartidasTabelaRodadasJTables;
 
+/**
+ * Classe responsavel por reunir metodos realizados nas telas das partidas.
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Time
+ * @see Jogador
+ * @see Partida
+ * @see Tecnico
+ * @see Estadios
+ */
 public class ControlePartidas {
 	static Listas brasileirao = new Listas();
 	
+	/**
+	 * Metodo que realiza a ação de ver uma partida do banco de Dados
+	 * @param Spinner spnRodada
+	 * @param JScrollPane caixaVertical
+	 * @param JPanel caixaDentroCaixa
+	 * @param int numPartidas
+	 * @param Listas brasileirao
+	 */
 	public static void partidasVer(JSpinner spnRodada, JScrollPane caixaVertical, JPanel caixaDentroCaixa, int numPartidas, Listas brasileirao) {
 		caixaDentroCaixa.removeAll();
 		int rodada =(int) Math.round((double) spnRodada.getValue());
 		int posicaoPainel = 0;
 		for (int i = 0; i < numPartidas; i++) {
+			//Se a partida "i" tiver valor da rodada igual ao inserido pelo usuario, cria-se um painel com os dados dela
 			if(brasileirao.getPartidas().get(i).getRodada() == rodada) {
 				Border blackline = BorderFactory.createLineBorder(Color.black, 3, true);
 				
+				//Painel da partida e sua estilizacao
 				JPanel painelPartidas = new JPanel();
 				painelPartidas.setBounds(0, posicaoPainel*110, 570, 100);
 				painelPartidas.setBackground(new Color(255,255,255));
 				painelPartidas.setBorder(blackline);
 				painelPartidas.setLayout(null);
 				
+				//Textos com os dados da partida
 				JLabel lblTimeCasa = new JLabel(brasileirao.getPartidas().get(i).getTimeCasa().getNome());
 				lblTimeCasa.setBounds(15, 40, 103, 13);
 				painelPartidas.add(lblTimeCasa);
@@ -74,18 +99,29 @@ public class ControlePartidas {
 				caixaVertical.setViewportView(caixaDentroCaixa);
 				posicaoPainel++;
 			}	
+			//Trocando visibilidade para atualizar os dados do painel principal
 			caixaVertical.setVisible(false);
 			caixaVertical.setVisible(true);
 		}
 	}
 
+	/**
+	 * Metodo que realiza a ação de ver uma partida do banco de Dados
+	 * @param Integer result
+	 * @param ArrayList<JButton> botoesDeletar
+	 * @param JScrollPane painelPartidasScroll
+	 * @param JPanel painelPartidas
+	 * @param JSpinner spnRodada
+	 * @param PartidasDeletar frame
+	 */
 	public static void partidasDeletar(Integer result, ArrayList<JButton> botoesDeletar, JScrollPane painelPartidasScroll, JPanel painelPartidas, JSpinner spnRodada, PartidasDeletar frame) {
-		
+		//Limpando arraylist de botoes e painel de partidas
 		painelPartidas.removeAll();
 		botoesDeletar.clear();
 		int rodada = (Integer)spnRodada.getValue();
 		int contador = 0;
 		for(int i = 0; i < brasileirao.getPartidas().size(); i++) {
+			//Se a partida "i" tiver valor da rodada igual ao inserido pelo usuario, cria-se um botao com os dados dela
 			if(brasileirao.getPartidas().get(i).getRodada() == rodada) {
 				int posicaoLista = i;
 				botoesDeletar.add(new JButton(brasileirao.getPartidas().get(i).toString()));
@@ -94,7 +130,8 @@ public class ControlePartidas {
 				painelPartidas.add(botoesDeletar.get(contador));
 				botoesDeletar.get(contador).addActionListener( new ActionListener() {
 					@Override
-					public void actionPerformed(ActionEvent e) {				
+					public void actionPerformed(ActionEvent e) {
+						//Janela popup para confirmacao final do usuario na delecao da partida
 						JFrame jFrame = new JFrame();
 						int resultado = 0;
 						
@@ -119,14 +156,22 @@ public class ControlePartidas {
 			
 		}
 		
+		//Trocando visibilidade do painel para atualizar as informacoes dele
 		painelPartidasScroll.setVisible(false);
 		painelPartidasScroll.setVisible(true);
 	}
 	
+	/**
+	 * Metodo que realiza a ação de adicionar gol a um jogador
+	 * @param JList listaTime
+	 * @param DefaultListModel listaJogadores
+	 * @param Listas brasileirao
+	 */
 	public static void partidasCriarJogadoresGols(JList listaTime, DefaultListModel listaJogadores, Listas brasileirao) {
 		String time = listaTime.getSelectedValue().toString();
 		
 		for(int i = 0; i < 20; i++) {
+			//Se o time "i" for igual ao selecionado pelo usuario, adicione seus jogadores em uma lista
 			if(brasileirao.getTimes().get(i).getNome() == time) {
 				for(int j = 0; j < brasileirao.getTimes().get(i).getJogadoresSize(); j++) {
 					if(brasileirao.getTimes().get(i).getJogadores(j) != null) {
@@ -137,39 +182,57 @@ public class ControlePartidas {
 		}
 	}
 	
+	/**
+	 * Metodo que realiza a ação de criar uma partida
+	 * @param PartidasCriar frame
+	 * @param ArrayList<JList> listaDeListas1
+	 * @param ArrayList<JList> listaDeListas2
+	 */
 	public static void partidasCriar(PartidasCriar frame, ArrayList<JList> listaDeListas1, ArrayList<JList> listaDeListas2) {
-		brasileirao.getPartidas().add(new Partida(frame.getTimeCasa(), frame.getTimeFora(), frame.estadio));
-		frame.index = brasileirao.getPartidas().size()-1;
+		//Adiciona uma partida no banco de dados com os parametros escolhidos pelo usuario no frame
+		brasileirao.getPartidas().add(new Partida(frame.getTimeCasa(), frame.getTimeFora(), frame.getEstadio()));
+		frame.setIndex(brasileirao.getPartidas().size()-1);
+		//Para cada gol feito, checa-se se o jogador "j" e igual ao jogador selecionado pelo usuario na lista1 "i"
 		for(int i = 0; i < frame.getGolsCasa(); i ++) {
 			for(int j = 0; j < frame.getTimeCasa().getJogadoresSize(); j++) {
 				if(frame.getTimeCasa().getJogadores(j) != null && listaDeListas1.get(i).getSelectedValue() == frame.getTimeCasa().getJogadores(j).getNome()) {
 					for(int k = 0; k < 20; k++) {
 						if(brasileirao.getTimes().get(k) == frame.getTimeCasa()) {
 							brasileirao.getTimes().get(k).getJogadores(j).fazerGol();
-							brasileirao.getPartidas().get(frame.index).addGolCasa(frame.getTimeCasa().getJogadores(j));
+							brasileirao.getPartidas().get(frame.getIndex()).addGolCasa(frame.getTimeCasa().getJogadores(j));
 						}
 					}
 				}
 			}		
 		}
+		//Mesmo processo do loop anterior
 		for(int i = 0; i < frame.getGolsFora(); i ++) {
 			for(int j = 0; j < frame.getTimeFora().getJogadoresSize(); j++) {
 				if(frame.getTimeFora().getJogadores(j) != null && listaDeListas2.get(i).getSelectedValue() == frame.getTimeFora().getJogadores(j).getNome()) {
 					for(int k = 0; k < 20; k++) {
 						if(brasileirao.getTimes().get(k) == frame.getTimeFora()) {
 							brasileirao.getTimes().get(k).getJogadores(j).fazerGol();
-							brasileirao.getPartidas().get(frame.index).addGolFora(frame.getTimeFora().getJogadores(j));
+							brasileirao.getPartidas().get(frame.getIndex()).addGolFora(frame.getTimeFora().getJogadores(j));
 						}
 					}
 				}
 			}		
 		}
-		brasileirao.getPartidas().get(frame.index).finalizarPartida2(frame.getGolsCasa(), frame.getGolsFora(), frame.valorRodada);
+		//Finalizando a partida com os dados escolhidos pelo usuario de gols e rodada
+		brasileirao.getPartidas().get(frame.getIndex()).finalizarPartida2(frame.getGolsCasa(), frame.getGolsFora(), frame.getValorRodada());
 		
 		frame.dispose();
 		PartidasTabelaRodadasJTables.main(null);
 	}
 	
+	/**
+	 * Metodo que realiza a ação de editar uma partida
+	 * @param PartidasCriar frame
+	 * @param ArrayList<JList> listaDeListas1
+	 * @param ArrayList<JList> listaDeListas2
+	 * @param Partida partidaEscolhida
+	 * @param int posicaoPartida
+	 */
 	public static void atualizarPartida(PartidasEditar frame, ArrayList<JList> listaDeListas1, ArrayList<JList> listaDeListas2, Partida partidaEscolhida, int posicaoPartida){
 		//Removendo os dados Antigos da Partida
 		partidaEscolhida.deletarPartida();
@@ -178,6 +241,7 @@ public class ControlePartidas {
 		//Instanciando uma nova partida com os dados da Antiga
 		brasileirao.getPartidas().add(new Partida(frame.getTimeCasa(), frame.getTimeFora(), frame.estadio));
 		int index = brasileirao.getPartidas().size()-1;
+		//Para cada gol feito, checa-se se o jogador "j" e igual ao jogador selecionado pelo usuario na lista1 "i"
 		for(int i = 0; i < frame.getGolsCasa(); i ++) {
 			for(int j = 0; j < frame.getTimeCasa().getJogadoresSize(); j++) {
 				if(frame.getTimeCasa().getJogadores(j) != null && listaDeListas1.get(i).getSelectedValue() == frame.getTimeCasa().getJogadores(j).getNome()) {
@@ -190,6 +254,7 @@ public class ControlePartidas {
 				}
 			}		
 		}
+		//Mesmo processo feito no loop anterior
 		for(int i = 0; i < frame.getGolsFora(); i ++) {
 			for(int j = 0; j < frame.getTimeFora().getJogadoresSize(); j++) {
 				if(frame.getTimeFora().getJogadores(j) != null && listaDeListas2.get(i).getSelectedValue() == frame.getTimeFora().getJogadores(j).getNome()) {
@@ -202,7 +267,8 @@ public class ControlePartidas {
 				}
 			}		
 		}
-		brasileirao.getPartidas().get( index).finalizarPartida2(frame.getGolsCasa(), frame.getGolsFora(), frame.getValorRodada());
+		//Finalizando a partida com os dados de gol e rodada escolhido pelo usuario
+		brasileirao.getPartidas().get(index).finalizarPartida2(frame.getGolsCasa(), frame.getGolsFora(), frame.getValorRodada());
 		
 		frame.dispose();
 		PartidasTabelaRodadasJTables.main(null);

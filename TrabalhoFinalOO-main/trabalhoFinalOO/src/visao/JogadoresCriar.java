@@ -32,6 +32,13 @@ import javax.swing.JSpinner;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Tela responsável por criar um jogador no banco de dados
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Jogador
+ * @see Listas
+ */
 public class JogadoresCriar extends JFrame {
 
 	private Listas brasileirao = new Listas();
@@ -59,6 +66,7 @@ public class JogadoresCriar extends JFrame {
 	}
 	/**
 	 * Construtor da Tela de Criar Jogadores cuja a função é instanciar os componentes visiais do frame para o usuário
+	 * @see JogadoresCriar
 	 */
 	public JogadoresCriar() {
 		//Adicionando titulo ao frame, tamanho e cor
@@ -105,31 +113,36 @@ public class JogadoresCriar extends JFrame {
 			listaTimes.addElement(brasileirao.getTimes().get(i).getNome());
 		}
 		
+		//Criando JList com os dados da lista de times
 		listagemTime = new JList(listaTimes);
 		listagemTime.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		listagemTime.setBounds(136, 256, 197, 112);
 		painelCadastro.add(listagemTime);
 		
+		//Painel Scroll com a JList de times
 		JScrollPane listaTimesScroll = new JScrollPane(listagemTime);
 		painelCadastro.add(listaTimesScroll);
 		listaTimesScroll.setSize(197, 112);
 		listaTimesScroll.setLocation(136, 256);
 		
+		//Texto auxiliar para indicar o time
 		JLabel lblTime = new JLabel("Time");
 		lblTime.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblTime.setBounds(25, 260, 101, 24);
 		painelCadastro.add(lblTime);
 		
+		//Texto auxiliar para indicar a idade
 		JLabel lblIdade = new JLabel("Idade");
 		lblIdade.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblIdade.setBounds(25, 106, 101, 24);
 		painelCadastro.add(lblIdade);
 		
-	
+		//Estetica e valores do JSpinner da idade do jogador
 		spnIdade.setBounds(136, 106, 49, 26);
 		spnIdade.setModel(new SpinnerNumberModel(18.0, 18.0, 100.0, 1.0));
 		painelCadastro.add(spnIdade);
 		
+		//Texto auxiliar para indicar a posicao
 		JLabel lblPosicao = new JLabel("Posição");
 		lblPosicao.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblPosicao.setBounds(25, 166, 101, 24);
@@ -144,18 +157,19 @@ public class JogadoresCriar extends JFrame {
 		listaPosicao.addElement(Posicao.VOLANTE);
 		listaPosicao.addElement(Posicao.ZAGUEIRO);
 		
-
+		//JList com as posicoes disponiveis para o jogador
 		listagemPosicao = new JList(listaPosicao);
 		listagemPosicao.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		listagemPosicao.setBounds(136, 166, 358, 80);
 		painelCadastro.add(listagemPosicao);
 		
+		//Painel Scroll com a JList das posicoes
 		JScrollPane srclPosicao = new JScrollPane(listagemPosicao);
 		painelCadastro.add(srclPosicao);
 		srclPosicao.setSize(197, 80);
 		srclPosicao.setLocation(136, 166);
 		
-		
+		//Funcao de voltar para o menu
 		botaoVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -169,8 +183,9 @@ public class JogadoresCriar extends JFrame {
 		botaoCriar.setFont(new Font("Arial", Font.PLAIN, 20));
 		painelConteudo.add(botaoCriar);
 		
+		//Funcao para executar a criacao do jogador
 		botaoCriar.addActionListener((event) -> {
-			//Conferindo se os dados do Jogador foram adcionados
+			//Conferindo se os dados do Jogador foram adicionados
 			if(!listagemPosicao.isSelectionEmpty() && !listagemTime.isSelectionEmpty() && !txtNome.getText().isBlank()) {			
 				setPosicaoJogador( (Posicao) listagemPosicao.getSelectedValue());
 				

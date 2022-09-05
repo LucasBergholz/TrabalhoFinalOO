@@ -5,11 +5,29 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 
 import bancoDeDados.Listas;
+import modelo.Estadios;
+import modelo.Jogador;
+import modelo.Partida;
+import modelo.Tecnico;
 import modelo.Time;
 
+/**
+ * Classe responsavel por reunir os metodos presentes na tela de classificacao.
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Time
+ * @see Partida
+ * @see Tecnico
+ */
 public class ControleClassificacao {
 	private static Listas brasileirao = new Listas();
 	
+	/**
+	 * Metodo responsavel por instanciar os dados da tabela e imprimi-los na tabela
+	 * @see Time
+	 * @see Tecnico
+	 * @see Estadios
+	 */
 	public static void inicializarTabela(ArrayList<Time> times, JTable tabelaClassificacao) {
 		times.clear();
 		//Adicionando os dados a tabela
@@ -49,6 +67,7 @@ public class ControleClassificacao {
 			tabelaClassificacao.setValueAt(times.get(i-1).getEmpates(),i,4);
 			tabelaClassificacao.setValueAt(times.get(i-1).getDerrotas(),i,5);
 			tabelaClassificacao.setValueAt(times.get(i-1).getSaldoGols(),i,6);
+			tabelaClassificacao.setValueAt(times.get(i-1).getTecnico().getNome(), i, 7);
 		}
 	 }
 }

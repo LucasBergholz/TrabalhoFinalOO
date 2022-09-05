@@ -19,6 +19,10 @@ import javax.swing.border.EmptyBorder;
  * 
  * @author Guilherme Rodrigues 
  * @author Lucas Gobbi
+ * @see JogadoresCriar
+ * @see JogadoresDeletar
+ * @see JogadoresEditar
+ * @see JogadoresVer
  *
  */
 public class JogadoresMenu extends JFrame {

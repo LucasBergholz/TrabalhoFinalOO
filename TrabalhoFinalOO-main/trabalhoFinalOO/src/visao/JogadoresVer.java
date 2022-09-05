@@ -26,17 +26,32 @@ import bancoDeDados.Listas;
 import controlador.ControleJogadores;
 import modelo.Time;
 
+/**
+ * Tela responsável por ver os jogadores do banco de dados
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Listas
+ * @see Jogador
+ * @see Time
+ */
 public class JogadoresVer extends JFrame {
 	
 	private static Listas brasileirao = new Listas();
 	private JPanel painelConteudo;
 	private Time timeEscolhido;
 
+	/**
+	 * Método de inicializacao da tela de ver jogador.
+	 */
 	public static void main(String[] args) {
 		JogadoresVer frame = new JogadoresVer();
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Construtor da tela de ver jogador, responsavel por instanciar os componentes visuais e seus valores internos.
+	 * @see JogadoresVer
+	 */
 	public JogadoresVer() {
 		//Criando titulo do frame e definindo caracteristicas do painel de conteudo
 		painelConteudo = new JPanel();
@@ -49,6 +64,7 @@ public class JogadoresVer extends JFrame {
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
+		//Botao para voltar para o menu de jogadores
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -73,18 +89,23 @@ public class JogadoresVer extends JFrame {
 		painelConteudo.add(panel);
 		panel.setLayout(null);
 
-		//Criando JList com times que aparecerão para o usuário
+		//Criando painel scroll com times que aparecerão para o usuário
 		JScrollPane painelTimes = new JScrollPane();
 		DefaultListModel<String> listaDeTimesModelo = new DefaultListModel<String>();
+		
+		//Loop que retira o nome dos times do banco de dados
 		for(int i = 0; i < 20; i++) {
 			listaDeTimesModelo.addElement(brasileirao.getTimes().get(i).getNome());
 		}
+		//JList com os times do banco de dados
 		JList<String> listaDeTimes = new JList<String>(listaDeTimesModelo);
-		painelTimes.setBounds(267, 0, 197, 64);
 		
+		//Definindo tamanho do painel scroll de times
+		painelTimes.setBounds(267, 0, 197, 64);
 		painelTimes.setViewportView(listaDeTimes);
 		panel.add(painelTimes);
 		
+		//Criando painel scroll que contera os jogadores do time escolhido e seus dados
 		JScrollPane painelScroll = new JScrollPane();
 		painelScroll.setBounds(127, 194, 500, 300);
 		painelScroll.setBackground(new Color(0, 0, 128));

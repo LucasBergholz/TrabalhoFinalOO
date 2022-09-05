@@ -28,13 +28,29 @@ import javax.swing.JMenuBar;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.SystemColor;
 
+/**
+ * Tela responsável por disponibilizar ao usuario quais telas ele pode ir
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see JogadoresMenu
+ * @see PartidasMenu
+ * @see Classificacao
+ * @see Artilharia
+ */
 public class Menu extends JFrame {	
 	
+	/**
+	 * Método de inicializacao da tela de menu.
+	 */
 	public static void main(String[] args) {
 		Menu menu = new Menu();
 		menu.setVisible(true);
 	}
 	
+	/**
+	 * Construtor da tela de menu.
+	 * @see Menu
+	 */
 	public Menu() {
 		//Padronizando o frame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

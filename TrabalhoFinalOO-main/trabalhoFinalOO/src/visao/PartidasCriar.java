@@ -34,18 +34,25 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Tela responsável por criar uma partida no banco de dados
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Listas
+ * @see Partida
+ * @see Jogador
+ * @see Time
+ */
 public class PartidasCriar extends JFrame {
 
 	//Atributos
 	private Listas brasileirao = new Listas();
 	private int golsCasa, golsFora;
 	private Time timeCasa, timeFora;
-	public Estadios estadio;
-	public int valorRodada, index;
+	private Estadios estadio;
+	private int valorRodada, index;
 
-	/*
-	 * Componentes Visuais
-	 * */
+	//Componentes Visuais 
 	private JPanel painelConteudo, painelGoleadores;
 	private JScrollPane painelScrollGoleadores;
 	private JButton botaoProximo = new JButton("Proximo");
@@ -53,7 +60,6 @@ public class PartidasCriar extends JFrame {
 	private JSpinner spnGolsCasa = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
 	private JSpinner spnGolsFora = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
 	private JSpinner spinnerRodada = new JSpinner(new SpinnerNumberModel(1, 1, 38, 1));
-	
 	
 	//Listas
 	private DefaultListModel listaTimes = new DefaultListModel();
@@ -72,12 +78,19 @@ public class PartidasCriar extends JFrame {
 	private ArrayList<JScrollPane> listaDePaineis1 = new ArrayList<JScrollPane>();
 	private ArrayList<JScrollPane> listaDePaineis2 = new ArrayList<JScrollPane>();
 	
-	//Metodos
+	/**
+	 * Método de inicializacao da tela de criar partida.
+	 */
 	public static void main(String[] args) {
 		PartidasCriar frame = new PartidasCriar();
 		frame.setVisible(true);
 	}
 
+
+	/**
+	 * Construtor da tela de criar partida, responsavel por instanciar os componentes visuais e seus valores internos.
+	 * @see PartidasCriar
+	 */
 	public PartidasCriar() {
 		//Painel e titulo instanciados
 		setTitle("Brasileirao 2022");
@@ -90,6 +103,7 @@ public class PartidasCriar extends JFrame {
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
+		//Botao para voltar para o menu de partidas
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -139,30 +153,34 @@ public class PartidasCriar extends JFrame {
 		
 		//Adicionando itens para a escolha do estadio
 		
-		
+		//Loop que retira o nome dos times do banco de dados
 		for(int i = 0; i < 20; i++) {
 			listaTimes.addElement(brasileirao.getTimes().get(i).getNome());	
 		}
-		
+		//JList com os times do banco de dados
 		timesCasa = new JList(listaTimes);
 		timesCasa.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		timesCasa.setBounds(52, 183, 197, 45);
 		painelConteudo.add(timesCasa);
 		
-		
+		//Funcao que evita o usuario escolher o mesmo time duas vezes para a partida
 		timesCasa.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent evt) {
+				//Limpa a lista do time de fora de casa
 				listaTimes2.clear();
 				for(int j = 0; j < 20; j++) {
+					//Caso o time "i" seja igual ao selecionado pelo usuario, nao sera adicionado na nova lista de times fora de casa
 					if(timesCasa.getSelectedValue() != brasileirao.getTimes().get(j).getNome()) {
 						listaTimes2.addElement(brasileirao.getTimes().get(j).getNome());
 					}
 				}
+				//Muda visibilidade para atualizar conteudo da pagina
 				painelConteudo.setVisible(false);
 				painelConteudo.setVisible(true);
 			}
 		});
 		
+		//Instanciando JList de times fora de casa
 		timesFora  = new JList(listaTimes2);
 		timesFora.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		timesFora.setBounds(490, 183, 197, 45);
@@ -178,26 +196,26 @@ public class PartidasCriar extends JFrame {
 		listaTimesScroll2.setSize(197, 45);
 		listaTimesScroll2.setLocation(490, 183);
 		
-		
-		
+		//Definindo tamanho dos spinners de gols
 		spnGolsCasa.setBounds(248, 183, 47, 45);
 		painelConteudo.add(spnGolsCasa);
 		
 		spnGolsFora.setBounds(445, 183, 47, 45);
 		painelConteudo.add(spnGolsFora);
 		
-		
+		//Adicionando estilizacao do botao de proximo
 		painelConteudo.add(botaoProximo);
 		botaoProximo.setBounds(512, 492, 175, 33);
 		botaoProximo.setFont(new Font("Arial", Font.PLAIN, 20));
 		
-		//Adicionando itens para a escolha do estadio
+		//Adicionando itens em uma lista para a escolha do estadio
 		listaDefaultEstadios = new DefaultListModel<Estadios>();
 		for(int i = 0; i < 19; i++) {
 			listaDefaultEstadios.addElement(Estadios.values()[i]);
 			
 		}
 		
+		//Instanciando JList de estadios
 		jListEstadios = new JList<Estadios>(listaDefaultEstadios);
 		jListEstadios.setFont(new Font("Arial Black", Font.PLAIN, 11));
 		jListEstadios.setBounds(266, 196, 197, 158);
@@ -208,6 +226,7 @@ public class PartidasCriar extends JFrame {
 		listaEstadios.setSize(195, 152);
 		painelConteudo.add(listaEstadios);
 		
+		//Texto auxiliar ao usuario
 		JTextPane textoRodada = new JTextPane();
 		textoRodada.setFont(new Font("Arial", Font.PLAIN, 25));
 		textoRodada.setForeground(new Color(255, 255, 255));
@@ -216,7 +235,7 @@ public class PartidasCriar extends JFrame {
 		textoRodada.setBounds(56, 345, 95, 35);
 		painelConteudo.add(textoRodada);
 		
-
+		//Estilizando spinner da rodada
 		spinnerRodada.setBounds(149, 345, 46, 33);
 		painelConteudo.add(spinnerRodada);
 		
@@ -236,12 +255,12 @@ public class PartidasCriar extends JFrame {
 		painelScrollGoleadores.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		painelScrollGoleadores.setVisible(false);
 		painelScrollGoleadores.setViewportView(painelGoleadores);
-		//painelScrollGoleadores.setLocation(60, 180);
 		painelScrollGoleadores.setBounds(60,180,600, 300);
 		painelGoleadores.setPreferredSize(new Dimension(600, 1500));
 		painelConteudo.add(painelScrollGoleadores);
 		painelGoleadores.setLayout(null);
 		
+		//Texto auxiliar ao usuario
 		JTextPane textoGoleadoresCasa = new JTextPane();
 		textoGoleadoresCasa.setText("Escolha os goleadores do jogo:");
 		textoGoleadoresCasa.setForeground(Color.WHITE);
@@ -263,7 +282,9 @@ public class PartidasCriar extends JFrame {
 		
 		//Botao para mudar a tela do placar para a tela dos goleadores da partida
 		botaoProximo.addActionListener((event) -> {
+			//Garantindo que todos os dados necessarios foram escolhidos pelo usuario
 			if((timesCasa.isSelectionEmpty() == false) && (timesFora.isSelectionEmpty() == false) && (jListEstadios.isSelectionEmpty() == false)) {
+				//Trocando visibilidade de todos os componentes da pagina
 				listaTimesScroll1.setVisible(false);
 				listaTimesScroll2.setVisible(false);
 				textoTimeCasa.setVisible(false);
@@ -277,8 +298,9 @@ public class PartidasCriar extends JFrame {
 				spinnerRodada.setVisible(false);
 				listaEstadios.setVisible(false);
 				botaoProximo.setVisible(false);
+
+				//Funcao de adicionar os gols ao jogador
 				ControlePartidas.partidasCriarJogadoresGols(timesCasa, listaJogadores1, brasileirao);
-				
 				//De acordo com o valor que o usuario escolheu para os gols, printar na tela "n" JLists com os jogadores do time
 				for(int i = 0; i < getGolsCasa(); i++) {
 					listaDeListas1.add(i, new JList<String>(listaJogadores1));
@@ -291,6 +313,7 @@ public class PartidasCriar extends JFrame {
 					painelGoleadores.add(listaDePaineis1.get(i));
 				}
 				
+				//Repetindo o processo anterior mas com o time fora de casa
 				ControlePartidas.partidasCriarJogadoresGols(timesFora, listaJogadores2, brasileirao);
 				for(int i = 0; i < getGolsFora(); i++) {
 					listaDeListas2.add(i, new JList<String>(listaJogadores2));
@@ -306,9 +329,11 @@ public class PartidasCriar extends JFrame {
 				botaoCriar.setVisible(true);
 				painelScrollGoleadores.setVisible(true);
 				textoGoleadoresCasa.setVisible(true);	
+				//Passando os dados para os atributos do painel
 				String timeCasaString, timeForaString;
 				estadio = jListEstadios.getSelectedValue();
 				valorRodada = (int)spinnerRodada.getValue();
+				//String auxiliar no salvamento do dado do time no atributo
 				timeCasaString = (String) timesCasa.getSelectedValue();
 				timeForaString = (String) timesFora.getSelectedValue();
 				for(int j = 0; j < 20; j++) {
@@ -325,7 +350,7 @@ public class PartidasCriar extends JFrame {
 		
 		//Funcao de criar partida
 		botaoCriar.addActionListener((event) -> {
-				ControlePartidas.partidasCriar(this, listaDeListas1, listaDeListas2);
+			ControlePartidas.partidasCriar(this, listaDeListas1, listaDeListas2);
 			
 		});
 		

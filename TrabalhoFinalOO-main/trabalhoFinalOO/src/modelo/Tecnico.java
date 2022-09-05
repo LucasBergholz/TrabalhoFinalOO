@@ -43,10 +43,6 @@ public class Tecnico extends Pessoa {
 	public void ganharPartida(){
 		this.setVitorias(this.getVitorias() + 1);
 	}
-	
-	public void perderPartida(){
-		
-	}
 
 	public int getVitorias() {
 		return vitorias;
