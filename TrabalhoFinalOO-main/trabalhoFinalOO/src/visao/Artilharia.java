@@ -54,13 +54,14 @@ public class Artilharia extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
-		painelConteudo.setBackground(new Color(0, 0, 128));
+		painelConteudo.setBackground(new Color(34, 139, 34));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
 		//Titulo para a pagina
 		JLabel titulo = new JLabel("ARTILHARIA");
+		titulo.setBackground(new Color(255, 215, 0));
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.setForeground(Color.WHITE);
 		titulo.setFont(new Font("Arial", Font.BOLD, 50));

@@ -98,7 +98,7 @@ public class PartidasCriar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
-		painelConteudo.setBackground(new Color(0, 0, 128));
+		painelConteudo.setBackground(new Color(34, 139, 34));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
@@ -127,7 +127,7 @@ public class PartidasCriar extends JFrame {
 		textoTimeCasa.setEditable(false);
 		textoTimeCasa.setForeground(Color.WHITE);
 		textoTimeCasa.setFont(new Font("Arial", Font.PLAIN, 25));
-		textoTimeCasa.setBackground(new Color(0, 0, 128));
+		textoTimeCasa.setBackground(new Color(34, 139, 34));
 		textoTimeCasa.setBounds(52, 148, 164, 35);
 		painelConteudo.add(textoTimeCasa);
 		
@@ -136,7 +136,7 @@ public class PartidasCriar extends JFrame {
 		textoTimeFora.setEditable(false);
 		textoTimeFora.setForeground(Color.WHITE);
 		textoTimeFora.setFont(new Font("Arial", Font.PLAIN, 25));
-		textoTimeFora.setBackground(new Color(0, 0, 128));
+		textoTimeFora.setBackground(new Color(34, 139, 34));
 		textoTimeFora.setBounds(523, 148, 164, 35);
 		painelConteudo.add(textoTimeFora);
 		
@@ -145,7 +145,7 @@ public class PartidasCriar extends JFrame {
 		textoX.setEditable(false);
 		textoX.setForeground(Color.WHITE);
 		textoX.setFont(new Font("Arial", Font.PLAIN, 25));
-		textoX.setBackground(new Color(0, 0, 128));
+		textoX.setBackground(new Color(34, 139, 34));
 		textoX.setBounds(358, 188, 24, 35);
 		painelConteudo.add(textoX);
 		
@@ -231,7 +231,7 @@ public class PartidasCriar extends JFrame {
 		textoRodada.setFont(new Font("Arial", Font.PLAIN, 25));
 		textoRodada.setForeground(new Color(255, 255, 255));
 		textoRodada.setText("Rodada");
-		textoRodada.setBackground(new Color(0, 0, 128));
+		textoRodada.setBackground(new Color(34, 139, 34));
 		textoRodada.setBounds(56, 345, 95, 35);
 		painelConteudo.add(textoRodada);
 		
@@ -243,7 +243,7 @@ public class PartidasCriar extends JFrame {
 		
 		//Painel com o conteudo dos goleadores
 		painelGoleadores = new JPanel();
-		painelGoleadores.setBackground(new Color(0, 0, 128));
+		painelGoleadores.setBackground(new Color(34, 139, 34));
 		painelGoleadores.setLocation(0, 0);
 		painelGoleadores.setSize(600, 500);
 		painelGoleadores.setVisible(true);
@@ -267,7 +267,7 @@ public class PartidasCriar extends JFrame {
 		textoGoleadoresCasa.setFont(new Font("Arial", Font.PLAIN, 25));
 		textoGoleadoresCasa.setEditable(false);
 		textoGoleadoresCasa.setVisible(false);
-		textoGoleadoresCasa.setBackground(new Color(0, 0, 128));
+		textoGoleadoresCasa.setBackground(new Color(34, 139, 34));
 		textoGoleadoresCasa.setBounds(185, 111, 366, 35);
 		painelConteudo.add(textoGoleadoresCasa);
 		

@@ -27,6 +27,7 @@ import javax.swing.JTable;
 import javax.swing.JMenuBar;
 import javax.swing.JRadioButtonMenuItem;
 import java.awt.SystemColor;
+import javax.swing.border.LineBorder;
 
 /**
  * Tela responsável por disponibilizar ao usuario quais telas ele pode ir
@@ -55,7 +56,7 @@ public class Menu extends JFrame {
 		//Padronizando o frame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 750, 600));
-		getContentPane().setBackground(new Color(0, 0, 128));
+		getContentPane().setBackground(new Color(34, 139, 34));
 		setTitle("BRASILEIRAO 2022");
 		setResizable(false);
 		getContentPane().setLayout(null);
@@ -63,7 +64,7 @@ public class Menu extends JFrame {
 		//Titulo da pagina
 		JLabel titulo = new JLabel("BRASILEIRAO 2022");
 		getContentPane().add(titulo);
-		titulo.setForeground(Color.WHITE);
+		titulo.setForeground(new Color(255, 255, 255));
 		titulo.setBackground(new Color(0, 0, 128));
 		titulo.setBounds(0, 0, 750, 101);
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -71,6 +72,9 @@ public class Menu extends JFrame {
 		
 		//Ver classificacao do campeonato
 		JToggleButton botaoClassificacao = new JToggleButton("Classificacao");
+		botaoClassificacao.setBorder(new LineBorder(new Color(255, 255, 255)));
+		botaoClassificacao.setForeground(new Color(255, 255, 255));
+		botaoClassificacao.setBackground(new Color(0, 0, 255));
 		//Mudar a pagina para a de classificacao
 		botaoClassificacao.addActionListener((event) -> {
 			this.dispose();
@@ -83,6 +87,9 @@ public class Menu extends JFrame {
 		
 		//Ir para menu de partidas
 		JToggleButton botaoPartidas = new JToggleButton("Partidas");
+		botaoPartidas.setBorder(new LineBorder(new Color(255, 255, 255)));
+		botaoPartidas.setForeground(new Color(255, 255, 255));
+		botaoPartidas.setBackground(new Color(0, 0, 255));
 		getContentPane().add(botaoPartidas);
 		botaoPartidas.setBounds(286, 212, 175, 33);
 		botaoPartidas.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -93,6 +100,9 @@ public class Menu extends JFrame {
 		
 		//Ver pagina da artilharia
 		JToggleButton botaoArtilharia = new JToggleButton("Artilharia");
+		botaoArtilharia.setBorder(new LineBorder(new Color(255, 255, 255)));
+		botaoArtilharia.setForeground(new Color(255, 255, 255));
+		botaoArtilharia.setBackground(new Color(0, 0, 255));
 		getContentPane().add(botaoArtilharia);
 		botaoArtilharia.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoArtilharia.setBounds(286, 291, 175, 33);
@@ -103,12 +113,18 @@ public class Menu extends JFrame {
 		
 		//Fechar o programa
 		JButton botaoSair = new JButton("Sair");
+		botaoSair.setBorder(new LineBorder(new Color(255, 255, 255)));
+		botaoSair.setForeground(new Color(255, 255, 255));
+		botaoSair.setBackground(new Color(0, 0, 255));
 		getContentPane().add(botaoSair);
 		botaoSair.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoSair.setBounds(286, 445, 175, 33);
 		
 		//Ir pro menu de jogadores
 		JToggleButton botaoJogadores = new JToggleButton("Jogadores");
+		botaoJogadores.setBorder(new LineBorder(new Color(255, 255, 255)));
+		botaoJogadores.setForeground(new Color(255, 255, 255));
+		botaoJogadores.setBackground(new Color(0, 0, 255));
 		botaoJogadores.setFont(new Font("Arial", Font.PLAIN, 20));
 		botaoJogadores.setBounds(286, 363, 175, 33);
 		getContentPane().add(botaoJogadores);

@@ -69,7 +69,7 @@ public class PartidasDeletar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
-		painelConteudo.setBackground(new Color(0, 0, 128));
+		painelConteudo.setBackground(new Color(34, 139, 34));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
@@ -94,7 +94,7 @@ public class PartidasDeletar extends JFrame {
 		
 		//Criando os blocos das partidas
 		JPanel painelRodadas = new JPanel();
-		painelRodadas.setBackground(new Color(0x274360));
+		painelRodadas.setBackground(new Color(128, 128, 128));
 		painelRodadas.setBounds(0, 98, 736, 64);
 		painelConteudo.add(painelRodadas);
 		painelRodadas.setLayout(null);
@@ -108,7 +108,7 @@ public class PartidasDeletar extends JFrame {
 		//Instanciando painel de partidas e seu painel "pai" que e scrollavel
 		painelPartidasScroll = new JScrollPane();
 		painelPartidas = new JPanel();
-		painelPartidas.setBackground(new Color(0, 0, 128));
+		painelPartidas.setBackground(new Color(34, 139, 34));
 		painelPartidasScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		painelPartidasScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		painelPartidasScroll.setVisible(true);

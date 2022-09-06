@@ -83,7 +83,7 @@ public class JogadoresEditar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
-		painelConteudo.setBackground(new Color(0, 0, 128));
+		painelConteudo.setBackground(new Color(34, 139, 34));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
@@ -108,7 +108,7 @@ public class JogadoresEditar extends JFrame {
 		
 		//Criando os blocos das partidas
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0x274360));
+		panel.setBackground(new Color(128, 128, 128));
 		panel.setBounds(0, 98, 736, 64);
 		painelConteudo.add(panel);
 		panel.setLayout(null);
@@ -127,7 +127,7 @@ public class JogadoresEditar extends JFrame {
 		//Painel de jogadores onde o usuario escolhera qual editar
 		painelJogadoresScroll = new JScrollPane();
 		painelJogadores = new JPanel();
-		painelJogadores.setBackground(new Color(0, 0, 128));
+		painelJogadores.setBackground(new Color(34, 139, 34));
 		painelJogadoresScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		painelJogadoresScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		painelJogadoresScroll.setVisible(true);

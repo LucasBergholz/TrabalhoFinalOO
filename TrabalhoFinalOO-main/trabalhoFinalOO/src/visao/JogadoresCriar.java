@@ -75,10 +75,20 @@ public class JogadoresCriar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
-		painelConteudo.setBackground(new Color(0, 0, 128));
+		painelConteudo.setBackground(new Color(34, 139, 34));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
+		
+		//Botao para voltar para o menu de jogadores
+		JButton botaoVoltar = new JButton("Voltar");
+		getContentPane().add(botaoVoltar);
+		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 16));
+		botaoVoltar.setBounds(24, 35, 85, 28);
+		botaoVoltar.addActionListener((event) -> {
+			this.dispose();
+			JogadoresMenu.main(null);
+		});
 		
 		//Titulo para a pagina
 		JLabel titulo = new JLabel("Cadastrar Jogador");

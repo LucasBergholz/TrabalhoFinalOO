@@ -84,7 +84,7 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		setResizable(false);
 		painelConteudo = new JPanel();
 		painelConteudo.setBounds(0, 0, 750, 1200);
-		painelConteudo.setBackground(new Color(0, 0, 128));
+		painelConteudo.setBackground(new Color(34, 139, 34));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
@@ -104,7 +104,7 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		//Criando os blocos das partidas
 		
 		JPanel painelRodadas = new JPanel();
-		painelRodadas.setBackground(new Color(0x274360));
+		painelRodadas.setBackground(new Color(128, 128, 128));
 		painelRodadas.setBounds(0, 78, 736, 64);
 		painelConteudo.add(painelRodadas);
 		painelRodadas.setLayout(null);
@@ -141,7 +141,7 @@ public class PartidasTabelaRodadasJTables extends JFrame {
 		JScrollPane caixaVertical = new JScrollPane();
 		caixaVertical.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		JPanel caixaDentroCaixa = new JPanel();
-		caixaDentroCaixa.setBackground(new Color(0, 0, 128));
+		caixaDentroCaixa.setBackground(new Color(34, 139, 34));
 		caixaDentroCaixa.setLayout(null);
 		caixaDentroCaixa.setPreferredSize(new Dimension(600, numPartidas*110));
 		caixaVertical.setSize(587, 350);
