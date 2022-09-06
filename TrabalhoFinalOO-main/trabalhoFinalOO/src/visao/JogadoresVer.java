@@ -22,8 +22,8 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import bancoDeDados.Listas;
 import controlador.ControleJogadores;
+import controlador.Listas;
 import modelo.Time;
 
 /**

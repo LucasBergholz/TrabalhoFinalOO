@@ -29,8 +29,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import bancoDeDados.Listas;
 import controlador.ControlePartidas;
+import controlador.Listas;
 import modelo.Estadios;
 import modelo.Jogador;
 import modelo.Partida;

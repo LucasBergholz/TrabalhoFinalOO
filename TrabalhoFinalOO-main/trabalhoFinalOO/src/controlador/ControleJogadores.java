@@ -8,7 +8,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import bancoDeDados.Listas;
 import modelo.Estadios;
 import modelo.Jogador;
 import modelo.Partida;

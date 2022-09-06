@@ -1,8 +1,8 @@
 package visao;
 
 import modelo.*;
-import bancoDeDados.*;
 import controlador.ControlePartidas;
+import controlador.Listas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

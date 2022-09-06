@@ -18,8 +18,8 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import bancoDeDados.Listas;
 import controlador.ControleArtilharia;
+import controlador.Listas;
 import modelo.*;
 
 /**

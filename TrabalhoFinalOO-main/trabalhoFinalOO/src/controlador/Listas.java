@@ -1,4 +1,4 @@
-package bancoDeDados;
+package controlador;
 
 import java.util.ArrayList;
 

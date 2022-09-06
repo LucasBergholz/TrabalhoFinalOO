@@ -22,8 +22,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import bancoDeDados.Listas;
 import controlador.ControlePartidas;
+import controlador.Listas;
 import modelo.Jogador;
 import modelo.Partida;
 import modelo.Time;

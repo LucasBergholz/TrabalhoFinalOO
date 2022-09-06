@@ -24,7 +24,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import bancoDeDados.Listas;
+import controlador.Listas;
 
 /**
  * Tela responsável por deletar os jogadores do banco de dados

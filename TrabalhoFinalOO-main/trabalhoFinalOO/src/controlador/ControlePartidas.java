@@ -19,7 +19,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.border.Border;
 
-import bancoDeDados.Listas;
 import modelo.Estadios;
 import modelo.Jogador;
 import modelo.Partida;

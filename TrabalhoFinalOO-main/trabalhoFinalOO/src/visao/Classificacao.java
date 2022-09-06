@@ -1,6 +1,6 @@
 package visao;
 
-import bancoDeDados.*;
+import controlador.*;
 import controlador.ControleClassificacao;
 import modelo.*;
 

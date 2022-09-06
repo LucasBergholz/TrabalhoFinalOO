@@ -8,8 +8,8 @@ import java.awt.Event;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import bancoDeDados.Listas;
 import controlador.ControlePartidas;
+import controlador.Listas;
 import visao.PartidasCriar;
 import visao.PartidasDeletar;
 

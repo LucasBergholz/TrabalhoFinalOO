@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import bancoDeDados.Listas;
+import controlador.Listas;
 import visao.JogadoresCriar;
 import visao.JogadoresDeletar;
 

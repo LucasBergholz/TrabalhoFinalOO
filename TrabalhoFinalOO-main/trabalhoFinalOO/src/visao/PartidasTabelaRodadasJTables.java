@@ -14,8 +14,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import bancoDeDados.Listas;
 import controlador.ControlePartidas;
+import controlador.Listas;
 import modelo.Jogador;
 import modelo.Partida;
 import modelo.Time;

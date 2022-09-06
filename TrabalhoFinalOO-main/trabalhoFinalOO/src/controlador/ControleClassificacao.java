@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 
-import bancoDeDados.Listas;
 import modelo.Estadios;
 import modelo.Jogador;
 import modelo.Partida;

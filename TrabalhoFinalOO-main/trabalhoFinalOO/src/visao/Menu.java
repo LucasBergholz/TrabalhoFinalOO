@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import bancoDeDados.Listas;
+import controlador.Listas;
 
 import java.awt.Color;
 import javax.swing.JLabel;
