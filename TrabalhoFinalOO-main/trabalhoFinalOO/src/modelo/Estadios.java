@@ -1,5 +1,14 @@
 package modelo;
 
+/**
+ * 
+ *	Enum com o nome de Todos os estadios do Brasileirão 2022
+ *
+ * @author Guilherme Rodrigues
+ * @author Lucas Gobbi
+ *
+ *	
+ */
 public enum Estadios {
 	ALFREDO_JACONI,
 	ALLIANZ_PARQUE,

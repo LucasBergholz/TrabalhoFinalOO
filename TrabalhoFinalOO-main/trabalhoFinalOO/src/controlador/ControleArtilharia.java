@@ -4,15 +4,30 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 
-import bancoDeDados.Listas;
+import modelo.Estadios;
 import modelo.Jogador;
+import modelo.Partida;
+import modelo.Tecnico;
 import modelo.Time;
 
+/**
+ * Classe responsavel por reunir metodos utilizados na tela de artilharia.
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Time
+ * @see Partida
+ * @see Estadios
+ */
 public class ControleArtilharia {
 	
 	private static Listas brasileirao = new Listas();
 	
-	//Funcao que puxa os dados do banco de dados e imprime na JTable de artilharia
+	/**
+	 * Metodo que puxa os dados do banco de dados e imprime na JTable de artilharia
+	 * @see Time
+	 * @see Jogador
+	 * @see Estadios
+	 */
 	public static void inicializarTabela(ArrayList<Time> times, JTable tabelaArtilharia) {
 		ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
 		times.clear();

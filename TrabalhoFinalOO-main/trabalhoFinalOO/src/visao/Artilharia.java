@@ -18,20 +18,35 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import bancoDeDados.Listas;
 import controlador.ControleArtilharia;
+import controlador.Listas;
 import modelo.*;
+
+/**
+ * Tela responsável por elencar os jogadores de todos os times por numero de gols
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see ControleArtilharia
+ * @see Jogador
+ */
 
 public class Artilharia extends JFrame {
 
 	private ArrayList<Time> times = new ArrayList<Time>();
 	private JTable tabelaArtilharia;
-
+	
+	/**
+	 * Método de inicializacao da tela de artilharia.
+	 */
 	public static void main(String[] args) {
 		Artilharia frame = new Artilharia();
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Construtor da tela de artilharia, responsavel por instanciar os componentes como JTable e seus valores internos.
+	 * @see Artilharia
+	 */
 	public Artilharia() {
 		//Criando titulo do frame e definindo caracteristicas do painel de conteudo
 		JPanel painelConteudo = new JPanel();
@@ -39,13 +54,14 @@ public class Artilharia extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
-		painelConteudo.setBackground(new Color(0, 0, 128));
+		painelConteudo.setBackground(new Color(34, 139, 34));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
 		//Titulo para a pagina
 		JLabel titulo = new JLabel("ARTILHARIA");
+		titulo.setBackground(new Color(255, 215, 0));
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.setForeground(Color.WHITE);
 		titulo.setFont(new Font("Arial", Font.BOLD, 50));

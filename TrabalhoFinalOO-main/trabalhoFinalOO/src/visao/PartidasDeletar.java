@@ -22,9 +22,21 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import bancoDeDados.Listas;
 import controlador.ControlePartidas;
+import controlador.Listas;
+import modelo.Jogador;
+import modelo.Partida;
+import modelo.Time;
 
+/**
+ * Tela responsável por deletar uma partida do banco de dados
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Listas
+ * @see Partida
+ * @see Jogador
+ * @see Time
+ */
 public class PartidasDeletar extends JFrame {
 
 	private JPanel painelConteudo, painelPartidas;
@@ -38,24 +50,31 @@ public class PartidasDeletar extends JFrame {
 	private Integer result;
 	
 
-
+	/**
+	 * Método de inicializacao da tela de deletar partida.
+	 */
 	public static void main(String[] args) {
 		PartidasDeletar frame = new PartidasDeletar();
 		frame.setVisible(true);
 	}
 
-	
+	/**
+	 * Construtor da tela de deletar partida, responsavel por instanciar os componentes visuais e seus valores internos.
+	 * @see PartidasDeletar
+	 */
 	public PartidasDeletar() {
+		//Padronizando o frame
 		setTitle("Brasileirao 2022");
 		painelConteudo = new JPanel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
-		painelConteudo.setBackground(new Color(0, 0, 128));
+		painelConteudo.setBackground(new Color(34, 139, 34));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
 		
+		//Botao para voltar pro menu de partidas
 		JButton botaoVoltar = new JButton("Voltar");
 		getContentPane().add(botaoVoltar);
 		botaoVoltar.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -75,19 +94,21 @@ public class PartidasDeletar extends JFrame {
 		
 		//Criando os blocos das partidas
 		JPanel painelRodadas = new JPanel();
-		painelRodadas.setBackground(new Color(0x274360));
+		painelRodadas.setBackground(new Color(128, 128, 128));
 		painelRodadas.setBounds(0, 98, 736, 64);
 		painelConteudo.add(painelRodadas);
 		painelRodadas.setLayout(null);
 		
+		//Label com texto auxiliar ao usuario
 		JLabel lblSpinner = new JLabel("RODADA");
 		lblSpinner.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblSpinner.setBounds(304, 10, 100, 40);
 		painelRodadas.add(lblSpinner);
 		
+		//Instanciando painel de partidas e seu painel "pai" que e scrollavel
 		painelPartidasScroll = new JScrollPane();
 		painelPartidas = new JPanel();
-		painelPartidas.setBackground(new Color(0, 0, 128));
+		painelPartidas.setBackground(new Color(34, 139, 34));
 		painelPartidasScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		painelPartidasScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		painelPartidasScroll.setVisible(true);
@@ -97,6 +118,7 @@ public class PartidasDeletar extends JFrame {
 		painelConteudo.add(painelPartidasScroll);
 		painelPartidas.setLayout(null);
 		
+		//Estilizando spinner de rodada
 		spnRodada.setFont(new Font("Arial", Font.PLAIN, 20));
 		spnRodada.setBounds(304, 10, 126, 40);
 		//Atualizar o que a tela mostra de acordo com a rodada do spinner

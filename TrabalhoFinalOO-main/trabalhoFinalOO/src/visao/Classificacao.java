@@ -1,6 +1,6 @@
 package visao;
 
-import bancoDeDados.*;
+import controlador.*;
 import controlador.ControleClassificacao;
 import modelo.*;
 
@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -23,19 +25,31 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.awt.Dimension;
 
+/**
+ * Tela de inicializacao da classificacao dos times
+ * @author Lucas Bergholz
+ * @author Guilherme Rodrigues
+ * @see Time
+ * @see Tecnico
+ */
 public class Classificacao extends JFrame {
 
 	private JPanel painelConteudo;
 	private JTable tabelaClassificacao;
 	private ArrayList<Time> times = new ArrayList<Time>();
 
-	
+	/**
+	 * Método de inicializacao da tela de classificacao.
+	 */
 	public static void main(String[] args) {
 		Classificacao frame = new Classificacao();
 		frame.setVisible(true);
 	}
 
-	
+	/**
+	 * Construtor da tela de classificao, responsavel por instanciar os componentes como JTable e seus valores internos.
+	 * @see Classificacao
+	 */
 	public Classificacao() {
 		//Criando titulo do frame e definindo caracteristicas do painel de conteudo
 		painelConteudo = new JPanel();
@@ -43,7 +57,7 @@ public class Classificacao extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 750, 600);
 		setResizable(false);
-		painelConteudo.setBackground(new Color(0, 0, 128));
+		painelConteudo.setBackground(new Color(34, 139, 34));
 		painelConteudo.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelConteudo);
 		painelConteudo.setLayout(null);
@@ -55,20 +69,31 @@ public class Classificacao extends JFrame {
 		painelScroll.setBackground(new Color(0, 0, 128));
 		painelScroll.setLocation(0, 122);
 		painelScroll.setSize(new Dimension(736, 441));
+		painelScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
 		//Estetica da tabela
-		tabelaClassificacao = new JTable(21,7);
+		tabelaClassificacao = new JTable(21,8);
 		tabelaClassificacao.setTableHeader(null);
 		tabelaClassificacao.setEnabled(false);
 		tabelaClassificacao.setGridColor(new Color(0, 0, 0));
 		tabelaClassificacao.setBackground(new Color(255, 255, 255));
 		tabelaClassificacao.setForeground(new Color(0, 0, 0));
 		tabelaClassificacao.setAutoCreateColumnsFromModel(false);
-		tabelaClassificacao.setRowHeight(25);
-		tabelaClassificacao.getColumnModel().getColumn(0).setPreferredWidth(200);
 		tabelaClassificacao.setFont(new Font("Arial", Font.PLAIN, 20));
-		tabelaClassificacao.setBounds(40, 100, 650, 525);
+		tabelaClassificacao.setBounds(40, 100, 0, 525);
+		
+		//Definindo tamanho das celulas da tabela
+		tabelaClassificacao.setRowHeight(25);
+		tabelaClassificacao.getColumnModel().getColumn(0).setPreferredWidth(250);
+		tabelaClassificacao.getColumnModel().getColumn(1).setPreferredWidth(90);
+		tabelaClassificacao.getColumnModel().getColumn(2).setPreferredWidth(80);
+		tabelaClassificacao.getColumnModel().getColumn(3).setPreferredWidth(90);
+		tabelaClassificacao.getColumnModel().getColumn(4).setPreferredWidth(90);
+		tabelaClassificacao.getColumnModel().getColumn(5).setPreferredWidth(90);
+		tabelaClassificacao.getColumnModel().getColumn(7).setPreferredWidth(200);
 		tabelaClassificacao.setRowSelectionAllowed(false);
+		//Tamanho da tabela nao se atualiza automaticamente
+		tabelaClassificacao.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		//Adicionando tabela no painelScroll e o pianelScroll no painel principal
 		painelScroll.setViewportView(tabelaClassificacao);
 		painelConteudo.add(painelScroll);
@@ -81,6 +106,7 @@ public class Classificacao extends JFrame {
 		tabelaClassificacao.setValueAt("Empates",0,4);
 		tabelaClassificacao.setValueAt("Derrotas",0,5);
 		tabelaClassificacao.setValueAt("SG",0,6);
+		tabelaClassificacao.setValueAt("Tecnico", 0, 7);
 		
 		//Inicializando a tabela
 		ControleClassificacao.inicializarTabela(times, tabelaClassificacao);
