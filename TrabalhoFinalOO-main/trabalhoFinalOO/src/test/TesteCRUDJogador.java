@@ -14,9 +14,13 @@ public class TesteCRUDJogador {
 	
 	@Test
 	void testeCriarJogador() {
+		//Esolhendo o time a ser testado
 		int indexTime = 4;
+		//iniciando o banco de dados
 		Listas brasileirao = new Listas();
 		brasileirao.inicializarTimes();
+		//Limpando os dados do Time
+		brasileirao.getTimes().get(indexTime).getJogadores().removeAll(brasileirao.getTimes().get(indexTime).getJogadores());
 		JogadoresCriar frameJogadores = new JogadoresCriar();
 		
 		//Iniciando os Valores

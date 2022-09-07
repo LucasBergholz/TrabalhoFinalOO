@@ -19,7 +19,7 @@ public class Jogador extends Pessoa {
 	/**
 	 * Construtor da Classe Jogador
 	 * 
-	 * @param Time pelo qual o Jogador irá Jogar: Time
+	 * @param time pelo qual o Jogador irá Jogar: Time
 	 * @param nome do Jogador: String
 	 * @param posicao na qual o Jogador joga
 	 * @see Pessoa

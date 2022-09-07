@@ -32,10 +32,10 @@ public class Time {
 	/**
 	 * Construtor da Classe Time
 	 * 
-	 * @param nome do time
-	 * @param Cor principal do time em Hexadecimal
-	 * @param cor secundaria  em Hexadecimal
-	 * @param nome do Tecnico
+	 * @param nome do time: String
+	 * @param cor1 em Hexadecimal: String
+	 * @param cor2 em Hexadecimal: String
+	 * @param nomeTecnico String
 	 * @param estadio do Time
 	 * 
 	 * @see Jogador
@@ -61,9 +61,9 @@ public class Time {
 	/**
 	 * Construtor da Classe Time
 	 * 
-	 * @param nome do time
-	 * @param Cor principal do time em Hexadecimal
-	 * @param cor secundaria em Hexadecimal
+	 * @param nome do time: String
+	 * @param cor1 em Hexadecimal: String
+	 * @param cor2 em Hexadecimal: String
 	 * @param estadio do Time
 	 * 
 	 * @see Jogador
