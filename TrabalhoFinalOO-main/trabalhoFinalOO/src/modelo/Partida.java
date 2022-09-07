@@ -23,8 +23,8 @@ public class Partida {
 	/**
 	 * Construtor da Classe Partida
 	 * 
-	 * @param time jogando Casa
-	 * @param time jogando Fora
+	 * @param timeCasa Time
+	 * @param timeFora Time
 	 * @param estadio em que a partida vai ser realizada
 	 * 
 	 * @see Time
@@ -43,9 +43,9 @@ public class Partida {
 	/**
 	 * Metodo que finaliza as Partidas Criadas previamente e distribui os gols entre os jogadores dos times
 	 * 
-	 * @param gols do time de Casa
-	 * @param gols do time de Fora
-	 * @param rodada da partida
+	 * @param golsCasa int
+	 * @param golsFora int
+	 * @param rodada da partida: int
 	 * 
 	 * @return False em caso de erro
 	 */
@@ -102,8 +102,8 @@ public class Partida {
 	/**
 	 * Metodo Utilizado para finalizar as Partidas e atualizar os dados dos times 
 	 * 
-	 * @param gols do time de Casa
-	 * @param gols do time de Fora
+	 * @param golsCasa -Gols feitos pelo time jogando em casa
+	 * @param golsFora -Gols feitos pelo time jogando Fora de casa
 	 * @param rodada da partida
 	 * 
 	 * 

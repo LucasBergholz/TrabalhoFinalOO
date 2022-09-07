@@ -45,11 +45,11 @@ public class ControlePartidas {
 	
 	/**
 	 * Metodo que realiza a ação de ver uma partida do banco de Dados
-	 * @param Spinner spnRodada
-	 * @param JScrollPane caixaVertical
-	 * @param JPanel caixaDentroCaixa
-	 * @param int numPartidas
-	 * @param Listas brasileirao
+	 * @param spnRodada JSpinner
+	 * @param caixaVertical JScrollPane
+	 * @param caixaDentroCaixa Jpanel
+	 * @param numPartidas int
+	 * @param brasileirao Listas
 	 */
 	public static void partidasVer(JSpinner spnRodada, JScrollPane caixaVertical, JPanel caixaDentroCaixa, int numPartidas, Listas brasileirao) {
 		caixaDentroCaixa.removeAll();
@@ -106,12 +106,12 @@ public class ControlePartidas {
 
 	/**
 	 * Metodo que realiza a ação de ver uma partida do banco de Dados
-	 * @param Integer result
-	 * @param ArrayList<JButton> botoesDeletar
-	 * @param JScrollPane painelPartidasScroll
-	 * @param JPanel painelPartidas
-	 * @param JSpinner spnRodada
-	 * @param PartidasDeletar frame
+	 * @param result Integer 
+	 * @param botoesDeletar ArrayList de botoes
+	 * @param painelPartidasScroll JScrollPane 
+	 * @param painelPartidas JPanel 
+	 * @param spnRodada JSpinner 
+	 * @param frame PartidasDeletar 
 	 */
 	public static void partidasDeletar(Integer result, ArrayList<JButton> botoesDeletar, JScrollPane painelPartidasScroll, JPanel painelPartidas, JSpinner spnRodada, PartidasDeletar frame) {
 		//Limpando arraylist de botoes e painel de partidas
@@ -162,9 +162,9 @@ public class ControlePartidas {
 	
 	/**
 	 * Metodo que realiza a ação de adicionar gol a um jogador
-	 * @param JList listaTime
-	 * @param DefaultListModel listaJogadores
-	 * @param Listas brasileirao
+	 * @param listaTime JList 
+	 * @param listaJogadores DefaultListModel
+	 * @param brasileirao Listas 
 	 */
 	public static void partidasCriarJogadoresGols(JList listaTime, DefaultListModel listaJogadores, Listas brasileirao) {
 		String time = listaTime.getSelectedValue().toString();
@@ -183,9 +183,9 @@ public class ControlePartidas {
 	
 	/**
 	 * Metodo que realiza a ação de criar uma partida
-	 * @param PartidasCriar frame
-	 * @param ArrayList<JList> listaDeListas1
-	 * @param ArrayList<JList> listaDeListas2
+	 * @param frame PartidasCriar 
+	 * @param listaDeListas1 ArrayList de JLists
+	 * @param listaDeListas2 ArrayList de JLists
 	 */
 	public static void partidasCriar(PartidasCriar frame, ArrayList<JList> listaDeListas1, ArrayList<JList> listaDeListas2) {
 		//Adiciona uma partida no banco de dados com os parametros escolhidos pelo usuario no frame
@@ -226,11 +226,11 @@ public class ControlePartidas {
 	
 	/**
 	 * Metodo que realiza a ação de editar uma partida
-	 * @param PartidasCriar frame
-	 * @param ArrayList<JList> listaDeListas1
-	 * @param ArrayList<JList> listaDeListas2
-	 * @param Partida partidaEscolhida
-	 * @param int posicaoPartida
+	 * @param frame PartidasCriar 
+	 * @param listaDeListas1 ArrayList  de JLists
+	 * @param listaDeListas2 ArrayList  de JLists
+	 * @param partidaEscolhida Partida 
+	 * @param posicaoPartida int 
 	 */
 	public static void atualizarPartida(PartidasEditar frame, ArrayList<JList> listaDeListas1, ArrayList<JList> listaDeListas2, Partida partidaEscolhida, int posicaoPartida){
 		//Removendo os dados Antigos da Partida

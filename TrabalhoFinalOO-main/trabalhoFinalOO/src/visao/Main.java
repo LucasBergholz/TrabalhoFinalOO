@@ -1,12 +1,6 @@
 package visao;
 
-import controlador.ControleArtilharia;
 import controlador.Listas;
-import modelo.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /**
  * Classe principal do projeto, responsavel por instanciar os dados iniciais do projeto e a tela de menu
  * @author Lucas Bergholz

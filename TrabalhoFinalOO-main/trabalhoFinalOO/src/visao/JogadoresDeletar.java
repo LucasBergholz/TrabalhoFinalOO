@@ -31,8 +31,8 @@ import controlador.Listas;
  * @author Lucas Bergholz
  * @author Guilherme Rodrigues
  * @see Listas
- * @see Jogador
- * @see Time
+ * @see modelo.Jogador
+ * @see modelo.Time
  */
 public class JogadoresDeletar extends JFrame {
 

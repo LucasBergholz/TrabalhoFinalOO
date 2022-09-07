@@ -93,7 +93,7 @@ public class PartidasEditar extends JFrame {
 
 	/**
 	 * Construtor da tela de editar partida, responsavel por instanciar os componentes visuais e seus valores internos.
-	 * @see Partidaseditar
+	 * @see PartidasEditar
 	 */
 	public PartidasEditar() {
 		//Padronizando o frame
